@@ -4,7 +4,8 @@ type Props = {
   href?: string;
   variant?: "primary" | "secondary";
   size?: "md" | "lg";
-  icon?: boolean;
+  /** true = chat bubble; or pass any icon node */
+  icon?: boolean | React.ReactNode;
   className?: string;
   children: React.ReactNode;
 };
@@ -34,7 +35,7 @@ export default function Button({ href = "#", variant = "primary", size = "lg", i
   };
   return (
     <Link href={href} className={`${base} ${sizes[variant][size]} ${variants[variant]} ${className}`}>
-      {icon && <ChatIcon />}
+      {icon === true ? <ChatIcon /> : icon}
       {children}
     </Link>
   );
