@@ -10,6 +10,15 @@ const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: +width, height: 900 } });
 await page.goto(url, { waitUntil: "load", timeout: 120000 });
 await page.evaluate(() => document.fonts.ready);
+// Trigger lazy-loaded images, then wait until they have all finished loading
+await page.evaluate(async () => {
+  for (let y = 0; y < document.body.scrollHeight; y += 600) {
+    window.scrollTo(0, y);
+    await new Promise((r) => setTimeout(r, 50));
+  }
+  window.scrollTo(0, 0);
+  await Promise.all([...document.images].map((img) => (img.complete ? null : new Promise((r) => (img.onload = img.onerror = r)))));
+});
 
 // Pin the fixed header to the page top so it doesn't overlay other sections
 await page.addStyleTag({ content: "header{position:absolute!important}" });

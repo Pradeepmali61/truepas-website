@@ -59,7 +59,12 @@ collect(page);
 if (refs.size) {
   await mkdir("public/images", { recursive: true });
   const { meta } = await api(`/files/${FILE_KEY}/images`);
-  for (const ref of refs) if (meta.images[ref]) await download(meta.images[ref], `public/images/${ref.slice(0, 10)}.png`);
+  for (const ref of refs) {
+    if (!meta.images[ref]) continue;
+    const buf = Buffer.from(await (await fetch(meta.images[ref])).arrayBuffer());
+    const ext = buf[0] === 0xff && buf[1] === 0xd8 ? "jpg" : "png";
+    await writeFile(`public/images/${ref.slice(0, 10)}.${ext}`, buf);
+  }
   console.log("images:", [...refs].map((r) => r.slice(0, 10)).join(", "));
 }
 

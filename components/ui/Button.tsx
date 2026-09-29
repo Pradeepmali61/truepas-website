@@ -12,8 +12,12 @@ type Props = {
 export function ChatIcon() {
   return (
     <span className="flex size-5 items-center justify-center">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/icons/chat-bubble.svg" alt="" width={17} height={17} />
+      <svg width="17" height="17" viewBox="0 0 17 17" aria-hidden>
+        <path
+          d="M0 16.9999V1.69999C0 1.23249 0.166458 0.832288 0.499373 0.499373C0.832288 0.166458 1.23249 0 1.69999 0H15.2999C15.7674 0 16.1676 0.166458 16.5005 0.499373C16.8335 0.832288 16.9999 1.23249 16.9999 1.69999V11.8999C16.9999 12.3674 16.8335 12.7676 16.5005 13.1006C16.1676 13.4335 15.7674 13.5999 15.2999 13.5999H3.39998L0 16.9999ZM2.67749 11.8999H15.2999V1.69999H1.69999V12.8562L2.67749 11.8999Z"
+          fill="currentColor"
+        />
+      </svg>
     </span>
   );
 }
