@@ -44,6 +44,6 @@ next-env.d.ts
 /design-ref/
 /screenshots/
 
-# raw image exports from the content team (optimized copies live in public/images)
+# raw image exports from the content team
 /First 22-*/
 /ForUser 23-*/

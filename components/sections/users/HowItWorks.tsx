@@ -1,13 +1,13 @@
-import Photo from "@/components/ui/Photo";
+import Placeholder from "@/components/ui/Placeholder";
 import SectionLabel from "@/components/ui/SectionLabel";
 
 const steps = [
-  { title: "Download the App or Visit a Kiosk", text: "Enter your name, email address, and phone number, or enroll on-site at a partner kiosk.", image: "step-enter-details", alt: "TruePas app registration screen asking for name, email and phone number" },
-  { title: "Identity Verification", text: "ID verification with liveness detection confirms you are who you say you are.", image: "step-verify-identity", alt: "TruePas app verifying identity with a face check" },
-  { title: "Face Biometric Registration", text: "Scan your face via the front camera to create a secure facial biometric template.", image: "step-scan-face", alt: "TruePas app scanning a face with the front camera" },
-  { title: "Consent & Privacy Set-Up", text: "Read and approve how your data is used before proceeding.", image: "step-approve-data", alt: "TruePas app privacy screen asking to approve data use" },
-  { title: "Secure Set-up", text: "Your details are securely processed and your account is set up in the background.", image: "step-secure-credential", alt: "TruePas app confirming a secure credential has been created" },
-  { title: "Enrollment Complete", text: "Use your face at any connected touchpoint, no re-verification needed.", image: "step-ready", alt: "TruePas app showing the digital identity is ready to use" },
+  { title: "Download the App or Visit a Kiosk", text: "Enter your name, email address, and phone number, or enroll on-site at a partner kiosk." },
+  { title: "Identity Verification", text: "ID verification with liveness detection confirms you are who you say you are." },
+  { title: "Face Biometric Registration", text: "Scan your face via the front camera to create a secure facial biometric template." },
+  { title: "Consent & Privacy Set-Up", text: "Read and approve how your data is used before proceeding." },
+  { title: "Secure Set-up", text: "Your details are securely processed and your account is set up in the background." },
+  { title: "Enrollment Complete", text: "Use your face at any connected touchpoint, no re-verification needed." },
 ];
 
 export default function HowItWorks() {
@@ -32,12 +32,7 @@ export default function HowItWorks() {
         <div className="grid w-full gap-x-10 gap-y-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-y-16">
           {steps.map((s) => (
             <div key={s.title} className="flex flex-col gap-6">
-              <Photo
-                src={`/images/users/${s.image}.webp`}
-                alt={s.alt}
-                className="h-56 rounded-sm shadow-card md:h-[277px]"
-                sizes="(min-width: 1024px) 347px, (min-width: 768px) 50vw, 100vw"
-              />
+              <Placeholder className="h-56 rounded-sm shadow-card md:h-[277px]" label={s.title} />
               <div className="flex flex-col gap-1">
                 <h3 className="text-xl leading-8 font-semibold">{s.title}</h3>
                 <p className="text-base leading-6">{s.text}</p>

@@ -1,5 +1,5 @@
 import Button from "@/components/ui/Button";
-import Photo from "@/components/ui/Photo";
+import Placeholder from "@/components/ui/Placeholder";
 import SectionLabel from "@/components/ui/SectionLabel";
 
 export default function Dashboard() {
@@ -29,12 +29,7 @@ export default function Dashboard() {
             <Button icon>Request a Dashboard Demonstration</Button>
           </div>
         </div>
-        <Photo
-          src="/images/enterprises/dashboard.webp"
-          alt="Manager reviewing the TruePas merchant dashboard with verification and location analytics"
-          className="h-64 rounded-2xl shadow-card-strong md:h-[417px] lg:flex-1"
-          sizes="(min-width: 1024px) 540px, 100vw"
-        />
+        <Placeholder className="h-64 rounded-2xl shadow-card-strong md:h-[417px] lg:flex-1" label="Merchant dashboard preview" />
       </div>
     </section>
   );

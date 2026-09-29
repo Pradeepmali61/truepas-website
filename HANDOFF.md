@@ -53,8 +53,6 @@ Regenerate the cache any time with the API, e.g. `curl -H "X-Figma-Token: $FIGMA
 
 ### Scripts
 
-- `node scripts/optimize-images.mjs` — converts the content team's raw exports (gitignored folders `First 22-*/`, `ForUser 23-*/` in the repo root) to WebP in `public/images/{enterprises,users}/`. Add a mapping entry per image; place it with `components/ui/Photo.tsx` (next/image `fill`, `cover`/`contain`)
-
 - `FIGMA_TOKEN=… node scripts/figma-export.mjs <frameNodeId> <refDir>` — exports icons → `public/icons/`, image fills → `public/images/` (detects jpg vs png by magic bytes), section renders → `design-ref/<refDir>/`
 - `node scripts/screenshot.mjs <url> <width> <outDir>` — Playwright full-page + per-`<section>` screenshots at a viewport width
 
@@ -66,7 +64,7 @@ Regenerate the cache any time with the API, e.g. `curl -H "X-Figma-Token: $FIGMA
 - Copy is verbatim from Figma, including dummy text ("Title", "Name", "Designation"). Draft copy written for missing content is commented as such in the file.
 - Links/buttons → `href="#"` unless the target page exists. `Navbar`/`Footer` live in `app/layout.tsx`; Navbar is sticky, shrinks on scroll, page-aware CTA (`Book a Demo` vs `Download the app` on `/users`) and active-page glass pill via `usePathname`.
 - Logo: the TruePas symbol is `components/ui/LogoMark.tsx` (inline SVG, `currentColor`, size by height e.g. `h-[22px] w-auto`) next to the "TRUEPAS" wordmark; favicon = `app/icon.svg`, `app/apple-icon.png`. It replaced the Figma mark (`image-8.svg`)
-- Component map: `components/ui/` (Button+icons, LogoMark, Photo, IconBox, SectionLabel, Placeholder, Accordion `size=md|lg`, Tabs, VideoPlayer), `components/sections/<page>/`, shared sections in `components/sections/` (CtaBanner, Numbers, Team, Testimonials `heading` prop).
+- Component map: `components/ui/` (Button+icons, LogoMark, IconBox, SectionLabel, Placeholder, Accordion `size=md|lg`, Tabs, VideoPlayer), `components/sections/<page>/`, shared sections in `components/sections/` (CtaBanner, Numbers, Team, Testimonials `heading` prop).
 
 ## Verification workflow
 
