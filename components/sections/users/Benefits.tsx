@@ -14,9 +14,9 @@ export default function Benefits() {
     <section className="section-pad bg-sky-50">
       <div className="container-page flex flex-col items-center gap-12 lg:gap-16">
         <h2 className="heading-lg text-center">Benefits</h2>
-        <div className="grid w-full gap-x-10 gap-y-9 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-[172px_196px]">
+        <div className="grid w-full gap-x-10 gap-y-7 md:grid-cols-2 md:gap-y-9 lg:grid-cols-3 lg:grid-rows-[172px_196px]">
           {benefits.map((b) => (
-            <div key={b.title} className="flex flex-col gap-4">
+            <div key={b.title} className="flex gap-4 md:flex-col">
               <IconBox icon={b.icon} />
               <div className="flex flex-col gap-1">
                 <h3 className="text-xl leading-8 font-semibold">{b.title}</h3>

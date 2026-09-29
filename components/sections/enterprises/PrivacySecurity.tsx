@@ -20,9 +20,9 @@ export default function PrivacySecurity() {
           <SectionLabel>Privacy &amp; Security</SectionLabel>
           <h2 className="heading-lg text-center">Trust, Built Into Every Interaction</h2>
         </div>
-        <div className="grid w-full gap-10 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid w-full gap-x-10 gap-y-7 md:grid-cols-2 md:gap-y-10 lg:grid-cols-3">
           {items.map((it) => (
-            <div key={it.title} className="flex flex-col gap-4">
+            <div key={it.title} className="flex gap-4 md:flex-col">
               <IconBox icon={it.icon} />
               <div className="flex flex-col gap-1">
                 <h3 className="text-xl leading-8 font-semibold">{it.title}</h3>

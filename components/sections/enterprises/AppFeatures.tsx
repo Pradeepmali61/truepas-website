@@ -18,9 +18,9 @@ export default function AppFeatures() {
           <h2 className="heading-lg">App Features</h2>
           <p className="text-base leading-6">Reduce Friction at Every Stage of the Customer Journey</p>
         </div>
-        <div className="grid w-full gap-x-10 gap-y-9 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-[auto_196px_auto]">
+        <div className="grid w-full gap-x-10 gap-y-7 md:grid-cols-2 md:gap-y-9 lg:grid-cols-3 lg:grid-rows-[auto_196px_auto]">
           {features.map((f) => (
-            <div key={f.title} className="flex flex-col gap-4">
+            <div key={f.title} className="flex gap-4 md:flex-col">
               <IconBox icon={f.icon} />
               <div className="flex flex-col gap-1">
                 <h3 className="text-xl leading-8 font-semibold">{f.title}</h3>
