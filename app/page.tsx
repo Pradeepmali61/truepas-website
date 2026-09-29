@@ -5,10 +5,10 @@ import Hero from "@/components/sections/enterprises/Hero";
 import IndustrySolutions from "@/components/sections/enterprises/IndustrySolutions";
 import Integrations from "@/components/sections/enterprises/Integrations";
 import MerchantBenefits from "@/components/sections/enterprises/MerchantBenefits";
-import Numbers from "@/components/sections/enterprises/Numbers";
+import Numbers from "@/components/sections/Numbers";
 import PrivacySecurity from "@/components/sections/enterprises/PrivacySecurity";
-import Team from "@/components/sections/enterprises/Team";
-import Testimonials from "@/components/sections/enterprises/Testimonials";
+import Team from "@/components/sections/Team";
+import Testimonials from "@/components/sections/Testimonials";
 import WhyTruePas from "@/components/sections/enterprises/WhyTruePas";
 
 export default function EnterprisesPage() {

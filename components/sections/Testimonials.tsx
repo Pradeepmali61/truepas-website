@@ -27,11 +27,11 @@ const testimonials = [
   },
 ];
 
-export default function Testimonials() {
+export default function Testimonials({ heading = "What our customers are saying" }: { heading?: string }) {
   return (
     <section className="section-pad bg-white">
       <div className="container-page flex flex-col items-center gap-10">
-        <h2 className="heading-lg text-center">What our customers are saying</h2>
+        <h2 className="heading-lg text-center">{heading}</h2>
         <div className="grid w-full gap-8 md:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((t) => (
             <figure key={t.name} className="glass flex flex-col gap-6 rounded-2xl px-8 py-6">

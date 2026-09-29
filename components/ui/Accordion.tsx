@@ -12,9 +12,36 @@ export function ChevronDown({ className = "" }: { className?: string }) {
   );
 }
 
-export default function Accordion({ items, defaultOpen = 0 }: { items: Item[]; defaultOpen?: number | null }) {
+// md = feature lists (16px titles, blue border when open); lg = FAQ (20px titles, border stays grey)
+const sizes = {
+  md: {
+    border: "border-line",
+    openBorder: "border-primary",
+    button: "items-start px-[19px]",
+    title: "text-base leading-6",
+    content: "pr-[67px] pl-[19px] text-sm leading-5",
+  },
+  lg: {
+    border: "border-line-3",
+    openBorder: "border-line-3",
+    button: "items-center px-[23px]",
+    title: "text-xl leading-8",
+    content: "pr-[23px] pl-[23px] text-base leading-6 lg:pr-[71px]",
+  },
+};
+
+export default function Accordion({
+  items,
+  defaultOpen = 0,
+  size = "md",
+}: {
+  items: Item[];
+  defaultOpen?: number | null;
+  size?: keyof typeof sizes;
+}) {
   const [open, setOpen] = useState<number | null>(defaultOpen);
   const id = useId();
+  const s = sizes[size];
 
   return (
     <div className="flex flex-col gap-2">
@@ -23,7 +50,7 @@ export default function Accordion({ items, defaultOpen = 0 }: { items: Item[]; d
         return (
           <div
             key={item.title}
-            className={`rounded-lg border bg-white transition-colors ${isOpen ? "border-primary" : "border-line hover:border-line-2"}`}
+            className={`rounded-lg border bg-white transition-colors ${isOpen ? s.openBorder : `${s.border} hover:border-line-2`}`}
           >
             <h3>
               <button
@@ -32,9 +59,9 @@ export default function Accordion({ items, defaultOpen = 0 }: { items: Item[]; d
                 aria-expanded={isOpen}
                 aria-controls={`${id}-p${i}`}
                 onClick={() => setOpen(isOpen ? null : i)}
-                className="flex w-full items-start gap-6 rounded-lg px-[19px] pt-[15px] text-left focus-visible:outline-2 focus-visible:outline-primary"
+                className={`flex w-full gap-6 rounded-lg pt-[15px] text-left focus-visible:outline-2 focus-visible:outline-primary ${s.button}`}
               >
-                <span className="flex-1 text-base leading-6 font-semibold">{item.title}</span>
+                <span className={`flex-1 font-semibold ${s.title}`}>{item.title}</span>
                 <ChevronDown className={`shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180 text-primary" : "text-ink"}`} />
               </button>
             </h3>
@@ -45,7 +72,7 @@ export default function Accordion({ items, defaultOpen = 0 }: { items: Item[]; d
               className={`grid transition-[grid-template-rows] duration-300 ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
             >
               <div className="overflow-hidden">
-                <p className="mt-1 pr-[67px] pl-[19px] text-sm leading-5">{item.content}</p>
+                <p className={`mt-1 ${s.content}`}>{item.content}</p>
               </div>
             </div>
             <div className="h-[15px]" />

@@ -63,7 +63,7 @@ Regenerate the cache any time with the API, e.g. `curl -H "X-Figma-Token: $FIGMA
 - **Placeholders:** checkerboard image areas in Figma → `<Placeholder>` (grey box). Image ref `ece298d0…` IS the checkerboard — the export script skips it.
 - Copy is verbatim from Figma, including dummy text ("Title", "Name", "Designation"). Draft copy written for missing content is commented as such in the file.
 - Links/buttons → `href="#"` unless the target page exists. `Navbar`/`Footer` live in `app/layout.tsx`; Navbar is sticky, shrinks on scroll, page-aware CTA (`Book a Demo` vs `Download the app` on `/users`) and active-page glass pill via `usePathname`.
-- Component map: `components/ui/` (Button+icons, IconBox, SectionLabel, Placeholder, Accordion, VideoPlayer), `components/sections/<page>/`, `components/sections/CtaBanner.tsx` (shared).
+- Component map: `components/ui/` (Button+icons, IconBox, SectionLabel, Placeholder, Accordion `size=md|lg`, Tabs, VideoPlayer), `components/sections/<page>/`, shared sections in `components/sections/` (CtaBanner, Numbers, Team, Testimonials `heading` prop).
 
 ## Verification workflow
 
@@ -77,7 +77,7 @@ Known deltas: Figma sections overlap 1px each (not replicated); grey placeholder
 ## Progress / remaining work
 
 - Enterprises `/` — DONE (all 13 sections, responsive, committed)
-- Users `/users` — Phase A done (Hero+app bar+video, How it works, Benefits). Remaining: Use-cases tabs (`333:936`), Numbers (`333:1603`), App features (`333:1026`), Security & Privacy (`407:1167`), Testimonials (`411:1305`), FAQ accordion (`333:1691`), Team (`333:1718`), CTA (`333:1729` — reuse `CtaBanner`), footer is layout-level
+- Users `/users` — DONE (all 12 sections; Phase A committed `56da2b1`, Phase B = Use-cases, Numbers, App features, Security & Privacy, Testimonials, FAQ, Team, CTA). Draft copy (non-Airports tabs, App feature answers 2–10, FAQ answers 2–4, "Global Certification" text) is marked in code and awaits client copy
 - Who are we `/who-are-we`, Compliances `/compliances` — not started (all data already in `nodes.json`; section renders still needed — API was rate-limited, rerun export script)
 
 Gotchas: project lives in OneDrive (slow file ops, occasional stale dev-server lock — kill the PID and restart `npm run dev`); port 3000 may be held by a zombie `next dev`; stray `package-lock.json` in `C:\Users\Administrator` triggers a harmless Next.js warning.
