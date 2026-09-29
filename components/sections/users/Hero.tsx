@@ -1,4 +1,5 @@
 import Button, { DownloadIcon } from "@/components/ui/Button";
+import LogoMark from "@/components/ui/LogoMark";
 import Placeholder from "@/components/ui/Placeholder";
 import VideoPlayer from "@/components/ui/VideoPlayer";
 
@@ -25,8 +26,7 @@ export default function Hero() {
         <div className="glass flex flex-col gap-5 rounded-2xl px-6 py-5 lg:h-24 lg:flex-row lg:items-center lg:justify-between lg:py-0">
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-1.5">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/icons/image-8.svg" alt="" className="size-6" />
+              <LogoMark className="h-4 w-auto text-primary" />
               <span className="text-[18px] leading-5 font-bold text-primary">TRUEPAS</span>
             </div>
             <div className="flex items-center gap-1">

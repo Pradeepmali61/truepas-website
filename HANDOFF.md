@@ -36,7 +36,7 @@ Pixel-accurate recreation of a Figma design as a Next.js + TypeScript + Tailwind
 
 ### Repo (committed)
 
-- `public/icons/*.svg` — Figma-exported icons (Google Material-style glyphs + logo mark `image-8.svg` + `group-1.svg`/`group-2.svg` = Apple/Play badges)
+- `public/icons/*.svg` — Figma-exported icons (Google Material-style glyphs + `group-1.svg`/`group-2.svg` = Apple/Play badges)
 - `public/images/*.jpg|png` — Figma image fills (testimonial avatars). Filenames = first 10 chars of the Figma `imageRef`
 - `design-ref/<page>/*.png` — **gitignored** Figma reference renders: `00-full.png` + one per top-level section (`NN-<nodeid>.png`)
 - `screenshots/` — **gitignored** Playwright screenshots, same naming (`1440-NN.png`)
@@ -65,7 +65,8 @@ Regenerate the cache any time with the API, e.g. `curl -H "X-Figma-Token: $FIGMA
 - **Placeholders:** checkerboard image areas in Figma → `<Placeholder>` (grey box). Image ref `ece298d0…` IS the checkerboard — the export script skips it.
 - Copy is verbatim from Figma, including dummy text ("Title", "Name", "Designation"). Draft copy written for missing content is commented as such in the file.
 - Links/buttons → `href="#"` unless the target page exists. `Navbar`/`Footer` live in `app/layout.tsx`; Navbar is sticky, shrinks on scroll, page-aware CTA (`Book a Demo` vs `Download the app` on `/users`) and active-page glass pill via `usePathname`.
-- Component map: `components/ui/` (Button+icons, IconBox, SectionLabel, Placeholder, Accordion `size=md|lg`, Tabs, VideoPlayer), `components/sections/<page>/`, shared sections in `components/sections/` (CtaBanner, Numbers, Team, Testimonials `heading` prop).
+- Logo: the TruePas symbol is `components/ui/LogoMark.tsx` (inline SVG, `currentColor`, size by height e.g. `h-[22px] w-auto`) next to the "TRUEPAS" wordmark; favicon = `app/icon.svg`, `app/apple-icon.png`. It replaced the Figma mark (`image-8.svg`)
+- Component map: `components/ui/` (Button+icons, LogoMark, Photo, IconBox, SectionLabel, Placeholder, Accordion `size=md|lg`, Tabs, VideoPlayer), `components/sections/<page>/`, shared sections in `components/sections/` (CtaBanner, Numbers, Team, Testimonials `heading` prop).
 
 ## Verification workflow
 

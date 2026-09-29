@@ -1,3 +1,4 @@
+import LogoMark from "@/components/ui/LogoMark";
 import Placeholder from "@/components/ui/Placeholder";
 import SectionLabel from "@/components/ui/SectionLabel";
 import VideoPlayer from "@/components/ui/VideoPlayer";
@@ -21,8 +22,7 @@ export default function WhyTruePas() {
           </div>
           <div className="flex h-40 items-center justify-center rounded-lg bg-sky-50 md:h-60 lg:flex-1">
             <div className="flex items-center gap-3 md:gap-[18px]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/icons/image-8.svg" alt="" width={71} height={72} className="size-12 md:h-[72px] md:w-[71px]" />
+              <LogoMark className="h-8 w-auto text-primary md:h-[50px]" />
               <span className="text-4xl font-bold text-primary md:text-[54px] md:leading-[58.6px]">TRUEPAS</span>
             </div>
           </div>
