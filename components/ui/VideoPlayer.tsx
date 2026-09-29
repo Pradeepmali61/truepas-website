@@ -19,9 +19,9 @@ export default function VideoPlayer({ className = "" }: { className?: string }) 
           type="button"
           onClick={() => setOpen(true)}
           aria-label="Play video"
-          className="flex size-[120px] items-center justify-center rounded-full bg-danger transition-transform hover:scale-105 focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-primary"
+          className="flex size-20 items-center justify-center rounded-full bg-danger transition-transform hover:scale-105 focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-primary md:size-[120px]"
         >
-          <svg width="40" height="47" viewBox="0 0 40 47" aria-hidden className="translate-x-1">
+          <svg width="40" height="47" viewBox="0 0 40 47" aria-hidden className="h-8 w-[27px] translate-x-1 md:h-[47px] md:w-10">
             <path d="M40 23.5 0 47V0z" fill="#fff" />
           </svg>
         </button>

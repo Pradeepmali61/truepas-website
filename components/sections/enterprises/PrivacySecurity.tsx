@@ -14,19 +14,19 @@ const items = [
 
 export default function PrivacySecurity() {
   return (
-    <section className="bg-sky-50 px-40 py-20">
+    <section className="section-pad bg-sky-50">
       <div className="container-page flex flex-col items-center gap-10">
         <div className="flex flex-col items-center gap-4">
           <SectionLabel>Privacy &amp; Security</SectionLabel>
-          <h2 className="text-center text-5xl leading-[72px] font-bold">Trust, Built Into Every Interaction</h2>
+          <h2 className="heading-lg text-center">Trust, Built Into Every Interaction</h2>
         </div>
-        <div className="grid w-full grid-cols-3 gap-10">
+        <div className="grid w-full gap-10 md:grid-cols-2 lg:grid-cols-3">
           {items.map((it) => (
             <div key={it.title} className="flex flex-col gap-4">
               <IconBox icon={it.icon} />
               <div className="flex flex-col gap-1">
                 <h3 className="text-xl leading-8 font-semibold">{it.title}</h3>
-                <p className="text-base leading-6 whitespace-pre-line">{it.text}</p>
+                <p className="text-base leading-6 lg:whitespace-pre-line">{it.text}</p>
               </div>
             </div>
           ))}

@@ -80,16 +80,16 @@ export default function IndustrySolutions() {
   };
 
   return (
-    <section className="bg-sky-50 px-40 py-20">
-      <div className="container-page flex flex-col items-center gap-16">
+    <section className="section-pad bg-sky-50">
+      <div className="container-page flex flex-col items-center gap-12 lg:gap-16">
         <div className="flex w-full flex-col items-center gap-10">
           <div className="flex flex-col items-center gap-4">
             <SectionLabel>Industry Solutions</SectionLabel>
-            <h2 className="max-w-[834px] text-center text-[56px] leading-[72px] font-bold">
-              One Identity Platform, Built for Every Merchant Environment
-            </h2>
+            <h2 className="heading-xl max-w-[834px] text-center">One Identity Platform, Built for Every Merchant Environment</h2>
           </div>
-          <div role="tablist" aria-label="Industries" onKeyDown={onKeyDown} className="flex items-center gap-2">
+          {/* Scrolls horizontally below lg; negative margins let it run edge to edge, py/-my keep the glass shadow unclipped */}
+          <div className="-mx-5 -my-3 w-[calc(100%+40px)] overflow-x-auto px-5 py-3 [scrollbar-width:none] md:-mx-10 md:w-[calc(100%+80px)] md:px-10 lg:mx-0 lg:w-full lg:px-0">
+          <div role="tablist" aria-label="Industries" onKeyDown={onKeyDown} className="mx-auto flex w-max items-center gap-2">
             {industries.map((ind, i) => (
               <button
                 key={ind.tab}
@@ -117,12 +117,13 @@ export default function IndustrySolutions() {
               </button>
             ))}
           </div>
+          </div>
         </div>
 
-        <div id={`${id}-panel`} role="tabpanel" aria-labelledby={`${id}-t${active}`} className="flex w-full gap-10">
-          <div className="flex h-[417px] flex-1 flex-col justify-between">
+        <div id={`${id}-panel`} role="tabpanel" aria-labelledby={`${id}-t${active}`} className="flex w-full flex-col gap-10 lg:flex-row">
+          <div className="flex flex-col justify-between gap-8 lg:h-[417px] lg:flex-1">
             <div className="flex flex-col gap-4">
-              <h3 className="max-w-[512px] text-[40px] leading-[52px] font-bold">{current.title}</h3>
+              <h3 className="heading-md max-w-[512px]">{current.title}</h3>
               <div className="flex flex-col gap-6 text-base leading-6">
                 <p>{current.intro}</p>
                 <p>
@@ -133,12 +134,12 @@ export default function IndustrySolutions() {
                 </p>
               </div>
             </div>
-            <div className="flex gap-4">
+            <div className="flex flex-wrap gap-4">
               <Button icon>Explore TruePas for {current.short}</Button>
               <Button variant="secondary">Read more</Button>
             </div>
           </div>
-          <Placeholder className="h-[417px] flex-1 rounded-2xl shadow-card-strong" label={`${current.tab} illustration`} />
+          <Placeholder className="h-64 rounded-2xl shadow-card-strong md:h-[417px] lg:flex-1" label={`${current.tab} illustration`} />
         </div>
       </div>
     </section>

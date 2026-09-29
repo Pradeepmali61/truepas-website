@@ -4,13 +4,13 @@ import SectionLabel from "@/components/ui/SectionLabel";
 
 export default function Dashboard() {
   return (
-    <section className="bg-sky-50 px-40 py-20">
-      <div className="container-page flex gap-10">
-        <div className="flex h-[417px] flex-1 flex-col justify-between">
+    <section className="section-pad bg-sky-50">
+      <div className="container-page flex flex-col gap-10 lg:flex-row">
+        <div className="flex flex-col justify-between gap-8 lg:h-[417px] lg:flex-1">
           <div className="flex flex-col gap-6">
             <SectionLabel>Merchant Dashboard</SectionLabel>
             <div className="flex flex-col gap-4">
-              <h2 className="max-w-[512px] text-[40px] leading-[52px] font-bold">Every Location, One View</h2>
+              <h2 className="heading-md max-w-[512px]">Every Location, One View</h2>
               <div className="flex flex-col gap-6 text-base leading-6">
                 <p>
                   <strong className="font-semibold">Monitor</strong>: Verification activity · Match success/failure rates ·
@@ -29,7 +29,7 @@ export default function Dashboard() {
             <Button icon>Request a Dashboard Demonstration</Button>
           </div>
         </div>
-        <Placeholder className="h-[417px] flex-1 rounded-2xl shadow-card-strong" label="Merchant dashboard preview" />
+        <Placeholder className="h-64 rounded-2xl shadow-card-strong md:h-[417px] lg:flex-1" label="Merchant dashboard preview" />
       </div>
     </section>
   );

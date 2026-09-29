@@ -21,13 +21,13 @@ export function IconBox({ icon }: { icon: string }) {
 
 export default function AppFeatures() {
   return (
-    <section className="bg-sky-50 px-40 py-20">
-      <div className="container-page flex flex-col items-center gap-16">
+    <section className="section-pad bg-sky-50">
+      <div className="container-page flex flex-col items-center gap-12 lg:gap-16">
         <div className="flex flex-col items-center gap-5 text-center">
-          <h2 className="text-5xl leading-[72px] font-bold">App Features</h2>
+          <h2 className="heading-lg">App Features</h2>
           <p className="text-base leading-6">Reduce Friction at Every Stage of the Customer Journey</p>
         </div>
-        <div className="grid w-full grid-cols-3 grid-rows-[auto_196px_auto] gap-x-10 gap-y-9">
+        <div className="grid w-full gap-x-10 gap-y-9 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-[auto_196px_auto]">
           {features.map((f) => (
             <div key={f.title} className="flex flex-col gap-4">
               <IconBox icon={f.icon} />

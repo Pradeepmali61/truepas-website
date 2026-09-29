@@ -3,11 +3,11 @@ import Placeholder from "@/components/ui/Placeholder";
 
 export default function Hero() {
   return (
-    <section className="bg-linear-to-b from-sky-200 to-white px-40 pt-[200px] pb-[120px]">
-      <div className="container-page flex gap-10">
-        <div className="flex w-[540px] flex-col gap-6">
+    <section className="bg-linear-to-b from-sky-200 to-white px-5 pt-32 pb-16 md:px-10 lg:pt-[200px] lg:pb-[120px]">
+      <div className="container-page flex flex-col gap-10 lg:flex-row">
+        <div className="flex flex-col gap-6 lg:w-[540px] lg:shrink-0">
           <div className="flex flex-col gap-4">
-            <h1 className="text-[56px] leading-[72px] font-bold">One Access for Every Customer Journey.</h1>
+            <h1 className="heading-xl">One Access for Every Customer Journey.</h1>
             <p className="max-w-[468px] text-base leading-6 text-ink-3">
               Turn every check-in, verification, entry and payment into a seamless experience with secure biometric
               identity.
@@ -15,12 +15,12 @@ export default function Hero() {
               Customers enroll once. Businesses verify instantly.
             </p>
           </div>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             <Button icon>Book a Demo</Button>
             <Button variant="secondary">Explore Solutions</Button>
           </div>
         </div>
-        <Placeholder className="h-[376px] flex-1 rounded-2xl shadow-card-strong" label="Hero image" />
+        <Placeholder className="h-64 rounded-2xl shadow-card-strong md:h-[376px] lg:flex-1" label="Hero image" />
       </div>
     </section>
   );

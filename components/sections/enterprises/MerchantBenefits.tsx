@@ -20,18 +20,16 @@ const benefits = [
 
 export default function MerchantBenefits() {
   return (
-    <section className="bg-white px-40 py-20">
-      <div className="container-page flex flex-col items-center gap-16">
+    <section className="section-pad bg-white">
+      <div className="container-page flex flex-col items-center gap-12 lg:gap-16">
         <div className="flex w-full flex-col items-center gap-10">
           <div className="flex flex-col items-center gap-4">
             <SectionLabel>Merchant Benefits</SectionLabel>
-            <h2 className="max-w-[654px] text-center text-5xl leading-[72px] font-bold">
-              One Identity, Less Friction, Every Step of the Way
-            </h2>
+            <h2 className="heading-lg max-w-[654px] text-center">One Identity, Less Friction, Every Step of the Way</h2>
           </div>
-          <div className="flex w-full items-start gap-10">
-            <Placeholder className="h-[417px] flex-1 rounded-2xl shadow-card-strong" label="Merchant benefits illustration" />
-            <div className="flex-1 whitespace-pre-line">
+          <div className="flex w-full flex-col gap-10 lg:flex-row lg:items-start">
+            <Placeholder className="h-64 rounded-2xl shadow-card-strong md:h-[417px] lg:flex-1" label="Merchant benefits illustration" />
+            <div className="lg:flex-1 lg:whitespace-pre-line">
               <Accordion items={benefits} />
             </div>
           </div>

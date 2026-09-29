@@ -29,10 +29,10 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="bg-white px-40 py-20">
+    <section className="section-pad bg-white">
       <div className="container-page flex flex-col items-center gap-10">
-        <h2 className="text-center text-5xl leading-[72px] font-bold">What our customers are saying</h2>
-        <div className="grid w-full grid-cols-3 gap-8">
+        <h2 className="heading-lg text-center">What our customers are saying</h2>
+        <div className="grid w-full gap-8 md:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((t) => (
             <figure key={t.name} className="glass flex flex-col gap-6 rounded-2xl px-8 py-6">
               <div className="flex gap-1.5" role="img" aria-label="Rated 5 out of 5">

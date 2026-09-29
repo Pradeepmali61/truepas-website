@@ -13,15 +13,15 @@ const social = [
 ];
 const legal = ["Privacy Policy", "Terms & Conditions", "Cookie Policy", "Contact"];
 
-const list = "flex gap-8 text-sm leading-[21px] tracking-[-0.14px]";
+const list = "flex flex-wrap gap-x-8 gap-y-3 text-sm leading-[21px] tracking-[-0.14px]";
 
 export default function Footer() {
   return (
-    <footer className="bg-sky-200 px-40 pt-20 pb-10">
-      <div className="container-page flex flex-col gap-6">
-        <div className="flex items-start justify-between">
+    <footer className="bg-sky-200 px-5 pt-14 pb-10 md:px-10 lg:pt-20">
+      <div className="container-page flex flex-col gap-8 md:gap-6">
+        <div className="flex flex-col items-start gap-8 md:flex-row md:justify-between">
           <Logo />
-          <nav aria-label="Footer" className="flex flex-col items-end gap-6">
+          <nav aria-label="Footer" className="flex flex-col gap-6 md:items-end">
             <ul className={list}>
               {primary.map((l) => (
                 <li key={l.label}>
@@ -43,7 +43,7 @@ export default function Footer() {
             </ul>
           </nav>
         </div>
-        <div className="flex justify-between text-sm leading-[21px] font-medium tracking-[-0.14px]">
+        <div className="flex flex-col-reverse gap-4 text-sm leading-[21px] font-medium tracking-[-0.14px] md:flex-row md:justify-between">
           <p>Copyright 2026 Company Name.</p>
           <ul className={list}>
             {legal.map((l) => (

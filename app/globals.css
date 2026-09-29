@@ -29,6 +29,50 @@
   margin-inline: auto;
 }
 
+/* Section spacing: Figma desktop values (80px / 160px side at 1440) from lg up */
+@utility section-pad {
+  padding: 56px 20px;
+  @media (width >= 48rem) {
+    padding-inline: 40px;
+  }
+  @media (width >= 64rem) {
+    padding-block: 80px;
+  }
+}
+
+/* Responsive headings: Figma sizes apply from lg (1024px) up */
+@utility heading-xl {
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: 700;
+  @media (width >= 48rem) {
+    font-size: 48px;
+    line-height: 60px;
+  }
+  @media (width >= 64rem) {
+    font-size: 56px;
+    line-height: 72px;
+  }
+}
+@utility heading-lg {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 700;
+  @media (width >= 64rem) {
+    font-size: 48px;
+    line-height: 72px;
+  }
+}
+@utility heading-md {
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 700;
+  @media (width >= 64rem) {
+    font-size: 40px;
+    line-height: 52px;
+  }
+}
+
 /* Approximation of Figma's GLASS effect (its parameters are not exposed by the API) */
 @utility glass {
   background: rgba(255, 255, 255, 0.25);

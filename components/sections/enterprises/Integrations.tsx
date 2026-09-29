@@ -4,15 +4,15 @@ import SectionLabel from "@/components/ui/SectionLabel";
 
 export default function Integrations() {
   return (
-    <section className="bg-white px-40 py-20">
-      <div className="container-page flex flex-col items-center gap-[72px]">
+    <section className="section-pad bg-white">
+      <div className="container-page flex flex-col items-center gap-12 lg:gap-[72px]">
         <div className="flex flex-col items-center gap-4">
           <SectionLabel>Integrations</SectionLabel>
-          <h2 className="max-w-[700px] text-center text-[56px] leading-[72px] font-bold">Works With the Systems You Already Run</h2>
+          <h2 className="heading-xl max-w-[700px] text-center">Works With the Systems You Already Run</h2>
         </div>
-        <div className="flex w-full gap-10">
-          <Placeholder className="h-[417px] flex-1 rounded-2xl shadow-card-strong" label="Integrations illustration" />
-          <div className="flex h-[417px] flex-1 flex-col justify-between">
+        <div className="flex w-full flex-col gap-10 lg:flex-row">
+          <Placeholder className="h-64 rounded-2xl shadow-card-strong md:h-[417px] lg:flex-1" label="Integrations illustration" />
+          <div className="flex flex-col justify-between gap-8 lg:h-[417px] lg:flex-1">
             <div className="flex flex-col gap-6 text-base leading-6">
               <p>TruePas is built to slot into your existing stack, no rip-and-replace required.</p>
               <p>
