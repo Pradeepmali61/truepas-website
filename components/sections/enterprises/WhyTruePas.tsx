@@ -3,7 +3,7 @@ import SectionLabel from "@/components/ui/SectionLabel";
 import VideoPlayer from "@/components/ui/VideoPlayer";
 
 const steps = [
-  { title: "Enrol Once", text: "Customers create a secure digital identity through the TruePas app." },
+  { title: "Enroll Once", text: "Customers create a secure digital identity through the TruePas app." },
   { title: "Verify Instantly", text: "A quick facial verification confirms identity at any TruePas-enabled location." },
   { title: "Complete the Journey", text: "Check in, access services from bookings to memberships with single verification." },
 ];
