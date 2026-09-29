@@ -1,5 +1,5 @@
 import Button from "@/components/ui/Button";
-import Placeholder from "@/components/ui/Placeholder";
+import Photo from "@/components/ui/Photo";
 import SectionLabel from "@/components/ui/SectionLabel";
 
 export default function Integrations() {
@@ -11,7 +11,15 @@ export default function Integrations() {
           <h2 className="heading-xl max-w-[700px] text-center">Works With the Systems You Already Run</h2>
         </div>
         <div className="flex w-full flex-col gap-10 lg:flex-row">
-          <Placeholder className="h-64 rounded-2xl shadow-card-strong md:h-[417px] lg:flex-1" label="Integrations illustration" />
+          <Photo
+            src="/images/enterprises/integrations.webp"
+            alt="TruePas connected to reservation, property management, ticketing, access control, CRM, loyalty, point-of-sale, payment, EHR, mobile and security systems"
+            className="h-64 rounded-2xl bg-sky-50 shadow-card-strong md:h-[417px] lg:flex-1"
+            sizes="(min-width: 1024px) 540px, 100vw"
+            fit="contain"
+            // The diagram fills the middle ~73% of the box height; fade its top/bottom edges so the letterbox bands show no seam
+            imgClassName="[mask-image:linear-gradient(to_bottom,transparent_13%,black_16%,black_84%,transparent_87%)]"
+          />
           <div className="flex flex-col justify-between gap-8 lg:h-[417px] lg:flex-1">
             <div className="flex flex-col gap-6 text-base leading-6">
               <p>TruePas is built to slot into your existing stack, no rip-and-replace required.</p>

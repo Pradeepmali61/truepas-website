@@ -53,6 +53,8 @@ Regenerate the cache any time with the API, e.g. `curl -H "X-Figma-Token: $FIGMA
 
 ### Scripts
 
+- `node scripts/optimize-images.mjs` — converts the content team's raw exports (gitignored folders `First 22-*/`, `ForUser 23-*/` in the repo root) to WebP in `public/images/{enterprises,users}/`. Add a mapping entry per image; place it with `components/ui/Photo.tsx` (next/image `fill`, `cover`/`contain`)
+
 - `FIGMA_TOKEN=… node scripts/figma-export.mjs <frameNodeId> <refDir>` — exports icons → `public/icons/`, image fills → `public/images/` (detects jpg vs png by magic bytes), section renders → `design-ref/<refDir>/`
 - `node scripts/screenshot.mjs <url> <width> <outDir>` — Playwright full-page + per-`<section>` screenshots at a viewport width
 

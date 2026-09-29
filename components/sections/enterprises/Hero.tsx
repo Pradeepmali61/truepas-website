@@ -1,5 +1,5 @@
 import Button from "@/components/ui/Button";
-import Placeholder from "@/components/ui/Placeholder";
+import Photo from "@/components/ui/Photo";
 
 export default function Hero() {
   return (
@@ -20,7 +20,13 @@ export default function Hero() {
             <Button variant="secondary">Explore Solutions</Button>
           </div>
         </div>
-        <Placeholder className="h-64 rounded-2xl shadow-card-strong md:h-[376px] lg:flex-1" label="Hero image" />
+        <Photo
+          src="/images/enterprises/hero.webp"
+          alt="Traveller verifying her identity with a facial scan at an airport self-service kiosk"
+          className="h-64 rounded-2xl shadow-card-strong md:h-[376px] lg:flex-1"
+          sizes="(min-width: 1024px) 540px, 100vw"
+          eager
+        />
       </div>
     </section>
   );
