@@ -9,7 +9,7 @@ import Logo from "./Logo";
 const links = [
   { label: "For Enterprises", href: "/" },
   { label: "For Users", href: "/users" },
-  { label: "Who are we", href: "#" },
+  { label: "Who are we", href: "/who-are-we" },
   { label: "Blogs", href: "#" },
 ];
 

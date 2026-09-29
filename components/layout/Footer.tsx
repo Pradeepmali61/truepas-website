@@ -4,7 +4,7 @@ import Logo from "./Logo";
 const primary = [
   { label: "For Enterprises", href: "/" },
   { label: "Blogs", href: "#" },
-  { label: "Who we are", href: "#" },
+  { label: "Who we are", href: "/who-are-we" },
   { label: "Download the app", href: "#" },
 ];
 const social = [
