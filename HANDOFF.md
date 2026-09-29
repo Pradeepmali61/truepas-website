@@ -78,6 +78,8 @@ Known deltas: Figma sections overlap 1px each (not replicated); grey placeholder
 
 - Enterprises `/` — DONE (all 13 sections, responsive, committed)
 - Users `/users` — DONE (all 12 sections; Phase A committed `56da2b1`, Phase B = Use-cases, Numbers, App features, Security & Privacy, Testimonials, FAQ, Team, CTA). Draft copy (non-Airports tabs, App feature answers 2–10, FAQ answers 2–4, "Global Certification" text) is marked in code and awaits client copy
-- Who are we `/who-are-we`, Compliances `/compliances` — not started (all data already in `nodes.json`; section renders still needed — API was rate-limited, rerun export script)
+- Who are we `/who-are-we` — DONE (About, team member grid, CTA; verified against the 720px cache render + Figma bounding boxes)
+- Compliances `/compliances` — DONE (single section; extra top padding clears the fixed navbar, section grows so the footer sits at the bottom). Not linked from navbar/footer because Figma has no link to it
+- Still to do when a FIGMA_TOKEN is available: export 1440 section renders to `design-ref/who-are-we` + `design-ref/compliances` for pixel diffs. All remaining copy (Name/Designation, Compliance name, drafts) awaits the client
 
 Gotchas: project lives in OneDrive (slow file ops, occasional stale dev-server lock — kill the PID and restart `npm run dev`); port 3000 may be held by a zombie `next dev`; stray `package-lock.json` in `C:\Users\Administrator` triggers a harmless Next.js warning.
