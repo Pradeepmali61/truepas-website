@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Button from "@/components/ui/Button";
+import Button, { DownloadIcon } from "@/components/ui/Button";
 import Logo from "./Logo";
 
 const links = [
   { label: "For Enterprises", href: "/" },
-  { label: "For Users", href: "#" },
+  { label: "For Users", href: "/users" },
   { label: "Who are we", href: "#" },
   { label: "Blogs", href: "#" },
 ];
@@ -33,6 +33,7 @@ export default function Navbar() {
   }, [menuOpen]);
 
   const solid = scrolled || menuOpen;
+  const usersPage = pathname === "/users";
 
   return (
     <header
@@ -58,8 +59,8 @@ export default function Navbar() {
           )}
         </nav>
         <div className="hidden justify-self-end lg:block">
-          <Button size="md" icon>
-            Book a Demo
+          <Button size="md" icon={usersPage ? <DownloadIcon className="size-6" /> : true}>
+            {usersPage ? "Download the app" : "Book a Demo"}
           </Button>
         </div>
         <button
@@ -89,8 +90,8 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
-          <Button size="md" icon className="mt-2 w-full">
-            Book a Demo
+          <Button size="md" icon={usersPage ? <DownloadIcon className="size-6" /> : true} className="mt-2 w-full">
+            {usersPage ? "Download the app" : "Book a Demo"}
           </Button>
         </nav>
       )}

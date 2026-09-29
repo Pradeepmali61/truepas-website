@@ -1,3 +1,5 @@
+import IconBox from "@/components/ui/IconBox";
+
 const features = [
   { icon: "acute", title: "Faster Check-In and Entry", text: "Replace manual document and ticket checks with fast identity recognition." },
   { icon: "arrow-cool-down", title: "Lower Operational Workload", text: "Automate repetitive verification tasks so staff can focus on customer support" },
@@ -7,17 +9,6 @@ const features = [
   { icon: "diamond-shine", title: "Personalized Engagement", text: "Recognize authorized users at the touchpoints." },
   { icon: "open-with", title: "Scalable Deployment", text: "Start with single location and expand across  properties, departments, and journeys." },
 ];
-
-export function IconBox({ icon }: { icon: string }) {
-  return (
-    <div className="glass flex size-[72px] shrink-0 items-center justify-center rounded-sm">
-      <span className="flex size-8 items-center justify-center">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={`/icons/${icon}.svg`} alt="" />
-      </span>
-    </div>
-  );
-}
 
 export default function AppFeatures() {
   return (

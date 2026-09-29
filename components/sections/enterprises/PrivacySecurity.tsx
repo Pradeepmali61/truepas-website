@@ -1,6 +1,6 @@
 import Button from "@/components/ui/Button";
 import SectionLabel from "@/components/ui/SectionLabel";
-import { IconBox } from "./AppFeatures";
+import IconBox from "@/components/ui/IconBox";
 
 const items = [
   { icon: "encrypted", title: "Privacy by Design", text: "Workflows minimize unnecessary collection, transmission, and exposure of personal data." },
