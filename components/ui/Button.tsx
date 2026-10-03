@@ -7,6 +7,7 @@ type Props = {
   /** true = chat bubble; or pass any icon node */
   icon?: boolean | React.ReactNode;
   className?: string;
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
   children: React.ReactNode;
 };
 
@@ -36,7 +37,7 @@ export function DownloadIcon({ className = "size-5" }: { className?: string }) {
   );
 }
 
-export default function Button({ href = "#", variant = "primary", size = "lg", icon, className = "", children }: Props) {
+export default function Button({ href = "#", variant = "primary", size = "lg", icon, className = "", onClick, children }: Props) {
   const base = "inline-flex items-center justify-center rounded-lg text-base leading-6 transition-colors";
   const sizes = {
     primary: { md: "gap-1 px-4 py-2", lg: "gap-2 px-4 py-3" },
@@ -47,7 +48,7 @@ export default function Button({ href = "#", variant = "primary", size = "lg", i
     secondary: "border border-line-2 bg-white font-medium text-ink hover:bg-surface",
   };
   return (
-    <Link href={href} className={`${base} ${sizes[variant][size]} ${variants[variant]} ${className}`}>
+    <Link href={href} onClick={onClick} className={`${base} ${sizes[variant][size]} ${variants[variant]} ${className}`}>
       {icon === true ? <ChatIcon /> : icon}
       {children}
     </Link>

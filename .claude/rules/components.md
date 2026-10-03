@@ -7,7 +7,7 @@ paths:
 # Components and pages
 
 ## Where things go
-- `components/ui/`: primitives (`Button`, `LogoMark`, `IconBox`, `SectionLabel`, `Placeholder`, `Accordion`, `Tabs`, `VideoPlayer`). Reuse these before writing new markup.
+- `components/ui/`: primitives (`Button`, `BookDemoButton`, `LogoMark`, `IconBox`, `SectionLabel`, `Placeholder`, `Accordion`, `Tabs`, `VideoPlayer`). Reuse these before writing new markup.
 - `components/layout/`: `Navbar`, `Footer`, `Logo`. They render only from `app/layout.tsx`.
 - `components/sections/<page>/`: sections used by one page (`enterprises`, `users`, `who-are-we`, `compliances`).
 - `components/sections/*.tsx`: sections shared across pages. Per-page differences are props (`Testimonials heading=…`), not copies.

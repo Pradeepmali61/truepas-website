@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import BookDemoButton from "@/components/ui/BookDemoButton";
 import Button, { DownloadIcon } from "@/components/ui/Button";
 import Logo from "./Logo";
 
@@ -34,6 +35,14 @@ export default function Navbar() {
 
   const solid = scrolled || menuOpen;
   const usersPage = pathname === "/users";
+  const cta = (className?: string, onClick?: () => void) =>
+    usersPage ? (
+      <Button size="md" icon={<DownloadIcon className="size-6" />} className={className} onClick={onClick}>
+        Download the app
+      </Button>
+    ) : (
+      <BookDemoButton size="md" className={className} onClick={onClick} />
+    );
 
   return (
     <header
@@ -58,11 +67,7 @@ export default function Navbar() {
             ),
           )}
         </nav>
-        <div className="hidden justify-self-end lg:block">
-          <Button size="md" icon={usersPage ? <DownloadIcon className="size-6" /> : true}>
-            {usersPage ? "Download the app" : "Book a Demo"}
-          </Button>
-        </div>
+        <div className="hidden justify-self-end lg:block">{cta()}</div>
         <button
           type="button"
           onClick={() => setMenuOpen((o) => !o)}
@@ -90,9 +95,7 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
-          <Button size="md" icon={usersPage ? <DownloadIcon className="size-6" /> : true} className="mt-2 w-full">
-            {usersPage ? "Download the app" : "Book a Demo"}
-          </Button>
+          {cta("mt-2 w-full", () => setMenuOpen(false))}
         </nav>
       )}
     </header>

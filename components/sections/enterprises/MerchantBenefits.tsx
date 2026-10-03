@@ -1,5 +1,5 @@
 import Accordion from "@/components/ui/Accordion";
-import Button from "@/components/ui/Button";
+import BookDemoButton from "@/components/ui/BookDemoButton";
 import Placeholder from "@/components/ui/Placeholder";
 import SectionLabel from "@/components/ui/SectionLabel";
 
@@ -34,7 +34,7 @@ export default function MerchantBenefits() {
             </div>
           </div>
         </div>
-        <Button icon>Book a Demo</Button>
+        <BookDemoButton />
       </div>
     </section>
   );

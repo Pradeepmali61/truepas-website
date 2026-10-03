@@ -1,3 +1,4 @@
+import BookDemoButton from "@/components/ui/BookDemoButton";
 import Button from "@/components/ui/Button";
 import Placeholder from "@/components/ui/Placeholder";
 
@@ -16,7 +17,7 @@ export default function Hero() {
             </p>
           </div>
           <div className="flex flex-wrap gap-4">
-            <Button icon>Book a Demo</Button>
+            <BookDemoButton />
             <Button variant="secondary">Explore Solutions</Button>
           </div>
         </div>

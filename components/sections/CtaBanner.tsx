@@ -1,4 +1,4 @@
-import Button from "@/components/ui/Button";
+import BookDemoButton from "@/components/ui/BookDemoButton";
 
 export default function CtaBanner() {
   return (
@@ -8,7 +8,7 @@ export default function CtaBanner() {
           <h2 className="text-[28px] leading-9 font-bold md:text-[32px] md:leading-[48px]">See TruePas in Action</h2>
           <p className="text-base leading-6">Ready to eliminate friction across your venues? Talk to our team.</p>
         </div>
-        <Button icon>Request demo</Button>
+        <BookDemoButton>Request demo</BookDemoButton>
       </div>
     </section>
   );

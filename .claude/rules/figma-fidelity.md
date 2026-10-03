@@ -16,7 +16,7 @@ The Figma file is the spec. Page → node map and file key are in `AGENTS.md`; t
 - Keep placeholders until the user explicitly asks for real images (the first images pass was reverted in `bd137eb`). Never import from the raw content folders `First 22-*` / `ForUser 23-*`.
 
 ## Links and pages
-- Links and buttons use `href="#"` unless the target route exists in `app/`.
+- Links and buttons use `href="#"` unless the target route exists in `app/`. Exception: every demo CTA ("Book a Demo", "Request demo") is a `BookDemoButton`, which opens the Calendly popup.
 - Don't add nav/footer links, pages or sections that aren't in Figma (e.g. `/compliances` is intentionally unlinked).
 
 ## Acceptable deltas
