@@ -22,3 +22,6 @@ Pixel-accurate build of the Figma file `jj854H0LwiYxUmxJOO2NxG` (page "High-Fi d
 - Shared utilities in `app/globals.css`: `section-pad`, `heading-xl` (56), `heading-lg` (48), `heading-md` (40), `glass` (approximation of Figma GLASS effect).
 - Verify every change at 1440 against the Figma reference PNGs (side-by-side) and check 375/768 for horizontal overflow.
 - Enterprises page = `/` (Figma node `506:2836`). Remaining pages: Users (`222:98`), Who are we (`506:3325`), Compliances (`525:3426`).
+
+## Rules
+Detailed project rules live in `.claude/rules/` — read them before making changes: `figma-fidelity.md`, `styling.md`, `components.md`, `workflow.md`.
