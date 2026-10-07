@@ -12,17 +12,20 @@ const DIRECT = "5-Oct/Direct"; // images sent outside the Drive folder
 const images = {
   "enterprises/hero.webp": `${ENT}/One Access for Every Customer Journey.jpg`,
 
-  // Quicker Check-In, Higher Throughput, Hotels and Stadiums wait on a decision about the real brand logos in them
+  "enterprises/benefit-quicker-check-in.webp": `${ENT}/Fold 3 Quicker CheckIn & Entry.jpg`,
   "enterprises/benefit-operational-load.webp": `${ENT}/Fold 3 Lighter Operational Load.jpg`,
   "enterprises/benefit-fraud-prevention.webp": `${ENT}/Fold 3 Sharper Fraud Prevention.jpg`,
   "enterprises/benefit-consistent-experience.webp": `${ENT}/Fold 3A More Consistent Experience.jpg`,
+  "enterprises/benefit-throughput.webp": `${ENT}/Fold 3 Higher Throughput at Peak Times.jpg`,
   "enterprises/benefit-personal-recognition.webp": `${ENT}/Fold 3 Recognition That Feels Personal.jpg`,
   "enterprises/benefit-grows-with-you.webp": `${ENT}/Fold 3 Grows With You.jpg`,
 
   "enterprises/industry-airports.webp": `${ENT}/Fold 4 Airports Airlines.jpg`,
   "enterprises/industry-car-rentals.webp": `${ENT}/Fold 4 Car Rentals.jpg`,
+  "enterprises/industry-hotels.webp": `${ENT}/Fold 4 Hotels.jpg`,
   "enterprises/industry-theme-parks.webp": `${ENT}/Fold 4 Theme Parks.jpg`,
   "enterprises/industry-cruise.webp": `${ENT}/Fold 4 Cruise.jpg`,
+  "enterprises/industry-stadiums.webp": `${ENT}/Fold 4 Stadiums & Entertainment Venues.jpg`,
   "enterprises/industry-healthcare.webp": `${ENT}/Fold 4 Healthcare Providers.jpg`,
 
   // Sent directly by the client to replace the Drive version

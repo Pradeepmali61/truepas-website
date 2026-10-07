@@ -6,8 +6,7 @@ import PhotoSwap from "@/components/ui/PhotoSwap";
 import SectionLabel from "@/components/ui/SectionLabel";
 import Tabs from "@/components/ui/Tabs";
 
-// Only Airports/Airlines copy exists in Figma; the other industries are drafts pending client review.
-// Hotels and Stadiums have no image yet: theirs show real brand logos, pending a decision.
+// Only Airports/Airlines copy exists in Figma; the other industries are drafts pending client review
 const industries = [
   {
     tab: "Airports/Airlines",
@@ -36,6 +35,8 @@ const industries = [
     intro: "Guests confirm their identity ahead of arrival and walk straight to their room.",
     fits: "Pre-arrival check-in · Front desk · Room access · Amenities and spa · Lounge entry · Check-out",
     gain: "Shorter front-desk lines, less paperwork, secure room access, more time for guest service, a personal welcome every stay",
+    image: "industry-hotels",
+    alt: "Guest verifying their identity on a device at a hotel reception as the receptionist welcomes them",
   },
   {
     tab: "Theme Parks",
@@ -64,6 +65,8 @@ const industries = [
     intro: "Fans link their tickets to their identity and walk in without searching for a phone or paper ticket.",
     fits: "Gate entry · Ticket validation · VIP and hospitality areas · Concessions · Staff access · Re-entry",
     gain: "Faster crowd flow, elimination of ticket touting, stronger venue security, higher concession sales, a better fan experience",
+    image: "industry-stadiums",
+    alt: "Fan verifying their identity and ticket at a stadium entrance with venue staff",
   },
   {
     tab: "Healthcare Providers",
