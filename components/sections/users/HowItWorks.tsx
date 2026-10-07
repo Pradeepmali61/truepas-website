@@ -21,9 +21,10 @@ export default function HowItWorks() {
             Use it across every platform. Frictionless, time-saving, hassle-free with zero-knowledge security.
           </p>
         </div>
-        <p className="flex items-center gap-2 text-2xl leading-9 font-bold">
+        {/* Wraps as two centred lines on phones; the clock and "3 minutes" stay together */}
+        <p className="flex flex-wrap items-center justify-center gap-x-2 text-center text-2xl leading-9 font-bold">
           Enroll yourself in just
-          <span className="flex items-center gap-2 text-[#3194ff]">
+          <span className="flex items-center gap-2 whitespace-nowrap text-[#3194ff]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/icons/clock.svg" alt="" className="size-6" />
             3 minutes

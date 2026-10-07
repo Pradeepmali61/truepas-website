@@ -30,7 +30,7 @@ export default function Hero() {
         </div>
 
         <div className="glass flex flex-col gap-5 rounded-2xl px-6 py-5 lg:h-24 lg:flex-row lg:items-center lg:justify-between lg:py-0">
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <div className="flex items-center gap-1.5">
               <LogoMark className="h-4 w-auto text-primary" />
               <span className="text-[18px] leading-5 font-bold text-primary">TRUEPAS</span>
