@@ -53,9 +53,11 @@ Regenerate the cache any time with the API, e.g. `curl -H "X-Figma-Token: $FIGMA
 
 ### Scripts
 
+- `node scripts/optimize-video.mjs` — needs `ffmpeg` on PATH (installed via winget). Compresses the brand video (`5-Oct/Direct/Truepas Brand Video.mp4`, from the client's SharePoint link) to `public/videos/truepas-brand.mp4` (1080p H.264 CRF 26 + AAC, faststart, ~34 MB) and saves the 2:00 frame as `public/images/video-poster.webp`
+
 - `FIGMA_TOKEN=… node scripts/figma-export.mjs <frameNodeId> <refDir>` — exports icons → `public/icons/`, image fills → `public/images/` (detects jpg vs png by magic bytes), section renders → `design-ref/<refDir>/`
 - `node scripts/screenshot.mjs <url> <width> <outDir>` — Playwright full-page + per-`<section>` screenshots at a viewport width
-- `node scripts/optimize-images.mjs` — converts the content team's raw JPGs (gitignored `5-Oct/For Enterprises`, `5-Oct/For Users` in the repo root, from the "5-Oct" Drive folder) to WebP in `public/images/{enterprises,users}/`. Add a mapping entry per image; place it with `components/ui/Photo.tsx` (next/image `fill`, `cover`/`contain`)
+- `node scripts/optimize-images.mjs` — converts the content team's raw images (gitignored `5-Oct/For Enterprises`, `5-Oct/For Users` in the repo root, mirroring the "5-Oct" Drive folder; `5-Oct/Direct` holds images sent outside Drive). A replaced image gets a new output name (e.g. `integrations-v2.webp`); `/_next/image` caches by URL for 4 hours, so reusing the name serves the old picture to WebP in `public/images/{enterprises,users}/`. Add a mapping entry per image; place it with `components/ui/Photo.tsx` (next/image `fill`, `cover`/`contain`)
 
 ## Build conventions
 
@@ -65,7 +67,7 @@ Regenerate the cache any time with the API, e.g. `curl -H "X-Figma-Token: $FIGMA
 - Copy is verbatim from Figma, including dummy text ("Title", "Name", "Designation"). Draft copy written for missing content is commented as such in the file.
 - Links/buttons → `href="#"` unless the target page exists. Demo CTAs ("Book a Demo", "Request demo") use `components/ui/BookDemoButton.tsx`: a Calendly popup, with the widget loaded on first click and the booking page as the `href` fallback. The Calendly URL is the `CALENDLY_URL` constant there (currently a personal test account; swap for the client's). `Navbar`/`Footer` live in `app/layout.tsx`; Navbar is sticky, shrinks on scroll, page-aware CTA (`Book a Demo` vs `Download the app` on `/users`) and active-page glass pill via `usePathname`.
 - Logo: the TruePas symbol is `components/ui/LogoMark.tsx` (inline SVG, `currentColor`, size by height e.g. `h-[22px] w-auto`) next to the "TRUEPAS" wordmark; favicon = `app/icon.svg`, `app/apple-icon.png`. It replaced the Figma mark (`image-8.svg`)
-- Component map: `components/ui/` (Button+icons, LogoMark, IconBox, SectionLabel, Placeholder, Photo, PhotoSwap (stacked, preloaded tab images), Accordion `size=md|lg` + `onOpenChange`, Tabs, VideoPlayer), `components/sections/<page>/`, shared sections in `components/sections/` (CtaBanner, Numbers, Team, Testimonials `heading` prop).
+- Component map: `components/ui/` (Button+icons, LogoMark, IconBox, SectionLabel, Placeholder, Photo, PhotoSwap (stacked, preloaded tab images), Accordion `size=md|lg` + `onOpenChange`, Tabs, VideoPlayer (poster + play button; plays the brand video in a dialog)), `components/sections/<page>/`, shared sections in `components/sections/` (CtaBanner, Numbers, Team, Testimonials `heading` prop).
 
 ## Verification workflow
 
@@ -82,7 +84,8 @@ Known deltas: Figma sections overlap 1px each (not replicated); grey placeholder
 - Users `/users` — DONE (all 12 sections; Phase A committed `56da2b1`, Phase B = Use-cases, Numbers, App features, Security & Privacy, Testimonials, FAQ, Team, CTA). Draft copy (non-Airports tabs, App feature answers 2–10, FAQ answers 2–4, "Global Certification" text) is marked in code and awaits client copy
 - Who are we `/who-are-we` — DONE (About, team member grid, CTA; verified against the 720px cache render + Figma bounding boxes)
 - Compliances `/compliances` — DONE (single section; extra top padding clears the fixed navbar, section grows so the footer sits at the bottom). Not linked from navbar/footer because Figma has no link to it
-- Images (5-Oct delivery + revisions in the same Drive folder) — placed: Enterprises Hero, 5 of 7 Merchant Benefits, 5 of 7 Industry tabs, Integrations (diagram, `contain`), Dashboard; Users Hero, 6 enrollment steps, 6 use-case tabs, 9 of 10 App features. Tab/accordion images use `PhotoSwap`. Waiting: Enterprises Fold 2 (pick set 1/2/3; confirm "Image 2/3" belong to Set 1) and the 1048×480 logo box (not delivered); Fold 10 Team (revision is 1080×834, needs 1080×1104); Quicker Check-In, Higher Throughput, Hotels and Stadiums (show Hertz/Avis/Budget/Enterprise, Hilton, Spotify/FC Barcelona branding — decision pending); Users Multi-Venue (pick one of two versions)
+- Brand video — DONE: `VideoPlayer` (Enterprises "Why TruePas", Users hero) shows the 2:00 poster frame and plays `public/videos/truepas-brand.mp4` in a dialog
+- Images (5-Oct delivery + revisions in the same Drive folder) — placed: Enterprises Hero, 5 of 7 Merchant Benefits, 5 of 7 Industry tabs, Integrations (diagram sent directly by the client, kept in `5-Oct/Direct/`, shown with `contain`), Dashboard; Users Hero, 6 enrollment steps, 6 use-case tabs, 9 of 10 App features. Tab/accordion images use `PhotoSwap`. Waiting: Enterprises Fold 2 (pick set 1/2/3; confirm "Image 2/3" belong to Set 1) and the 1048×480 logo box (not delivered); Fold 10 Team (revision is 1080×834, needs 1080×1104); Quicker Check-In, Higher Throughput, Hotels and Stadiums (show Hertz/Avis/Budget/Enterprise, Hilton, Spotify/FC Barcelona branding — decision pending); Users Multi-Venue (pick one of two versions)
 - Still to do when a FIGMA_TOKEN is available: export 1440 section renders to `design-ref/who-are-we` + `design-ref/compliances` for pixel diffs. All remaining copy (Name/Designation, Compliance name, drafts) awaits the client
 
 Gotchas: project lives in OneDrive (slow file ops, occasional stale dev-server lock — kill the PID and restart `npm run dev`); port 3000 may be held by a zombie `next dev`; stray `package-lock.json` in `C:\Users\Administrator` triggers a harmless Next.js warning.
