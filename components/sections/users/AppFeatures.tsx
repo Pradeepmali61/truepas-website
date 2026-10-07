@@ -3,8 +3,7 @@
 import { useState } from "react";
 import Accordion from "@/components/ui/Accordion";
 import Button, { DownloadIcon } from "@/components/ui/Button";
-import Photo from "@/components/ui/Photo";
-import Placeholder from "@/components/ui/Placeholder";
+import PhotoSwap from "@/components/ui/PhotoSwap";
 import SectionLabel from "@/components/ui/SectionLabel";
 
 // Only the first item has copy in Figma; the rest are drafts pending client review.
@@ -22,12 +21,11 @@ const features = [
   { title: "Easy Opt-Out & Deletion", content: "Withdraw consent or permanently delete your biometric data in a few taps.", image: "feature-opt-out", alt: "TruePas app profile screen with account deletion and privacy controls" },
 ];
 
-const frame = "h-64 rounded-2xl shadow-card-strong md:h-[417px] lg:flex-1";
+const images = features.map((f) => (f.image ? { src: `/images/users/${f.image}.webp`, alt: f.alt } : undefined));
 
 export default function AppFeatures() {
   // Last opened item; the image stays when every item is closed
   const [shown, setShown] = useState(0);
-  const current = features[shown];
 
   return (
     <section className="section-pad bg-white">
@@ -38,11 +36,13 @@ export default function AppFeatures() {
             <h2 className="heading-lg text-center">App features</h2>
           </div>
           <div className="flex w-full flex-col gap-10 lg:flex-row lg:items-start">
-            {current.image ? (
-              <Photo src={`/images/users/${current.image}.webp`} alt={current.alt} className={frame} sizes="(min-width: 1024px) 540px, 100vw" />
-            ) : (
-              <Placeholder className={frame} label={`${current.title} illustration`} />
-            )}
+            <PhotoSwap
+              images={images}
+              active={shown}
+              className="h-64 rounded-2xl shadow-card-strong md:h-[417px] lg:flex-1"
+              sizes="(min-width: 1024px) 540px, 100vw"
+              label={`${features[shown].title} illustration`}
+            />
             <div className="lg:flex-1">
               <Accordion items={features} onOpenChange={(i) => i !== null && setShown(i)} />
             </div>

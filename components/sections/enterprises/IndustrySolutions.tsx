@@ -2,11 +2,12 @@
 
 import { useId, useState } from "react";
 import Button from "@/components/ui/Button";
-import Placeholder from "@/components/ui/Placeholder";
+import PhotoSwap from "@/components/ui/PhotoSwap";
 import SectionLabel from "@/components/ui/SectionLabel";
 import Tabs from "@/components/ui/Tabs";
 
-// Only Airports/Airlines copy exists in Figma; the other industries are drafts pending client review
+// Only Airports/Airlines copy exists in Figma; the other industries are drafts pending client review.
+// Hotels and Stadiums have no image yet: theirs show real brand logos, pending a decision.
 const industries = [
   {
     tab: "Airports/Airlines",
@@ -15,6 +16,8 @@ const industries = [
     intro: "Passengers link their identity to their trip before they ever reach the airport.",
     fits: "Arrival · Self-service check-in · Identity verification · Security · Lounge entry · Gate access · Boarding",
     gain: "Shorter queues, faster passenger flow, less document handling, higher terminal throughput, consistent verification, a smoother passenger experience",
+    image: "industry-airports",
+    alt: "Traveller verifying their identity on a check-in device while airline staff assist",
   },
   {
     tab: "Car Rentals",
@@ -23,6 +26,8 @@ const industries = [
     intro: "Renters verify their identity and licence once, then skip the counter at every pickup.",
     fits: "Online booking · Licence verification · Counter-free pickup · Vehicle access · Returns · Loyalty programs",
     gain: "Fewer counter queues, reduced rental fraud, faster vehicle handover, lower staffing load, a seamless renter experience",
+    image: "industry-car-rentals",
+    alt: "Customer verifying their identity at a car rental counter as the agent hands over the keys",
   },
   {
     tab: "Hotels",
@@ -39,6 +44,8 @@ const industries = [
     intro: "Visitors link their tickets and passes to their identity for fast, secure entry all day long.",
     fits: "Park entry · Season pass validation · Ride access · Express lanes · Dining and retail · Re-entry",
     gain: "Faster gate throughput, no pass sharing, fewer lost tickets, reduced staffing at entrances, happier visitors",
+    image: "industry-theme-parks",
+    alt: "Family verifying their identity at a theme park entrance gate with a staff member",
   },
   {
     tab: "Cruise",
@@ -47,6 +54,8 @@ const industries = [
     intro: "Passengers verify once before sailing and move through embarkation and every port with ease.",
     fits: "Terminal check-in · Embarkation · Onboard access · Cabin entry · Onboard purchases · Shore excursions · Disembarkation",
     gain: "Quicker embarkation, accurate passenger manifests, secure onboard access, less document handling, a smoother voyage",
+    image: "industry-cruise",
+    alt: "Passenger verifying their identity at a cruise terminal gate with the ship outside",
   },
   {
     tab: "Stadiums & Entertainment Venues",
@@ -63,8 +72,12 @@ const industries = [
     intro: "Patients verify their identity once and are recognised instantly at every visit.",
     fits: "Patient registration · Appointment check-in · Record access · Pharmacy pickup · Restricted areas · Insurance verification",
     gain: "Fewer identity errors, reduced medical fraud, shorter waiting rooms, less admin work, safer patient care",
+    image: "industry-healthcare",
+    alt: "Patient checking in at a hospital reception with identity verification",
   },
 ];
+
+const images = industries.map((ind) => (ind.image ? { src: `/images/enterprises/${ind.image}.webp`, alt: ind.alt } : undefined));
 
 export default function IndustrySolutions() {
   const [active, setActive] = useState(0);
@@ -101,7 +114,13 @@ export default function IndustrySolutions() {
               <Button variant="secondary">Read more</Button>
             </div>
           </div>
-          <Placeholder className="h-64 rounded-2xl shadow-card-strong md:h-[417px] lg:flex-1" label={`${current.tab} illustration`} />
+          <PhotoSwap
+            images={images}
+            active={active}
+            className="h-64 rounded-2xl shadow-card-strong md:h-[417px] lg:flex-1"
+            sizes="(min-width: 1024px) 540px, 100vw"
+            label={`${current.tab} illustration`}
+          />
         </div>
       </div>
     </section>

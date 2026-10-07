@@ -2,7 +2,7 @@
 
 import { useId, useState } from "react";
 import Button, { DownloadIcon } from "@/components/ui/Button";
-import Photo from "@/components/ui/Photo";
+import PhotoSwap from "@/components/ui/PhotoSwap";
 import SectionLabel from "@/components/ui/SectionLabel";
 import Tabs from "@/components/ui/Tabs";
 
@@ -52,6 +52,8 @@ const useCases = [
   },
 ];
 
+const images = useCases.map((u) => ({ src: `/images/users/${u.image}.webp`, alt: u.alt }));
+
 export default function UseCases() {
   const [active, setActive] = useState(0);
   const id = useId();
@@ -79,9 +81,9 @@ export default function UseCases() {
               <Button variant="secondary">Read more</Button>
             </div>
           </div>
-          <Photo
-            src={`/images/users/${current.image}.webp`}
-            alt={current.alt}
+          <PhotoSwap
+            images={images}
+            active={active}
             className="h-64 rounded-2xl shadow-card-strong md:h-[417px] lg:flex-1"
             sizes="(min-width: 1024px) 540px, 100vw"
           />

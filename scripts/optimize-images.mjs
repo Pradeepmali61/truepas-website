@@ -11,6 +11,22 @@ const USR = "5-Oct/For Users";
 const images = {
   "enterprises/hero.webp": `${ENT}/One Access for Every Customer Journey.jpg`,
 
+  // Quicker Check-In, Higher Throughput, Hotels and Stadiums wait on a decision about the real brand logos in them
+  "enterprises/benefit-operational-load.webp": `${ENT}/Fold 3 Lighter Operational Load.jpg`,
+  "enterprises/benefit-fraud-prevention.webp": `${ENT}/Fold 3 Sharper Fraud Prevention.jpg`,
+  "enterprises/benefit-consistent-experience.webp": `${ENT}/Fold 3A More Consistent Experience.jpg`,
+  "enterprises/benefit-personal-recognition.webp": `${ENT}/Fold 3 Recognition That Feels Personal.jpg`,
+  "enterprises/benefit-grows-with-you.webp": `${ENT}/Fold 3 Grows With You.jpg`,
+
+  "enterprises/industry-airports.webp": `${ENT}/Fold 4 Airports Airlines.jpg`,
+  "enterprises/industry-car-rentals.webp": `${ENT}/Fold 4 Car Rentals.jpg`,
+  "enterprises/industry-theme-parks.webp": `${ENT}/Fold 4 Theme Parks.jpg`,
+  "enterprises/industry-cruise.webp": `${ENT}/Fold 4 Cruise.jpg`,
+  "enterprises/industry-healthcare.webp": `${ENT}/Fold 4 Healthcare Providers.jpg`,
+
+  "enterprises/integrations.webp": `${ENT}/Fold 6 Works With the Systems You Already Run.jpg`,
+  "enterprises/dashboard.webp": `${ENT}/Fold 7 Every Location One View.jpg`,
+
   "users/hero.webp": `${USR}/One Face Infinite Places.jpg`,
 
   "users/step-enter-details.webp": `${USR}/Fold 2 Enter Details.jpg`,
