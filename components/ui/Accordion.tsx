@@ -30,15 +30,15 @@ const sizes = {
   },
 };
 
-export default function Accordion({
-  items,
-  defaultOpen = 0,
-  size = "md",
-}: {
+type Props = {
   items: Item[];
   defaultOpen?: number | null;
   size?: keyof typeof sizes;
-}) {
+  /** Called with the newly opened item's index, or null when it was closed (e.g. to swap a section image) */
+  onOpenChange?: (open: number | null) => void;
+};
+
+export default function Accordion({ items, defaultOpen = 0, size = "md", onOpenChange }: Props) {
   const [open, setOpen] = useState<number | null>(defaultOpen);
   const id = useId();
   const s = sizes[size];
@@ -58,7 +58,11 @@ export default function Accordion({
                 id={`${id}-h${i}`}
                 aria-expanded={isOpen}
                 aria-controls={`${id}-p${i}`}
-                onClick={() => setOpen(isOpen ? null : i)}
+                onClick={() => {
+                  const next = isOpen ? null : i;
+                  setOpen(next);
+                  onOpenChange?.(next);
+                }}
                 className={`flex w-full gap-6 rounded-lg pt-[15px] text-left focus-visible:outline-2 focus-visible:outline-primary ${s.button}`}
               >
                 <span className={`flex-1 font-semibold ${s.title}`}>{item.title}</span>

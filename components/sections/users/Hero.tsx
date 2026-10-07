@@ -1,6 +1,6 @@
 import Button, { DownloadIcon } from "@/components/ui/Button";
 import LogoMark from "@/components/ui/LogoMark";
-import Placeholder from "@/components/ui/Placeholder";
+import Photo from "@/components/ui/Photo";
 import VideoPlayer from "@/components/ui/VideoPlayer";
 
 export default function Hero() {
@@ -20,7 +20,13 @@ export default function Hero() {
               }
             </p>
           </div>
-          <Placeholder className="h-64 rounded-2xl shadow-card-strong md:h-[376px] lg:flex-1" label="Hero image" />
+          <Photo
+            src="/images/users/hero.webp"
+            alt="Traveller holding a phone with a TruePas airport travel pass in the terminal"
+            className="h-64 rounded-2xl shadow-card-strong md:h-[376px] lg:flex-1"
+            sizes="(min-width: 1024px) 540px, 100vw"
+            eager
+          />
         </div>
 
         <div className="glass flex flex-col gap-5 rounded-2xl px-6 py-5 lg:h-24 lg:flex-row lg:items-center lg:justify-between lg:py-0">

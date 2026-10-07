@@ -2,7 +2,7 @@
 
 import { useId, useState } from "react";
 import Button, { DownloadIcon } from "@/components/ui/Button";
-import Placeholder from "@/components/ui/Placeholder";
+import Photo from "@/components/ui/Photo";
 import SectionLabel from "@/components/ui/SectionLabel";
 import Tabs from "@/components/ui/Tabs";
 
@@ -12,31 +12,43 @@ const useCases = [
     tab: "Airports",
     title: "From hours in the queue to seconds at the gate.",
     text: "One glance verifies your identity at every checkpoint, check-in, security, and boarding, cutting wait times substantially and eliminating document fraud.",
+    image: "use-case-airports",
+    alt: "Traveller showing a TruePas travel pass on his phone in an airport terminal",
   },
   {
     tab: "Car Rentals",
     title: "From the rental counter to the open road.",
     text: "Your face confirms your identity and licence at pickup, so you skip the desk paperwork and get behind the wheel in minutes.",
+    image: "use-case-car-rentals",
+    alt: "Customer at a car rental counter with a verified TruePas identity on their phone",
   },
   {
     tab: "Hotels",
     title: "From the front desk straight to your room.",
     text: "Check in before you arrive and let a single glance unlock the lobby, your room, and hotel amenities throughout your stay.",
+    image: "use-case-hotels",
+    alt: "Guest checking in at a hotel reception with TruePas on their phone",
   },
   {
     tab: "Theme Parks",
     title: "From long entry lines to more time on the rides.",
     text: "Your face is your ticket: enter the park, use express lanes, and re-enter all day without juggling passes or wristbands.",
+    image: "use-case-theme-parks",
+    alt: "Visitor entering a theme park with a TruePas pass on their phone",
   },
   {
     tab: "Cruise",
     title: "From terminal paperwork to boarding in minutes.",
     text: "Verify once before you sail and breeze through embarkation, onboard access, and every port of call with a single glance.",
+    image: "use-case-cruise",
+    alt: "Passenger boarding at a cruise terminal with a TruePas boarding pass on their phone",
   },
   {
     tab: "Venues",
     title: "From ticket scanning to walking straight in.",
     text: "Link your ticket to your identity and enter stadiums, concerts, and events without searching for your phone or a paper ticket.",
+    image: "use-case-venues",
+    alt: "Fan entering a stadium with a TruePas pass on their phone",
   },
 ];
 
@@ -67,7 +79,12 @@ export default function UseCases() {
               <Button variant="secondary">Read more</Button>
             </div>
           </div>
-          <Placeholder className="h-64 rounded-2xl shadow-card-strong md:h-[417px] lg:flex-1" label={`${current.tab} illustration`} />
+          <Photo
+            src={`/images/users/${current.image}.webp`}
+            alt={current.alt}
+            className="h-64 rounded-2xl shadow-card-strong md:h-[417px] lg:flex-1"
+            sizes="(min-width: 1024px) 540px, 100vw"
+          />
         </div>
       </div>
     </section>

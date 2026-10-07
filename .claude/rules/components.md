@@ -7,7 +7,7 @@ paths:
 # Components and pages
 
 ## Where things go
-- `components/ui/`: primitives (`Button`, `BookDemoButton`, `LogoMark`, `IconBox`, `SectionLabel`, `Placeholder`, `Accordion`, `Tabs`, `VideoPlayer`). Reuse these before writing new markup.
+- `components/ui/`: primitives (`Button`, `BookDemoButton`, `LogoMark`, `IconBox`, `SectionLabel`, `Placeholder`, `Photo`, `Accordion`, `Tabs`, `VideoPlayer`). Reuse these before writing new markup.
 - `components/layout/`: `Navbar`, `Footer`, `Logo`. They render only from `app/layout.tsx`.
 - `components/sections/<page>/`: sections used by one page (`enterprises`, `users`, `who-are-we`, `compliances`).
 - `components/sections/*.tsx`: sections shared across pages. Per-page differences are props (`Testimonials heading=…`), not copies.
@@ -26,11 +26,11 @@ paths:
 
 ## Server vs client
 - Server components by default. Add `"use client"` only for state, effects or browser APIs.
-- Keep the client boundary small: `Tabs` and `Accordion` are client primitives. A section becomes client only when it owns their state (`IndustrySolutions`, `UseCases`).
+- Keep the client boundary small: `Tabs` and `Accordion` are client primitives. A section becomes client only when it owns their state (`IndustrySolutions`, `UseCases`, users `AppFeatures`).
 
 ## Images and icons
 - SVG icons are files in `public/icons/` (kebab-case, exported from Figma), rendered as `<img>` with `{/* eslint-disable-next-line @next/next/no-img-element */}`. `IconBox` takes the bare name (`icon="fingerprint"`).
-- Raster images (avatars, photos) use `next/image` with explicit `width`/`height`.
+- Raster images use `next/image`: avatars with explicit `width`/`height`; section photos through `Photo` (`fill` inside the placeholder's box classes, WebP from `scripts/optimize-images.mjs`).
 - Inline SVGs use `fill="currentColor"` where they should follow text colour, plus `aria-hidden`.
 
 ## Accessibility
