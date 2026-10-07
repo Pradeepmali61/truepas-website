@@ -7,6 +7,7 @@ import sharp from "sharp";
 
 const ENT = "5-Oct/For Enterprises";
 const USR = "5-Oct/For Users";
+const DIRECT = "5-Oct/Direct"; // images sent outside the Drive folder
 
 const images = {
   "enterprises/hero.webp": `${ENT}/One Access for Every Customer Journey.jpg`,
@@ -24,7 +25,8 @@ const images = {
   "enterprises/industry-cruise.webp": `${ENT}/Fold 4 Cruise.jpg`,
   "enterprises/industry-healthcare.webp": `${ENT}/Fold 4 Healthcare Providers.jpg`,
 
-  "enterprises/integrations.webp": `${ENT}/Fold 6 Works With the Systems You Already Run.jpg`,
+  // Sent directly by the client to replace the Drive version
+  "enterprises/integrations-v2.webp": `${DIRECT}/Fold 6 Works With the Systems You Already Run.png`,
   "enterprises/dashboard.webp": `${ENT}/Fold 7 Every Location One View.jpg`,
 
   "users/hero.webp": `${USR}/One Face Infinite Places.jpg`,

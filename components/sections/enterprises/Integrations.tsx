@@ -11,9 +11,9 @@ export default function Integrations() {
           <h2 className="heading-xl max-w-[700px] text-center">Works With the Systems You Already Run</h2>
         </div>
         <div className="flex w-full flex-col gap-10 lg:flex-row">
-          {/* A diagram, so it's shown whole; the white box blends with its near-white edges where the tablet frame is wider */}
+          {/* A diagram, so it's shown whole; the white box blends with its near-white edges wherever the frame's shape differs */}
           <Photo
-            src="/images/enterprises/integrations.webp"
+            src="/images/enterprises/integrations-v2.webp"
             alt="TruePas connected to reservation, property management, ticketing, access control, CRM, loyalty, point-of-sale, payment, EHR, mobile and security systems"
             className="h-64 rounded-2xl bg-white shadow-card-strong md:h-[417px] lg:flex-1"
             sizes="(min-width: 1024px) 540px, 100vw"

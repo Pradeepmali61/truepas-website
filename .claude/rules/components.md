@@ -31,6 +31,7 @@ paths:
 ## Images and icons
 - SVG icons are files in `public/icons/` (kebab-case, exported from Figma), rendered as `<img>` with `{/* eslint-disable-next-line @next/next/no-img-element */}`. `IconBox` takes the bare name (`icon="fingerprint"`).
 - Raster images use `next/image`: avatars with explicit `width`/`height`; section photos through `Photo` (`fill` inside the placeholder's box classes, WebP from `scripts/optimize-images.mjs`); a frame whose image follows tabs or accordion items uses `PhotoSwap`, which stacks and preloads every image so switching is instant.
+- Replacing an image means a new file name (`integrations-v2.webp`): `/_next/image` caches by URL (Next 16 `minimumCacheTTL` is 4 hours), so the same name keeps serving the old picture.
 - Inline SVGs use `fill="currentColor"` where they should follow text colour, plus `aria-hidden`.
 
 ## Accessibility
