@@ -1,5 +1,5 @@
 import Button, { DownloadIcon } from "@/components/ui/Button";
-import LogoMark from "@/components/ui/LogoMark";
+import BrandLogo from "@/components/ui/BrandLogo";
 import Photo from "@/components/ui/Photo";
 import VideoPlayer from "@/components/ui/VideoPlayer";
 
@@ -24,17 +24,13 @@ export default function Hero() {
             src="/images/users/hero.webp"
             alt="Traveller holding a phone with a TruePas airport travel pass in the terminal"
             className="h-64 rounded-2xl shadow-card-strong md:h-[376px] lg:flex-1"
-            sizes="(min-width: 1024px) 540px, 100vw"
             eager
           />
         </div>
 
         <div className="glass flex flex-col gap-5 rounded-2xl px-6 py-5 lg:h-24 lg:flex-row lg:items-center lg:justify-between lg:py-0">
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <div className="flex items-center gap-1.5">
-              <LogoMark className="h-4 w-auto text-primary" />
-              <span className="text-[18px] leading-5 font-bold text-primary">TRUEPAS</span>
-            </div>
+            <BrandLogo height={22} className="h-[22px]" />
             <div className="flex items-center gap-1">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/icons/star-rate-half.svg" alt="" className="size-6" />

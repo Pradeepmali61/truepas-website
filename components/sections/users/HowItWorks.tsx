@@ -37,7 +37,6 @@ export default function HowItWorks() {
                 src={`/images/users/${s.image}.webp`}
                 alt={s.alt}
                 className="h-56 rounded-sm shadow-card md:h-[277px]"
-                sizes="(min-width: 1024px) 347px, (min-width: 768px) 50vw, 100vw"
               />
               <div className="flex flex-col gap-1">
                 <h3 className="text-xl leading-8 font-semibold">{s.title}</h3>

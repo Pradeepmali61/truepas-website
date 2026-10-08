@@ -1,11 +1,10 @@
 import Link from "next/link";
-import LogoMark from "@/components/ui/LogoMark";
+import BrandLogo from "@/components/ui/BrandLogo";
 
 export default function Logo() {
   return (
-    <Link href="/" className="flex items-center gap-2" aria-label="TruePas home">
-      <LogoMark className="h-[22px] w-auto text-primary" />
-      <span className="text-2xl leading-[26px] font-bold text-primary">TRUEPAS</span>
+    <Link href="/" className="flex items-center" aria-label="TruePas home">
+      <BrandLogo height={29} className="h-[29px]" eager />
     </Link>
   );
 }

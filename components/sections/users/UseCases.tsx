@@ -85,7 +85,6 @@ export default function UseCases() {
             images={images}
             active={active}
             className="h-64 rounded-2xl shadow-card-strong md:h-[417px] lg:flex-1"
-            sizes="(min-width: 1024px) 540px, 100vw"
           />
         </div>
       </div>

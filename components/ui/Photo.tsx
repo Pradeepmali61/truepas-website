@@ -5,8 +5,6 @@ type Props = {
   alt: string;
   /** Box styling (size, radius, shadow) — same classes a Placeholder would take */
   className?: string;
-  /** Rendered width hints for the srcset, e.g. "(min-width: 1024px) 540px, 100vw" */
-  sizes: string;
   /** contain = show the whole image (diagrams); cover = fill and crop (photos) */
   fit?: "cover" | "contain";
   /** Above-the-fold images load immediately */
@@ -15,14 +13,16 @@ type Props = {
   imgClassName?: string;
 };
 
-export default function Photo({ src, alt, className = "", sizes, fit = "cover", eager = false, imgClassName = "" }: Props) {
+// Served as-is (unoptimized): scripts/optimize-images.mjs already made the WebP, and the full-size file keeps
+// zoomed-in images sharp instead of stretching a screen-sized, re-compressed copy
+export default function Photo({ src, alt, className = "", fit = "cover", eager = false, imgClassName = "" }: Props) {
   return (
     <div className={`relative overflow-hidden ${className}`}>
       <Image
         src={src}
         alt={alt}
         fill
-        sizes={sizes}
+        unoptimized
         loading={eager ? "eager" : undefined}
         fetchPriority={eager ? "high" : undefined}
         className={`${fit === "contain" ? "object-contain" : "object-cover"} ${imgClassName}`}

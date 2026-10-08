@@ -10,6 +10,9 @@ const USR = "5-Oct/For Users";
 const DIRECT = "5-Oct/Direct"; // images sent outside the Drive folder
 
 const images = {
+  // Final logo from the client (transparent PNG); stays PNG so its edges stay crisp
+  "truepas-logo.png": `${DIRECT}/TruePas logo.png`,
+
   "enterprises/hero.webp": `${ENT}/One Access for Every Customer Journey.jpg`,
 
   "enterprises/benefit-quicker-check-in.webp": `${ENT}/Fold 3 Quicker CheckIn & Entry.jpg`,
@@ -55,6 +58,8 @@ const images = {
   "users/feature-enrollment.webp": `${USR}/Fold 6 Biometric Enrollment & ID Verification.jpg`,
   "users/feature-speed.webp": `${USR}/Fold 6 Sub-3-Second Authenticatio.jpg`,
   "users/feature-consent.webp": `${USR}/Fold 6 Per-Industry Consent Toggles.jpg`,
+  // Two versions were delivered; the user picked the one without the "1" suffix
+  "users/feature-multi-venue.webp": `${USR}/Fold 6 Multi-Venue Credential Management.jpg`,
   "users/feature-integrations.webp": `${USR}/Fold 6 Deep System Integrations.jpg`,
   "users/feature-opt-out.webp": `${USR}/Fold 6 Easy Opt-Out & Deletions.jpg`,
 };
@@ -65,7 +70,8 @@ const MAX_WIDTH = 1400;
 for (const [out, src] of Object.entries(images)) {
   const dest = path.join("public/images", out);
   await mkdir(path.dirname(dest), { recursive: true });
-  const info = await sharp(src).resize({ width: MAX_WIDTH, withoutEnlargement: true }).webp({ quality: 82 }).toFile(dest);
+  const resized = sharp(src).resize({ width: MAX_WIDTH, withoutEnlargement: true });
+  const info = await (out.endsWith(".png") ? resized.png({ compressionLevel: 9 }) : resized.webp({ quality: 88 })).toFile(dest);
   const before = (await stat(src)).size;
   console.log(`${out.padEnd(36)} ${info.width}x${info.height}  ${(before / 1024) | 0}KB -> ${(info.size / 1024) | 0}KB`);
 }

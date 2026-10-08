@@ -6,8 +6,7 @@ import Button, { DownloadIcon } from "@/components/ui/Button";
 import PhotoSwap from "@/components/ui/PhotoSwap";
 import SectionLabel from "@/components/ui/SectionLabel";
 
-// Only the first item has copy in Figma; the rest are drafts pending client review.
-// Multi-Venue has no image yet: the content team sent two versions and one still has to be picked.
+// Only the first item has copy in Figma; the rest are drafts pending client review
 const features = [
   { title: "3D Face Scan Authentication", content: "One selfie to securely verify your identity at every authorized checkpoint.", image: "feature-face-scan", alt: "TruePas app scanning a face to verify identity" },
   { title: "Instant Document Access", content: "Keep your verified ID documents in one secure place, ready whenever a checkpoint needs them.", image: "feature-documents", alt: "TruePas app document wallet with a passport, licence and other IDs" },
@@ -16,7 +15,7 @@ const features = [
   { title: "Biometric Enrollment & ID Verification", content: "Enroll your face and verify your ID in minutes, from the app or at a partner kiosk.", image: "feature-enrollment", alt: "TruePas app biometric enrollment and ID verification screen" },
   { title: "Sub-3-Second Authentication", content: "Real-time biometric matching confirms who you are in under three seconds at any touchpoint.", image: "feature-speed", alt: "TruePas app confirming verification in seconds" },
   { title: "Per-Industry Consent Toggles", content: "Choose exactly which industries can verify you, and change your mind at any time.", image: "feature-consent", alt: "TruePas app privacy settings with consent toggles per industry" },
-  { title: "Multi-Venue Credential Management", content: "Manage tickets, bookings, and passes across every connected venue from a single identity." },
+  { title: "Multi-Venue Credential Management", content: "Manage tickets, bookings, and passes across every connected venue from a single identity.", image: "feature-multi-venue", alt: "TruePas app listing airport, hotel, event, cruise and car rental credentials in one place" },
   { title: "Deep System Integrations", content: "Works with the check-in, ticketing, and access systems venues already use.", image: "feature-integrations", alt: "TruePas app connected to airline, hotel, cruise, healthcare and point-of-sale systems" },
   { title: "Easy Opt-Out & Deletion", content: "Withdraw consent or permanently delete your biometric data in a few taps.", image: "feature-opt-out", alt: "TruePas app profile screen with account deletion and privacy controls" },
 ];
@@ -40,7 +39,6 @@ export default function AppFeatures() {
               images={images}
               active={shown}
               className="h-64 rounded-2xl shadow-card-strong md:h-[417px] lg:flex-1"
-              sizes="(min-width: 1024px) 540px, 100vw"
               label={`${features[shown].title} illustration`}
             />
             <div className="lg:flex-1">

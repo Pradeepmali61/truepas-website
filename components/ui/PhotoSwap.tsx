@@ -6,15 +6,13 @@ type Props = {
   active: number;
   /** Box styling (size, radius, shadow) — same classes a Placeholder would take */
   className?: string;
-  /** Rendered width hints for the srcset, e.g. "(min-width: 1024px) 540px, 100vw" */
-  sizes: string;
   /** Accessible name while the active entry has no image */
   label?: string;
 };
 
 // Every image is stacked in the box and loads with the section, so switching tabs swaps instantly instead of
-// waiting for a fetch on each click
-export default function PhotoSwap({ images, active, className = "", sizes, label = "Image placeholder" }: Props) {
+// waiting for a fetch on each click. Served as-is (unoptimized) like Photo, so zooming in stays sharp.
+export default function PhotoSwap({ images, active, className = "", label = "Image placeholder" }: Props) {
   const current = images[active];
   return (
     <div
@@ -31,7 +29,7 @@ export default function PhotoSwap({ images, active, className = "", sizes, label
               alt={i === active ? img.alt : ""}
               aria-hidden={i === active ? undefined : true}
               fill
-              sizes={sizes}
+              unoptimized
               className={`object-cover ${i === active ? "" : "invisible"}`}
             />
           ),

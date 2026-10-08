@@ -25,7 +25,6 @@ export default function Hero() {
           src="/images/enterprises/hero.webp"
           alt="Traveller verifying her identity with a facial scan at an airport self-service kiosk"
           className="h-64 rounded-2xl shadow-card-strong md:h-[376px] lg:flex-1"
-          sizes="(min-width: 1024px) 540px, 100vw"
           eager
         />
       </div>

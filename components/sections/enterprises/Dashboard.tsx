@@ -33,7 +33,6 @@ export default function Dashboard() {
           src="/images/enterprises/dashboard.webp"
           alt="Manager reviewing the TruePas merchant dashboard with verification and location analytics"
           className="h-64 rounded-2xl shadow-card-strong md:h-[417px] lg:flex-1"
-          sizes="(min-width: 1024px) 540px, 100vw"
         />
       </div>
     </section>

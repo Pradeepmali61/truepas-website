@@ -16,7 +16,6 @@ export default function Integrations() {
             src="/images/enterprises/integrations-v2.webp"
             alt="TruePas connected to reservation, property management, ticketing, access control, CRM, loyalty, point-of-sale, payment, EHR, mobile and security systems"
             className="h-64 rounded-2xl bg-white shadow-card-strong md:h-[417px] lg:flex-1"
-            sizes="(min-width: 1024px) 540px, 100vw"
             fit="contain"
           />
           <div className="flex flex-col justify-between gap-8 lg:h-[417px] lg:flex-1">

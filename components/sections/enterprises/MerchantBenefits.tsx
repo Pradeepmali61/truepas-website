@@ -42,7 +42,6 @@ export default function MerchantBenefits() {
               images={images}
               active={shown}
               className="h-64 rounded-2xl shadow-card-strong md:h-[417px] lg:flex-1"
-              sizes="(min-width: 1024px) 540px, 100vw"
               label={`${benefits[shown].title} illustration`}
             />
             <div className="lg:flex-1 lg:whitespace-pre-line">

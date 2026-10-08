@@ -7,7 +7,7 @@ paths:
 # Components and pages
 
 ## Where things go
-- `components/ui/`: primitives (`Button`, `BookDemoButton`, `LogoMark`, `IconBox`, `SectionLabel`, `Placeholder`, `Photo`, `PhotoSwap`, `Accordion`, `Tabs`, `VideoPlayer`). Reuse these before writing new markup.
+- `components/ui/`: primitives (`Button`, `BookDemoButton`, `BrandLogo`, `IconBox`, `SectionLabel`, `Placeholder`, `Photo`, `PhotoSwap`, `Accordion`, `Tabs`, `VideoPlayer`). Reuse these before writing new markup.
 - `components/layout/`: `Navbar`, `Footer`, `Logo`. They render only from `app/layout.tsx`.
 - `components/sections/<page>/`: sections used by one page (`enterprises`, `users`, `who-are-we`, `compliances`).
 - `components/sections/*.tsx`: sections shared across pages. Per-page differences are props (`Testimonials heading=…`), not copies.
@@ -31,7 +31,7 @@ paths:
 ## Images and icons
 - SVG icons are files in `public/icons/` (kebab-case, exported from Figma), rendered as `<img>` with `{/* eslint-disable-next-line @next/next/no-img-element */}`. `IconBox` takes the bare name (`icon="fingerprint"`).
 - Raster images use `next/image`: avatars with explicit `width`/`height`; section photos through `Photo` (`fill` inside the placeholder's box classes, WebP from `scripts/optimize-images.mjs`); a frame whose image follows tabs or accordion items uses `PhotoSwap`, which stacks and preloads every image so switching is instant.
-- Replacing an image means a new file name (`integrations-v2.webp`): `/_next/image` caches by URL (Next 16 `minimumCacheTTL` is 4 hours), so the same name keeps serving the old picture.
+- `Photo`, `PhotoSwap` and `BrandLogo` render `unoptimized`: the WebP/PNG is already optimised by the script, and serving the full-size file keeps images sharp when zoomed. Don't pass `sizes` to them. Only images that still go through `/_next/image` (avatars) are cached by URL for 4 hours (Next 16 `minimumCacheTTL`), so a replaced avatar needs a new file name.
 - Inline SVGs use `fill="currentColor"` where they should follow text colour, plus `aria-hidden`.
 
 ## Accessibility

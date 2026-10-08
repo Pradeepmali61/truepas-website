@@ -20,7 +20,7 @@ export default function VideoPlayer({ className = "" }: { className?: string }) 
   return (
     <>
       <div className={`relative flex items-center justify-center overflow-hidden rounded-2xl bg-placeholder/80 ${className}`}>
-        <Image src={POSTER} alt="" fill sizes="(min-width: 1024px) 1120px, 100vw" className="object-cover" />
+        <Image src={POSTER} alt="" fill unoptimized className="object-cover" />
         <button
           type="button"
           onClick={() => setOpen(true)}
