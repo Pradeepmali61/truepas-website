@@ -1,12 +1,12 @@
 import BrandLogo from "@/components/ui/BrandLogo";
-import Placeholder from "@/components/ui/Placeholder";
+import Photo from "@/components/ui/Photo";
 import SectionLabel from "@/components/ui/SectionLabel";
 import VideoPlayer from "@/components/ui/VideoPlayer";
 
 const steps = [
-  { title: "Enroll Once", text: "Customers create a secure digital identity through the TruePas app." },
-  { title: "Verify Instantly", text: "A quick facial verification confirms identity at any TruePas-enabled location." },
-  { title: "Complete the Journey", text: "Check in, access services from bookings to memberships with single verification." },
+  { title: "Enroll Once", text: "Customers create a secure digital identity through the TruePas app.", image: "step-enroll", alt: "Customer creating a TruePas digital identity on his phone" },
+  { title: "Verify Instantly", text: "A quick facial verification confirms identity at any TruePas-enabled location.", image: "step-verify", alt: "The same customer verifying his face at an airport TruePas kiosk" },
+  { title: "Complete the Journey", text: "Check in, access services from bookings to memberships with single verification.", image: "step-journey", alt: "The same customer checking in for his club membership booking at a TruePas kiosk" },
 ];
 
 export default function WhyTruePas() {
@@ -32,7 +32,7 @@ export default function WhyTruePas() {
           <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
             {steps.map((s) => (
               <div key={s.title} className="flex flex-col gap-6">
-                <Placeholder className="h-56 rounded-sm shadow-card md:h-[277px]" label={s.title} />
+                <Photo src={`/images/enterprises/${s.image}.webp`} alt={s.alt} className="h-56 rounded-sm shadow-card md:h-[277px]" />
                 <div className="flex flex-col gap-1">
                   <h3 className="text-xl leading-8 font-semibold">{s.title}</h3>
                   <p className="text-base leading-6">{s.text}</p>

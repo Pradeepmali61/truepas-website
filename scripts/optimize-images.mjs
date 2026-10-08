@@ -15,6 +15,11 @@ const images = {
 
   "enterprises/hero.webp": `${ENT}/One Access for Every Customer Journey.jpg`,
 
+  // Fold 2 came in three sets; Set 1 ("Set 1 image 1", "Image 2", "Image 3") keeps one character and matches the step copy
+  "enterprises/step-enroll.webp": `${ENT}/Fold 2 - Set 1 image 1.jpg`,
+  "enterprises/step-verify.webp": `${ENT}/Fold 2 - Image 2.jpg`,
+  "enterprises/step-journey.webp": `${ENT}/Fold 2 - Image 3.jpg`,
+
   "enterprises/benefit-quicker-check-in.webp": `${ENT}/Fold 3 Quicker CheckIn & Entry.jpg`,
   "enterprises/benefit-operational-load.webp": `${ENT}/Fold 3 Lighter Operational Load.jpg`,
   "enterprises/benefit-fraud-prevention.webp": `${ENT}/Fold 3 Sharper Fraud Prevention.jpg`,
