@@ -1,4 +1,4 @@
-import Placeholder from "@/components/ui/Placeholder";
+import Photo from "@/components/ui/Photo";
 import SectionLabel from "@/components/ui/SectionLabel";
 
 export default function Team() {
@@ -10,7 +10,11 @@ export default function Team() {
           <h2 className="heading-lg text-center">The Team Behind TruePas</h2>
         </div>
         <div className="flex flex-col gap-10 lg:flex-row">
-          <Placeholder className="h-72 rounded-2xl shadow-card-strong md:h-[552px] lg:flex-1" label="TruePas team" />
+          <Photo
+            src="/images/enterprises/team.webp"
+            alt="TruePas leadership team around a digital table showing verified identities connected across the world"
+            className="h-72 rounded-2xl shadow-card-strong md:h-[552px] lg:flex-1"
+          />
           <div className="flex flex-col text-base leading-6 lg:flex-1">
             <p>TruePas began with a simple problem and the rest was the search for its solution.</p>
             <p className="mt-6">

@@ -39,6 +39,11 @@ const images = {
   // Sent directly by the client to replace the Drive version
   "enterprises/integrations-v2.webp": `${DIRECT}/Fold 6 Works With the Systems You Already Run.png`,
   "enterprises/dashboard.webp": `${ENT}/Fold 7 Every Location One View.jpg`,
+  // Shared Team section (Enterprises and Users pages)
+  "enterprises/team.webp": `${ENT}/Fold 10 The Team Behind TruePas.jpg`,
+
+  // Who are we page; delivered in the "For Enterprises" Drive folder
+  "who-are-we/about.webp": `${ENT}/About Us.jpg`,
 
   "users/hero.webp": `${USR}/One Face Infinite Places.jpg`,
 

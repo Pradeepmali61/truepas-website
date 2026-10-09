@@ -1,4 +1,4 @@
-import Placeholder from "@/components/ui/Placeholder";
+import Photo from "@/components/ui/Photo";
 
 export default function About() {
   return (
@@ -12,7 +12,12 @@ export default function About() {
             }
           </p>
         </div>
-        <Placeholder className="h-64 rounded-2xl shadow-card-strong md:h-[376px] lg:flex-1" label="About TruePas" />
+        <Photo
+          src="/images/who-are-we/about.webp"
+          alt="Woman showing a verified TruePas identity on her phone while a face scan checks her in at an airport gate"
+          className="h-64 rounded-2xl shadow-card-strong md:h-[376px] lg:flex-1"
+          eager
+        />
       </div>
     </section>
   );
