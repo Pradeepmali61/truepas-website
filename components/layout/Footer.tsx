@@ -8,7 +8,9 @@ const primary = [
   { label: "Download the app", href: "#" },
 ];
 const social = [
-  { label: "Linkedin", href: "#" },
+  { label: "Linkedin", href: "https://www.linkedin.com/company/truepas/" },
+  // Not in Figma; added at the client's request
+  { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61595153494823" },
   { label: "Instagram", href: "#" },
 ];
 const legal = ["Privacy Policy", "Terms & Conditions", "Cookie Policy", "Contact"];
@@ -35,7 +37,12 @@ export default function Footer() {
               <li>Stay Connected</li>
               {social.map((l) => (
                 <li key={l.label}>
-                  <Link href={l.href} className="hover:text-primary">
+                  {/* Social profiles open in a new tab; "#" (no URL yet) stays in place */}
+                  <Link
+                    href={l.href}
+                    {...(l.href.startsWith("http") && { target: "_blank", rel: "noopener noreferrer" })}
+                    className="hover:text-primary"
+                  >
                     {l.label}
                   </Link>
                 </li>
