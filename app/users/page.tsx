@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import CtaBanner from "@/components/sections/CtaBanner";
-import Numbers from "@/components/sections/Numbers";
 import Team from "@/components/sections/Team";
-import Testimonials from "@/components/sections/Testimonials";
 import AppFeatures from "@/components/sections/users/AppFeatures";
 import Benefits from "@/components/sections/users/Benefits";
 import Faq from "@/components/sections/users/Faq";
@@ -23,10 +21,8 @@ export default function UsersPage() {
       <HowItWorks />
       <Benefits />
       <UseCases />
-      <Numbers />
       <AppFeatures />
       <SecurityPrivacy />
-      <Testimonials heading="What our users are saying" />
       <Faq />
       <Team />
       <CtaBanner />
