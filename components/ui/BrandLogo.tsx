@@ -1,8 +1,9 @@
 import Image from "next/image";
 
-// Final TruePas logo (gradient symbol + navy "TruePas" wordmark) from the client: public/images/truepas-logo.png, 1400×276.
+// Final TruePas logo (gradient symbol + navy "TruePas" wordmark) from the client: public/images/truepas-logo.png, 1344×276.
+// The symbol was scaled to 85% inside the PNG (client feedback: the T read too big next to the wordmark).
 // Served as-is (unoptimized): the full-size PNG stays crisp on 3x screens and when zoomed in.
-const RATIO = 1400 / 276;
+const RATIO = 1344 / 276;
 
 type Props = {
   /** Largest rendered height in px (sets the width/height attributes). Smaller breakpoints go in className, e.g. "h-11 md:h-[66px]" */
