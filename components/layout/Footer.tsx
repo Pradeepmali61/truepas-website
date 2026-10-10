@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { CookieSettingsButton } from "./CookieConsent";
 import Logo from "./Logo";
 
 const primary = [
@@ -67,10 +66,6 @@ export default function Footer() {
                 </Link>
               </li>
             ))}
-            {/* Not in Figma; added at the client's request so visitors can change their cookie choice */}
-            <li>
-              <CookieSettingsButton className="hover:text-primary" />
-            </li>
           </ul>
         </div>
       </div>

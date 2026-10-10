@@ -438,7 +438,7 @@ export const termsAndConditions: LegalDoc = {
 export const cookiePolicy: LegalDoc = {
   eyebrow: "Privacy & Security",
   title: "Cookies & Your Choices",
-  description: "A clear guide to cookie categories, consent choices, browser controls and preference management.",
+  description: "A clear guide to cookie categories, consent choices and browser controls.",
   effective: "October 9, 2026",
   updated: "October 11, 2026",
   sections: [
@@ -457,8 +457,8 @@ export const cookiePolicy: LegalDoc = {
     {
       title: "3. Strictly Necessary Cookies",
       blocks: [
-        "Strictly necessary cookies support core website functionality, security and service operation. They are always active and cannot be disabled through the preference panel.",
-        "The TruePas website does not set its own cookies at present. Your cookie choice is saved in your browser’s local storage (truepas-cookie-consent) so that we can respect it on your next visit.",
+        "Strictly necessary cookies support core website functionality, security and service operation. They are always active.",
+        "The TruePas website does not set its own cookies at present.",
       ],
     },
     {
@@ -506,37 +506,22 @@ export const cookiePolicy: LegalDoc = {
       ],
     },
     {
-      title: "9. Managing Cookie Preferences",
+      title: "9. Browser Controls",
       blocks: [
-        "Visitors can update optional cookie choices through the Cookie Settings panel. Strictly necessary cookies remain active because they are required for core site functionality.",
-        "Blocking or deleting certain cookies may affect website functionality.",
+        "Most browsers allow users to view, block or delete cookies through browser settings. Browser controls may affect all websites visited.",
       ],
     },
     {
-      title: "10. Browser Controls",
-      blocks: [
-        "Most browsers allow users to view, block or delete cookies through browser settings. Browser controls operate independently from the TruePas preference panel and may affect all websites visited.",
-      ],
-    },
-    {
-      title: "11. Policy Updates",
+      title: "10. Policy Updates",
       blocks: [
         "This Cookie Policy may be updated as website technologies, service providers or legal requirements change. Updates will be posted with a revised effective date.",
       ],
     },
     {
-      title: "12. Contact Information",
+      title: "11. Contact Information",
       blocks: [
         "Questions about cookies or tracking preferences can be sent to us through the Contact page.",
       ],
     },
   ],
 };
-
-export const cookieCategories = [
-  { category: "Strictly Necessary", purpose: "Core site security, functionality and service operation.", required: "Required" },
-  { category: "Functional", purpose: "Remember preferences and support enhanced functionality.", required: "Optional" },
-  { category: "Analytics", purpose: "Measure and improve website performance and usage.", required: "Optional" },
-  { category: "Marketing", purpose: "Support campaign measurement and relevant communication.", required: "Optional" },
-  { category: "Third-Party", purpose: "Provider-specific functionality, analytics or marketing.", required: "Depends on provider and consent" },
-];
