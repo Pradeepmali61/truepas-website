@@ -11,11 +11,13 @@ const links = [
   { label: "For Enterprises", href: "/" },
   { label: "For Users", href: "/users" },
   { label: "Who are we", href: "/who-are-we" },
-  { label: "Blogs", href: "#" },
+  { label: "Blogs", href: "/blogs" },
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
+  // Blog posts (/blogs/<slug>) keep the Blogs pill active
+  const isActive = (href: string) => href === pathname || (href !== "/" && pathname.startsWith(`${href}/`));
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -56,7 +58,7 @@ export default function Navbar() {
         </div>
         <nav aria-label="Main" className="hidden items-center gap-10 lg:flex">
           {links.map((l) =>
-            l.href === pathname ? (
+            isActive(l.href) ? (
               <Link key={l.label} href={l.href} aria-current="page" className="glass rounded-lg px-3 py-2 text-base leading-6 font-semibold text-ink-3/80">
                 {l.label}
               </Link>
@@ -89,8 +91,8 @@ export default function Navbar() {
               key={l.label}
               href={l.href}
               onClick={() => setMenuOpen(false)}
-              aria-current={l.href === pathname ? "page" : undefined}
-              className={`rounded-lg px-3 py-3 text-base leading-6 text-ink-3 hover:bg-sky-50 ${l.href === pathname ? "font-semibold" : ""}`}
+              aria-current={isActive(l.href) ? "page" : undefined}
+              className={`rounded-lg px-3 py-3 text-base leading-6 text-ink-3 hover:bg-sky-50 ${isActive(l.href) ? "font-semibold" : ""}`}
             >
               {l.label}
             </Link>

@@ -3,9 +3,10 @@ import Logo from "./Logo";
 
 const primary = [
   { label: "For Enterprises", href: "/" },
-  { label: "Blogs", href: "#" },
+  { label: "Blogs", href: "/blogs" },
   { label: "Who we are", href: "/who-are-we" },
-  { label: "Download the app", href: "#" },
+  // The store links live on the Users page until the app store URLs arrive
+  { label: "Download the app", href: "/users" },
 ];
 const social = [
   { label: "Linkedin", href: "https://www.linkedin.com/company/truepas/" },
@@ -13,7 +14,12 @@ const social = [
   { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61595153494823" },
   { label: "Instagram", href: "#" },
 ];
-const legal = ["Privacy Policy", "Terms & Conditions", "Cookie Policy", "Contact"];
+const legal = [
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Terms & Conditions", href: "/terms-and-conditions" },
+  { label: "Cookie Policy", href: "/cookie-policy" },
+  { label: "Contact", href: "/contact" },
+];
 
 const list = "flex flex-wrap gap-x-8 gap-y-3 text-sm leading-[21px] tracking-[-0.14px]";
 
@@ -54,9 +60,9 @@ export default function Footer() {
           <p>Copyright 2026 Company Name.</p>
           <ul className={list}>
             {legal.map((l) => (
-              <li key={l}>
-                <Link href="#" className="hover:text-primary">
-                  {l}
+              <li key={l.label}>
+                <Link href={l.href} className="hover:text-primary">
+                  {l.label}
                 </Link>
               </li>
             ))}
