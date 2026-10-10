@@ -4,7 +4,7 @@ import { termsAndConditions } from "@/lib/legal";
 
 export const metadata: Metadata = {
   title: "TruePas — Terms & Conditions",
-  description: "Review the draft terms governing access to and use of TruePas services.",
+  description: "The terms that govern your use of the TruePas website, mobile app and TruePas-enabled kiosks.",
 };
 
 export default function TermsPage() {

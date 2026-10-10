@@ -88,11 +88,6 @@ export default function LegalDocument({ doc, extras = {} }: Props) {
               return (
                 <section key={id} id={id} className="flex scroll-mt-28 flex-col gap-3 border-b border-line py-6 first:pt-0 lg:py-7">
                   <h2 className="text-[26px] leading-[34px] font-semibold">{s.title}</h2>
-                  {s.notice && (
-                    <span className="w-fit rounded-[40px] border border-[#f2b84b] bg-[#fff8e8] px-2.5 py-[5px] text-xs font-bold text-[#8a5a00]">
-                      {s.notice}
-                    </span>
-                  )}
                   {s.blocks.map((b, i) => (
                     <Block key={i} block={b} />
                   ))}

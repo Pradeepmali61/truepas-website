@@ -1,13 +1,12 @@
 // Privacy Policy and Terms & Conditions are verbatim from the client's .docx files (9 Oct 2026).
-// The Cookie Policy is the draft from the truepas-website-pages package and still needs a cookie audit.
+// The Cookie Policy is the truepas-website-pages draft plus the cookie audit of 11 Oct 2026 (local build and
+// truepas-blond.vercel.app): the site sets no cookies itself; only the Calendly popup sets third-party ones.
 
 // A string is a paragraph; the objects are sub-headings, lists and a highlighted placeholder box
 export type LegalBlock = string | { h3: string } | { ul: string[] } | { ol: string[] } | { box: string[] };
 
 export type LegalSection = {
   title: string;
-  /** Review badge shown under the heading, e.g. "[COOKIE AUDIT REQUIRED]" */
-  notice?: string;
   blocks: LegalBlock[];
 };
 
@@ -24,7 +23,7 @@ export const privacyPolicy: LegalDoc = {
   eyebrow: "Privacy & Security",
   title: "Your Privacy Matters",
   description:
-    "A clear draft framework for how TruePas may collect, use, protect and manage personal and biometric information.",
+    "How TruePas collects, uses, protects and shares personal and biometric information, and the choices you have.",
   effective: "October 9, 2026",
   updated: "October 9, 2026",
   sections: [
@@ -227,7 +226,7 @@ export const termsAndConditions: LegalDoc = {
   eyebrow: "Legal",
   title: "Terms & Conditions",
   description:
-    "A draft legal framework for using TruePas services, biometric identity workflows and enterprise integrations.",
+    "The terms that govern your use of the TruePas website, mobile app and TruePas-enabled kiosks.",
   effective: "October 9, 2026",
   updated: "October 9, 2026",
   sections: [
@@ -440,9 +439,8 @@ export const cookiePolicy: LegalDoc = {
   eyebrow: "Privacy & Security",
   title: "Cookies & Your Choices",
   description: "A clear guide to cookie categories, consent choices, browser controls and preference management.",
-  // The package has [EFFECTIVE DATE] placeholders here; dates match the other two policies until confirmed
   effective: "October 9, 2026",
-  updated: "October 9, 2026",
+  updated: "October 11, 2026",
   sections: [
     {
       title: "1. What Are Cookies?",
@@ -458,45 +456,53 @@ export const cookiePolicy: LegalDoc = {
     },
     {
       title: "3. Strictly Necessary Cookies",
-      notice: "[COOKIE AUDIT REQUIRED]",
       blocks: [
         "Strictly necessary cookies support core website functionality, security and service operation. They are always active and cannot be disabled through the preference panel.",
-        "The specific cookies in this category have not yet been confirmed by a website cookie audit.",
+        "The TruePas website does not set its own cookies at present. Your cookie choice is saved in your browser’s local storage (truepas-cookie-consent) so that we can respect it on your next visit.",
       ],
     },
     {
       title: "4. Functional Cookies",
-      notice: "[COOKIE AUDIT REQUIRED]",
       blocks: [
         "Functional cookies may remember settings, preferences or previously selected options. These cookies are optional and are used only with consent.",
+        "The TruePas website does not use functional cookies at present.",
       ],
     },
     {
       title: "5. Analytics Cookies",
-      notice: "[COOKIE AUDIT REQUIRED]",
       blocks: [
         "Analytics cookies may help understand how visitors use the website, identify performance issues and improve content or functionality. These cookies are optional and are used only with consent.",
+        "The TruePas website does not use analytics cookies at present.",
       ],
     },
     {
       title: "6. Marketing Cookies",
-      notice: "[COOKIE AUDIT REQUIRED]",
       blocks: [
         "Marketing cookies may support campaign measurement, relevant messaging or audience analysis. These cookies are optional and are used only with consent.",
+        "The TruePas website does not use marketing cookies at present.",
       ],
     },
     {
       title: "7. Third-Party Cookies",
-      notice: "[COOKIE AUDIT REQUIRED]",
       blocks: [
-        "Third-party cookies may be set by approved service providers that support website functionality, analytics or marketing. The third parties used by this website must be confirmed through an audit.",
+        "Third-party cookies may be set by approved service providers that support website functionality, analytics or marketing.",
+        "When you select Book a Demo, a scheduling window from Calendly opens on the page. Calendly and the services it relies on may then set the following cookies, which are governed by Calendly’s own cookie policy:",
+        {
+          ul: [
+            "__cf_bm (Cloudflare, for Calendly): protects the booking window from automated traffic. Expires after 30 minutes.",
+            "_cfuvid (Cloudflare, for Calendly): supports traffic security and rate limiting. Expires when you close your browser.",
+            "OptanonConsent (Calendly): remembers your cookie choices on Calendly. Expires after 1 year.",
+            "m (Stripe, for Calendly): helps prevent payment fraud. Expires after up to 2 years.",
+          ],
+        },
+        "Calendly may also ask for your consent to its own optional analytics and marketing cookies inside the booking window.",
       ],
     },
     {
       title: "8. Cookie Duration",
-      notice: "[COOKIE AUDIT REQUIRED]",
       blocks: [
-        "Cookie duration depends on the cookie type and provider. Session cookies expire when the browsing session ends, while persistent cookies remain for a defined period. Actual durations must be confirmed through an audit.",
+        "Cookie duration depends on the cookie type and provider. Session cookies expire when the browsing session ends, while persistent cookies remain for a defined period.",
+        "The durations of the cookies that can currently be set are listed in Section 7.",
       ],
     },
     {
@@ -520,10 +526,8 @@ export const cookiePolicy: LegalDoc = {
     },
     {
       title: "12. Contact Information",
-      notice: "[LEGAL REVIEW REQUIRED]",
       blocks: [
-        "Questions about cookies or tracking preferences should be directed to the verified contact below once confirmed.",
-        { box: ["Cookie and privacy contact: [CONFIRM VERIFIED EMAIL]"] },
+        "Questions about cookies or tracking preferences can be sent to us through the Contact page.",
       ],
     },
   ],
