@@ -57,7 +57,7 @@ export default function Footer() {
           </nav>
         </div>
         <div className="flex flex-col-reverse gap-4 text-sm leading-[21px] font-medium tracking-[-0.14px] md:flex-row md:justify-between">
-          <p>Copyright 2026 Company Name.</p>
+          <p>Copyright 2026 TruePas.</p>
           <ul className={list}>
             {legal.map((l) => (
               <li key={l.label}>
