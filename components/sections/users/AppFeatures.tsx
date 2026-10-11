@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Accordion from "@/components/ui/Accordion";
-import Button, { DownloadIcon } from "@/components/ui/Button";
+import DownloadButton from "@/components/ui/DownloadButton";
 import PhotoSwap from "@/components/ui/PhotoSwap";
 import SectionLabel from "@/components/ui/SectionLabel";
 
@@ -46,7 +46,7 @@ export default function AppFeatures() {
             </div>
           </div>
         </div>
-        <Button icon={<DownloadIcon />}>Download the app</Button>
+        <DownloadButton />
       </div>
     </section>
   );

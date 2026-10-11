@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Placeholder from "@/components/ui/Placeholder";
+import Photo from "@/components/ui/Photo";
 import SectionLabel from "@/components/ui/SectionLabel";
 import { posts } from "@/lib/blog-posts";
 import { formatDate } from "@/lib/format";
@@ -19,7 +19,7 @@ export default function BlogList() {
           {posts.map((p) => (
             <li key={p.slug}>
               <Link href={`/blogs/${p.slug}`} className="group flex h-full flex-col gap-5 rounded-2xl bg-white p-4 shadow-card transition-shadow hover:shadow-card-strong">
-                <Placeholder label={`${p.title} cover image`} className="h-48 rounded-lg" />
+                <Photo src={p.image} alt={p.imageAlt} className="h-48 rounded-lg" />
                 <div className="flex flex-1 flex-col gap-3">
                   <SectionLabel className="text-sm leading-6">{p.category}</SectionLabel>
                   <h2 className="text-xl leading-8 font-semibold group-hover:text-primary">{p.title}</h2>

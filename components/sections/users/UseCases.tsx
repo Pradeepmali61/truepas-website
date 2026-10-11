@@ -1,7 +1,8 @@
 "use client";
 
 import { useId, useState } from "react";
-import Button, { DownloadIcon } from "@/components/ui/Button";
+import Button from "@/components/ui/Button";
+import DownloadButton from "@/components/ui/DownloadButton";
 import PhotoSwap from "@/components/ui/PhotoSwap";
 import SectionLabel from "@/components/ui/SectionLabel";
 import Tabs from "@/components/ui/Tabs";
@@ -77,7 +78,7 @@ export default function UseCases() {
               <p className="text-base leading-6">{current.text}</p>
             </div>
             <div className="flex flex-wrap gap-4">
-              <Button icon={<DownloadIcon />}>Download the app</Button>
+              <DownloadButton />
               <Button variant="secondary">Read more</Button>
             </div>
           </div>

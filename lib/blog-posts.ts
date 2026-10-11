@@ -6,6 +6,9 @@ export type BlogPost = {
   category: string;
   date: string; // ISO date
   readMinutes: number;
+  /** Cover photo, reused from the site's own images until the client sends article artwork */
+  image: string;
+  imageAlt: string;
   body: { heading?: string; text: string }[];
 };
 
@@ -17,6 +20,8 @@ export const posts: BlogPost[] = [
     category: "Identity",
     date: "2026-10-01",
     readMinutes: 4,
+    image: "/images/enterprises/step-enroll.webp",
+    imageAlt: "Traveller holding a phone showing his TruePas digital identity",
     body: [
       { text: "Hotels, airports, car rental desks and venues each ask for the same proof of identity, again and again. Customers queue, staff check documents by hand, and the business learns nothing it didn't already know." },
       { heading: "Verify once, reuse everywhere", text: "With TruePas, a customer enrolls once in the app: their ID document is verified and linked to a secure face template. At any TruePas-enabled location, a quick face scan confirms it is really them, in seconds." },
@@ -31,6 +36,8 @@ export const posts: BlogPost[] = [
     category: "Privacy & Security",
     date: "2026-09-24",
     readMinutes: 5,
+    image: "/images/users/step-approve-data.webp",
+    imageAlt: "TruePas app screen asking the user to review and approve how their data is used",
     body: [
       { text: "Trust is the foundation of biometric identity. People rightly want to know what happens to their face data before they use it." },
       { heading: "Templates, not photos", text: "TruePas converts a face scan into an encrypted mathematical template. The template is used to match a person at verification time and cannot be turned back into a photo." },
@@ -45,6 +52,8 @@ export const posts: BlogPost[] = [
     category: "Industry",
     date: "2026-09-15",
     readMinutes: 3,
+    image: "/images/enterprises/industry-cruise.webp",
+    imageAlt: "Cruise passenger checking in at a TruePas kiosk in the terminal",
     body: [
       { text: "Peak times are where customer experience is won or lost. A few seconds saved per guest becomes minutes saved per queue." },
       { heading: "1. Shorter queues", text: "Face verification takes seconds, so lines move faster without adding staff." },

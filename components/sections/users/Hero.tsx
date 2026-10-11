@@ -1,4 +1,4 @@
-import Button, { DownloadIcon } from "@/components/ui/Button";
+import DownloadButton from "@/components/ui/DownloadButton";
 import BrandLogo from "@/components/ui/BrandLogo";
 import Photo from "@/components/ui/Photo";
 import VideoPlayer from "@/components/ui/VideoPlayer";
@@ -47,7 +47,7 @@ export default function Hero() {
                 <img src="/icons/group-2.svg" alt="Google Play" className="h-[18px]" />
               </div>
             </div>
-            <Button icon={<DownloadIcon />} className="whitespace-nowrap">Download the app</Button>
+            <DownloadButton className="whitespace-nowrap" />
           </div>
         </div>
 

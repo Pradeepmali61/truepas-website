@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import BookDemoButton from "@/components/ui/BookDemoButton";
-import Button, { DownloadIcon } from "@/components/ui/Button";
+import DownloadButton from "@/components/ui/DownloadButton";
 import Logo from "./Logo";
 
 const links = [
@@ -39,9 +39,7 @@ export default function Navbar() {
   const usersPage = pathname === "/users";
   const cta = (className?: string, onClick?: () => void) =>
     usersPage ? (
-      <Button size="md" icon={<DownloadIcon className="size-6" />} className={className} onClick={onClick}>
-        Download the app
-      </Button>
+      <DownloadButton size="md" iconClassName="size-6" className={className} onClick={onClick} />
     ) : (
       <BookDemoButton size="md" className={className} onClick={onClick} />
     );

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Placeholder from "@/components/ui/Placeholder";
+import Photo from "@/components/ui/Photo";
 import SectionLabel from "@/components/ui/SectionLabel";
 import type { BlogPost } from "@/lib/blog-posts";
 import { formatDate } from "@/lib/format";
@@ -18,7 +18,7 @@ export default function BlogArticle({ post }: { post: BlogPost }) {
             {formatDate(post.date)} · {post.readMinutes} min read
           </p>
         </header>
-        <Placeholder label={`${post.title} cover image`} className="h-56 rounded-2xl md:h-[400px]" />
+        <Photo src={post.image} alt={post.imageAlt} eager className="h-56 rounded-2xl md:h-[400px]" />
         <div className="flex flex-col gap-6">
           {post.body.map((b) => (
             <div key={b.heading ?? b.text} className="flex flex-col gap-2">
