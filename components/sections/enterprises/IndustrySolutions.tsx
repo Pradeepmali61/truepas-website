@@ -88,7 +88,7 @@ export default function IndustrySolutions() {
   const current = industries[active];
 
   return (
-    <section className="section-pad bg-sky-50">
+    <section id="industry-solutions" className="section-pad scroll-mt-16 bg-sky-50">
       <div className="container-page flex flex-col items-center gap-12 lg:gap-16">
         <div className="flex w-full flex-col items-center gap-10">
           <div className="flex flex-col items-center gap-4">
