@@ -32,6 +32,7 @@ export default function PrivacySecurity() {
           ))}
         </div>
         <Button
+          href="/privacy-policy"
           variant="secondary"
           icon={
             <span className="flex size-5 items-center justify-center">
