@@ -18,6 +18,12 @@ type Values = {
 type Field = keyof Values;
 type Status = "idle" | "submitting" | "success" | "error";
 
+// Inquiries are emailed to the TruePas inbox through FormSubmit (formsubmit.co, no account). It must be called
+// from the visitor's browser: it blocks server requests (e.g. from Vercel). Each new domain triggers a one-time
+// "Activate Form" email to this inbox, and inquiries from that domain fail until its link is clicked.
+const INBOX = "truepasai@gmail.com";
+const FAILED = "The inquiry could not be delivered. Please try again later or use Book a Demo.";
+
 const initial: Values = { fullName: "", workEmail: "", company: "", phone: "", industry: "", inquiryType: "", message: "", consent: false, companyWebsite: "" };
 
 const industries = ["Aviation", "Hospitality", "Car Rentals", "Theme Parks", "Cruise Operations", "Stadiums & Entertainment Venues", "Healthcare", "Other"];
@@ -91,15 +97,35 @@ export default function ContactForm() {
     setStatus("submitting");
     setMessage("");
     try {
-      const res = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(values) });
-      const result = (await res.json()) as { ok: boolean; message: string };
-      if (!res.ok || !result.ok) throw new Error(result.message);
+      const res = await fetch(`https://formsubmit.co/ajax/${INBOX}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          _subject: `TruePas inquiry: ${values.inquiryType} from ${values.fullName} (${values.company})`,
+          _replyto: values.workEmail,
+          _template: "table",
+          _captcha: "false",
+          // FormSubmit drops submissions whose _honey field is filled in
+          _honey: values.companyWebsite,
+          Name: values.fullName,
+          Email: values.workEmail,
+          Company: values.company,
+          Phone: values.phone || "-",
+          Industry: values.industry,
+          "Inquiry type": values.inquiryType,
+          Message: values.message,
+        }),
+      });
+      // FormSubmit answers { success: "true" | "false", message }
+      const result = (await res.json()) as { success?: string | boolean; message?: string };
+      if (!res.ok || String(result.success) !== "true") throw new Error(result.message);
       setStatus("success");
-      setMessage(result.message);
+      setMessage("Your inquiry has been sent.");
       setValues(initial);
     } catch (err) {
+      console.error("Contact form delivery failed:", err);
       setStatus("error");
-      setMessage(err instanceof Error ? err.message : "The inquiry could not be submitted. Please try again.");
+      setMessage(FAILED);
     }
   }
 
