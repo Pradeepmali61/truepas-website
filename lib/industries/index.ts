@@ -8,9 +8,8 @@ import venues from "./venues";
 
 export type { Industry, JourneyStep } from "./types";
 
-// Industry pages aren't in Figma; the copy is a draft pending client review. Images are reused from the
-// Enterprises and Users pages (plus unused deliveries) until the client sends a dedicated set for each journey.
-// Keys are the /industries/<slug> routes
+// Industry pages aren't in Figma; the copy is a draft pending client review. Step images are generated from
+// docs/industry-image-prompts.md (see HANDOFF.md). Keys are the /industries/<slug> routes
 export const industries = {
   airports,
   "car-rentals": carRentals,

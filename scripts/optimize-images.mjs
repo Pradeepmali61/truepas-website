@@ -74,9 +74,6 @@ const images = {
   "users/feature-integrations.webp": `${USR}/Fold 6 Deep System Integrations.jpg`,
   "users/feature-opt-out.webp": `${USR}/Fold 6 Easy Opt-Out & Deletions.jpg`,
 
-  // Industry pages (/industries/<slug>): the unused Fold 2 sets and the second Multi-Venue version
-  "industries/enroll-at-home.webp": `${ENT}/Fold 2 - Set 2 image 1.jpg`,
-  "industries/identity-kiosk.webp": `${ENT}/Fold 2 - Set 3 image 1.jpg`,
   // Dedicated journey images, generated from the prompts in docs/industry-image-prompts.md
   ...Object.fromEntries(
     Object.entries({
@@ -86,6 +83,7 @@ const images = {
       "theme-parks": ["1-link-tickets", "2-family", "3-park-entry", "4-season-pass", "5-rides", "6-express-reentry"],
       cruise: ["1-enroll", "2-documents", "3-embarkation", "4-cabin", "5-shore", "6-disembark"],
       venues: ["1-link-tickets", "2-ticket-validation", "3-gate-entry", "4-vip", "5-re-entry", "6-next-event"],
+      healthcare: ["1-register", "2-id-check", "3-consent", "4-kiosk", "5-record", "6-pharmacy"],
     }).flatMap(([industry, steps]) =>
       steps.map((s) => [`industries/${industry}-${s}.webp`, `${IND}/${industry}-${s}.png`]),
     ),
