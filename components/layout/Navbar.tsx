@@ -11,12 +11,12 @@ const links = [
   { label: "For Enterprises", href: "/" },
   { label: "For Users", href: "/users" },
   { label: "Who are we", href: "/who-are-we" },
-  { label: "Blogs", href: "/blogs" },
+  // Blogs (app/_blogs) are hidden until the client's articles arrive: { label: "Blogs", href: "/blogs" }
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
-  // Blog posts (/blogs/<slug>) keep the Blogs pill active
+  // Child routes (e.g. /blogs/<slug>) keep their parent pill active
   const isActive = (href: string) => href === pathname || (href !== "/" && pathname.startsWith(`${href}/`));
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
