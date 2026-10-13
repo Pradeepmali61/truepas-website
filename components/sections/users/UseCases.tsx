@@ -1,7 +1,6 @@
 "use client";
 
 import { useId, useState } from "react";
-import Button from "@/components/ui/Button";
 import DownloadButton from "@/components/ui/DownloadButton";
 import PhotoSwap from "@/components/ui/PhotoSwap";
 import SectionLabel from "@/components/ui/SectionLabel";
@@ -79,7 +78,7 @@ export default function UseCases() {
             </div>
             <div className="flex flex-wrap gap-4">
               <DownloadButton />
-              <Button variant="secondary">Read more</Button>
+              {/* "Read more" (Figma) is hidden until there are use-case articles to link to: <Button variant="secondary">Read more</Button> */}
             </div>
           </div>
           <PhotoSwap

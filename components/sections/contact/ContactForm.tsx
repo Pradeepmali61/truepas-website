@@ -61,26 +61,41 @@ const statusStyles = {
   error: "mb-4 rounded-lg border border-danger bg-[#fff1f1] px-3.5 py-3 text-sm font-medium text-[#9a1f1f]",
 };
 
-// Links can preselect an inquiry type with its slug, e.g. /contact?inquiry=api-integration#inquiry
-const slug = (s: string) => s.toLowerCase().replace(/\s+/g, "-");
+// Message hints for an industry preselected from an Industry Solutions CTA. Drafts pending client review
+const industryHints: Record<string, string> = {
+  Aviation: "Which touchpoints do you want to streamline? e.g. check-in, security, lounge entry or boarding",
+  Hospitality: "Which touchpoints do you want to streamline? e.g. pre-arrival check-in, room access or check-out",
+  "Car Rentals": "Which touchpoints do you want to streamline? e.g. licence verification, counter-free pickup or returns",
+  "Theme Parks": "Which touchpoints do you want to streamline? e.g. park entry, season passes or ride access",
+  "Cruise Operations": "Which touchpoints do you want to streamline? e.g. terminal check-in, embarkation or cabin entry",
+  "Stadiums & Entertainment Venues": "Which touchpoints do you want to streamline? e.g. gate entry, VIP areas or concessions",
+  Healthcare: "Which touchpoints do you want to streamline? e.g. patient registration, appointment check-in or pharmacy pickup",
+};
+
+// Links can preselect the industry and inquiry type with their slugs, e.g. /contact?industry=aviation&inquiry=request-demo#inquiry
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+const fromSlug = (options: string[], param: string | null) => options.find((o) => slug(o) === param) ?? "";
+
+type Prefill = Pick<Values, "industry" | "inquiryType">;
+const empty: Prefill = { industry: "", inquiryType: "" };
 
 function PrefilledForm() {
-  const param = useSearchParams().get("inquiry");
-  return <InquiryForm inquiryType={inquiryTypes.find((t) => slug(t) === param) ?? ""} />;
+  const params = useSearchParams();
+  return <InquiryForm prefill={{ industry: fromSlug(industries, params.get("industry")), inquiryType: fromSlug(inquiryTypes, params.get("inquiry")) }} />;
 }
 
 // The query string is only known in the browser, so the static HTML carries the empty form until it is read
 export default function ContactForm() {
   return (
-    <Suspense fallback={<InquiryForm inquiryType="" />}>
+    <Suspense fallback={<InquiryForm prefill={empty} />}>
       <PrefilledForm />
     </Suspense>
   );
 }
 
-function InquiryForm({ inquiryType }: { inquiryType: string }) {
+function InquiryForm({ prefill }: { prefill: Prefill }) {
   const id = useId();
-  const [values, setValues] = useState({ ...initial, inquiryType });
+  const [values, setValues] = useState({ ...initial, ...prefill });
   const [errors, setErrors] = useState<Partial<Record<Field, string>>>({});
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
@@ -139,7 +154,7 @@ function InquiryForm({ inquiryType }: { inquiryType: string }) {
       if (!res.ok || String(result.success) !== "true") throw new Error(result.message);
       setStatus("success");
       setMessage("Your inquiry has been sent.");
-      setValues({ ...initial, inquiryType });
+      setValues({ ...initial, ...prefill });
     } catch (err) {
       console.error("Contact form delivery failed:", err);
       setStatus("error");
@@ -197,7 +212,9 @@ function InquiryForm({ inquiryType }: { inquiryType: string }) {
         </label>
         <textarea
           {...a11y("message")}
-          placeholder={values.inquiryType === "API Integration" ? "Which systems should TruePas connect with? e.g. your PMS, ticketing or CRM platform" : undefined}
+          placeholder={
+            values.inquiryType === "API Integration" ? "Which systems should TruePas connect with? e.g. your PMS, ticketing or CRM platform" : industryHints[values.industry]
+          }
           value={values.message}
           onChange={(e) => update("message", e.target.value)}
           className={`${control} min-h-[132px] resize-y py-3`}

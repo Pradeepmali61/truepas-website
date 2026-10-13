@@ -6,11 +6,13 @@ import PhotoSwap from "@/components/ui/PhotoSwap";
 import SectionLabel from "@/components/ui/SectionLabel";
 import Tabs from "@/components/ui/Tabs";
 
-// Only Airports/Airlines copy exists in Figma; the other industries are drafts pending client review
+// Only Airports/Airlines copy exists in Figma; the other industries are drafts pending client review.
+// `contact` is the industry slug that the contact form preselects from the Explore CTA.
 const industries = [
   {
     tab: "Airports/Airlines",
     short: "Airports",
+    contact: "aviation",
     title: "From Curb to Gate, Without the Wait",
     intro: "Passengers link their identity to their trip before they ever reach the airport.",
     fits: "Arrival · Self-service check-in · Identity verification · Security · Lounge entry · Gate access · Boarding",
@@ -21,6 +23,7 @@ const industries = [
   {
     tab: "Car Rentals",
     short: "Car Rentals",
+    contact: "car-rentals",
     title: "From Booking to Keys, in Seconds",
     intro: "Renters verify their identity and licence once, then skip the counter at every pickup.",
     fits: "Online booking · Licence verification · Counter-free pickup · Vehicle access · Returns · Loyalty programs",
@@ -31,6 +34,7 @@ const industries = [
   {
     tab: "Hotels",
     short: "Hotels",
+    contact: "hospitality",
     title: "Check In Before You Arrive",
     intro: "Guests confirm their identity ahead of arrival and walk straight to their room.",
     fits: "Pre-arrival check-in · Front desk · Room access · Amenities and spa · Lounge entry · Check-out",
@@ -41,6 +45,7 @@ const industries = [
   {
     tab: "Theme Parks",
     short: "Theme Parks",
+    contact: "theme-parks",
     title: "More Rides, Less Waiting",
     intro: "Visitors link their tickets and passes to their identity for fast, secure entry all day long.",
     fits: "Park entry · Season pass validation · Ride access · Express lanes · Dining and retail · Re-entry",
@@ -51,6 +56,7 @@ const industries = [
   {
     tab: "Cruise",
     short: "Cruise",
+    contact: "cruise-operations",
     title: "From Terminal to Deck, Effortlessly",
     intro: "Passengers verify once before sailing and move through embarkation and every port with ease.",
     fits: "Terminal check-in · Embarkation · Onboard access · Cabin entry · Onboard purchases · Shore excursions · Disembarkation",
@@ -61,6 +67,7 @@ const industries = [
   {
     tab: "Stadiums & Entertainment Venues",
     short: "Venues",
+    contact: "stadiums-entertainment-venues",
     title: "Doors Open, Lines Disappear",
     intro: "Fans link their tickets to their identity and walk in without searching for a phone or paper ticket.",
     fits: "Gate entry · Ticket validation · VIP and hospitality areas · Concessions · Staff access · Re-entry",
@@ -71,6 +78,7 @@ const industries = [
   {
     tab: "Healthcare Providers",
     short: "Healthcare",
+    contact: "healthcare",
     title: "Right Patient, Right Care, Every Time",
     intro: "Patients verify their identity once and are recognised instantly at every visit.",
     fits: "Patient registration · Appointment check-in · Record access · Pharmacy pickup · Restricted areas · Insurance verification",
@@ -113,8 +121,10 @@ export default function IndustrySolutions() {
               </div>
             </div>
             <div className="flex flex-wrap gap-4">
-              <Button icon>Explore TruePas for {current.short}</Button>
-              <Button variant="secondary">Read more</Button>
+              <Button icon href={`/contact?industry=${current.contact}&inquiry=request-demo#inquiry`}>
+                Explore TruePas for {current.short}
+              </Button>
+              {/* "Read more" (Figma) is hidden until there are industry articles to link to: <Button variant="secondary">Read more</Button> */}
             </div>
           </div>
           <PhotoSwap
