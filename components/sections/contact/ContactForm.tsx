@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useId, useState, type FormEvent } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useId, useState, type FormEvent } from "react";
 
 type Values = {
   fullName: string;
@@ -60,9 +61,26 @@ const statusStyles = {
   error: "mb-4 rounded-lg border border-danger bg-[#fff1f1] px-3.5 py-3 text-sm font-medium text-[#9a1f1f]",
 };
 
+// Links can preselect an inquiry type with its slug, e.g. /contact?inquiry=api-integration#inquiry
+const slug = (s: string) => s.toLowerCase().replace(/\s+/g, "-");
+
+function PrefilledForm() {
+  const param = useSearchParams().get("inquiry");
+  return <InquiryForm inquiryType={inquiryTypes.find((t) => slug(t) === param) ?? ""} />;
+}
+
+// The query string is only known in the browser, so the static HTML carries the empty form until it is read
 export default function ContactForm() {
+  return (
+    <Suspense fallback={<InquiryForm inquiryType="" />}>
+      <PrefilledForm />
+    </Suspense>
+  );
+}
+
+function InquiryForm({ inquiryType }: { inquiryType: string }) {
   const id = useId();
-  const [values, setValues] = useState(initial);
+  const [values, setValues] = useState({ ...initial, inquiryType });
   const [errors, setErrors] = useState<Partial<Record<Field, string>>>({});
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
@@ -121,7 +139,7 @@ export default function ContactForm() {
       if (!res.ok || String(result.success) !== "true") throw new Error(result.message);
       setStatus("success");
       setMessage("Your inquiry has been sent.");
-      setValues(initial);
+      setValues({ ...initial, inquiryType });
     } catch (err) {
       console.error("Contact form delivery failed:", err);
       setStatus("error");
@@ -130,7 +148,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form noValidate onSubmit={submit} className="rounded-2xl border border-line/75 bg-white p-7 shadow-card-strong md:p-10">
+    <form id="inquiry" noValidate onSubmit={submit} className="scroll-mt-24 rounded-2xl border border-line/75 bg-white p-7 shadow-card-strong md:p-10">
       <h2 className="mb-2 text-2xl leading-8 font-semibold">Send an Inquiry</h2>
       <p className="mb-[26px] text-base leading-6 text-ink-3">Complete the form and the TruePas team will review your requirements.</p>
 
@@ -177,7 +195,13 @@ export default function ContactForm() {
         <label htmlFor={`${id}-message`} className="text-sm font-semibold">
           Message
         </label>
-        <textarea {...a11y("message")} value={values.message} onChange={(e) => update("message", e.target.value)} className={`${control} min-h-[132px] resize-y py-3`} />
+        <textarea
+          {...a11y("message")}
+          placeholder={values.inquiryType === "API Integration" ? "Which systems should TruePas connect with? e.g. your PMS, ticketing or CRM platform" : undefined}
+          value={values.message}
+          onChange={(e) => update("message", e.target.value)}
+          className={`${control} min-h-[132px] resize-y py-3`}
+        />
         {error("message")}
       </div>
 

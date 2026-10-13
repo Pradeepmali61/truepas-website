@@ -32,7 +32,7 @@ export default function Integrations() {
               </p>
             </div>
             <div>
-              <Button variant="secondary" icon>
+              <Button variant="secondary" icon href="/contact?inquiry=api-integration#inquiry">
                 Speak with an Integration Specialist
               </Button>
             </div>
