@@ -68,7 +68,7 @@ const industryHints: Record<string, string> = {
   "Car Rentals": "Which touchpoints do you want to streamline? e.g. licence verification, counter-free pickup or returns",
   "Theme Parks": "Which touchpoints do you want to streamline? e.g. park entry, season passes or ride access",
   "Cruise Operations": "Which touchpoints do you want to streamline? e.g. terminal check-in, embarkation or cabin entry",
-  "Stadiums & Entertainment Venues": "Which touchpoints do you want to streamline? e.g. gate entry, VIP areas or concessions",
+  "Stadiums & Entertainment Venues": "Which touchpoints do you want to streamline? e.g. gate entry, VIP areas or staff access",
   Healthcare: "Which touchpoints do you want to streamline? e.g. patient registration, appointment check-in or pharmacy pickup",
 };
 

@@ -1,4 +1,4 @@
-// Usage: node scripts/optimize-images.mjs
+// Usage: node scripts/optimize-images.mjs [output path prefix, e.g. industries/airports]
 // Converts the content team's raw exports (gitignored 5-Oct/ folder in the repo root) into
 // resized WebP files under public/images. Add an entry per image as it is placed on the site.
 import { mkdir, stat } from "node:fs/promises";
@@ -8,6 +8,7 @@ import sharp from "sharp";
 const ENT = "5-Oct/For Enterprises";
 const USR = "5-Oct/For Users";
 const DIRECT = "5-Oct/Direct"; // images sent outside the Drive folder
+const IND = "5-Oct/Industries"; // generated industry journey images
 
 const images = {
   // Final logo from the client (transparent PNG); stays PNG so its edges stay crisp
@@ -72,12 +73,32 @@ const images = {
   "users/feature-multi-venue.webp": `${USR}/Fold 6 Multi-Venue Credential Management.jpg`,
   "users/feature-integrations.webp": `${USR}/Fold 6 Deep System Integrations.jpg`,
   "users/feature-opt-out.webp": `${USR}/Fold 6 Easy Opt-Out & Deletions.jpg`,
+
+  // Industry pages (/industries/<slug>): the unused Fold 2 sets and the second Multi-Venue version
+  "industries/enroll-at-home.webp": `${ENT}/Fold 2 - Set 2 image 1.jpg`,
+  "industries/identity-kiosk.webp": `${ENT}/Fold 2 - Set 3 image 1.jpg`,
+  // Dedicated journey images, generated from the prompts in docs/industry-image-prompts.md
+  ...Object.fromEntries(
+    Object.entries({
+      airports: ["1-link-trip", "2-self-check-in", "3-bag-drop", "4-security", "5-lounge", "6-boarding"],
+      "car-rentals": ["1-book-link", "2-licence-check", "3-skip-queue", "4-key-handover", "5-exit-gate", "6-returns"],
+      hotels: ["1-book-link", "2-pre-arrival", "3-front-desk", "4-room-access", "5-spa-gym", "6-check-out"],
+      "theme-parks": ["1-link-tickets", "2-family", "3-park-entry", "4-season-pass", "5-rides", "6-express-reentry"],
+      cruise: ["1-enroll", "2-documents", "3-embarkation", "4-cabin", "5-shore", "6-disembark"],
+      venues: ["1-link-tickets", "2-ticket-validation", "3-gate-entry", "4-vip", "5-re-entry", "6-next-event"],
+    }).flatMap(([industry, steps]) =>
+      steps.map((s) => [`industries/${industry}-${s}.webp`, `${IND}/${industry}-${s}.png`]),
+    ),
+  ),
 };
 
 // Largest slot is ~540 CSS px wide; 1400px covers 2x screens with room for crops
 const MAX_WIDTH = 1400;
 
-for (const [out, src] of Object.entries(images)) {
+// Optional filter so a new batch doesn't re-encode (and churn) every existing file, e.g. `industries/airports`
+const only = process.argv[2];
+
+for (const [out, src] of Object.entries(images).filter(([out]) => !only || out.startsWith(only))) {
   const dest = path.join("public/images", out);
   await mkdir(path.dirname(dest), { recursive: true });
   const resized = sharp(src).resize({ width: MAX_WIDTH, withoutEnlargement: true });

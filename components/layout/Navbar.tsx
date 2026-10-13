@@ -16,8 +16,9 @@ const links = [
 
 export default function Navbar() {
   const pathname = usePathname();
-  // Child routes (e.g. /blogs/<slug>) keep their parent pill active
-  const isActive = (href: string) => href === pathname || (href !== "/" && pathname.startsWith(`${href}/`));
+  // Child routes (e.g. /blogs/<slug>) keep their parent pill active; industry pages (/industries/<slug>) belong to For Enterprises
+  const isActive = (href: string) =>
+    href === pathname || (href === "/" ? pathname.startsWith("/industries/") : pathname.startsWith(`${href}/`));
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
