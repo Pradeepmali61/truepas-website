@@ -52,7 +52,7 @@ type Props = {
 export default function LegalDocument({ doc, extras = {} }: Props) {
   return (
     <>
-      <section className="bg-linear-to-b from-sky-200 to-white px-5 pt-36 pb-8 text-center md:px-10 lg:pb-10">
+      <section className="bg-linear-to-b from-sky-200 to-white px-5 pt-24 pb-8 text-center md:px-10 lg:pt-28 lg:pb-10">
         <div className="mx-auto flex max-w-[700px] flex-col items-center gap-4">
           <h1 className="heading-xl">{doc.title}</h1>
           <p className="text-base leading-[26px] text-ink-3">{doc.description}</p>
