@@ -19,7 +19,7 @@ Report any step you skipped or that failed, with its output.
 - Never commit `design-ref/`, `screenshots/`, `out/`, `truepas-offline/` (build/export output), `.env*`, the raw content folders, or any token.
 
 ## Dependencies
-- Runtime deps are only `next`, `react` and `react-dom`. Ask before adding any package; prefer a few lines of local code (no `clsx`, UI kits or animation libraries).
+- Runtime deps are only `next`, `react`, `react-dom` and `@google/genai` (chat assistant, approved 15 Oct 2026). Ask before adding any package; prefer a few lines of local code (no `clsx`, UI kits or animation libraries).
 
 ## Next.js 16
 - Before using an API you haven't used in this repo, read it in `node_modules/next/dist/docs/`. Known changes: `next lint` is removed; `middleware.ts` is now `proxy.ts`; `params`/`searchParams` are async; use the global `PageProps<'/route'>` / `LayoutProps<'/route'>` types; Turbopack is the default; dev output lives in `.next/dev`.

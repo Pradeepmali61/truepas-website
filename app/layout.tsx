@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import ChatWidget from "@/components/layout/ChatWidget";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import { SITE_URL } from "@/lib/site";
@@ -28,6 +29,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Navbar />
         {children}
         <Footer />
+        {/* The assistant needs the Gemini API key; pages are prerendered, so adding the key takes a redeploy */}
+        {process.env.GEMINI_API_KEY && <ChatWidget />}
       </body>
     </html>
   );

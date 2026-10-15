@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useId, useState, type FormEvent } from "react";
+import { industries, inquiryTypes, slug } from "@/lib/contact";
 
 type Values = {
   fullName: string;
@@ -26,9 +27,6 @@ const INBOX = "truepasai@gmail.com";
 const FAILED = "The inquiry could not be delivered. Please try again later or use Book a Demo.";
 
 const initial: Values = { fullName: "", workEmail: "", company: "", phone: "", industry: "", inquiryType: "", message: "", consent: false, companyWebsite: "" };
-
-const industries = ["Aviation", "Hospitality", "Car Rentals", "Theme Parks", "Cruise Operations", "Stadiums & Entertainment Venues", "Healthcare", "Other"];
-const inquiryTypes = ["Request Demo", "Enterprise Partnership", "API Integration", "Technical Support", "General Inquiry"];
 
 const inputs: { name: Field; label: string; type?: string; autoComplete: string; optional?: boolean }[] = [
   { name: "fullName", label: "Full Name", autoComplete: "name" },
@@ -73,7 +71,6 @@ const industryHints: Record<string, string> = {
 };
 
 // Links can preselect the industry and inquiry type with their slugs, e.g. /contact?industry=aviation&inquiry=request-demo#inquiry
-const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 const fromSlug = (options: string[], param: string | null) => options.find((o) => slug(o) === param) ?? "";
 
 type Prefill = Pick<Values, "industry" | "inquiryType">;
@@ -81,7 +78,13 @@ const empty: Prefill = { industry: "", inquiryType: "" };
 
 function PrefilledForm() {
   const params = useSearchParams();
-  return <InquiryForm prefill={{ industry: fromSlug(industries, params.get("industry")), inquiryType: fromSlug(inquiryTypes, params.get("inquiry")) }} />;
+  // Keyed by the query so a new prefill (e.g. from the chat assistant while already on /contact) resets the form
+  return (
+    <InquiryForm
+      key={params.toString()}
+      prefill={{ industry: fromSlug(industries, params.get("industry")), inquiryType: fromSlug(inquiryTypes, params.get("inquiry")) }}
+    />
+  );
 }
 
 // The query string is only known in the browser, so the static HTML carries the empty form until it is read

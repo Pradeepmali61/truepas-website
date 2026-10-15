@@ -35,16 +35,21 @@ function loadWidget() {
   return widget;
 }
 
-async function openPopup(e: React.MouseEvent<HTMLAnchorElement>) {
-  // Modified clicks (new tab/window) follow the href to Calendly's own page
-  if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-  e.preventDefault();
+/** Opens the Calendly booking popup; also used by the chat assistant's book_demo action */
+export async function openDemoBooking() {
   try {
     (await loadWidget()).initPopupWidget({ url: CALENDLY_URL });
   } catch {
     // Widget blocked (e.g. ad blocker): fall back to the booking page
     window.location.assign(CALENDLY_URL);
   }
+}
+
+function openPopup(e: React.MouseEvent<HTMLAnchorElement>) {
+  // Modified clicks (new tab/window) follow the href to Calendly's own page
+  if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  e.preventDefault();
+  openDemoBooking();
 }
 
 type Props = {
