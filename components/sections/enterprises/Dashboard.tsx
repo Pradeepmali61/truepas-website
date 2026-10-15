@@ -1,4 +1,4 @@
-import Button from "@/components/ui/Button";
+import BookDemoButton from "@/components/ui/BookDemoButton";
 import Photo from "@/components/ui/Photo";
 import SectionLabel from "@/components/ui/SectionLabel";
 
@@ -26,7 +26,7 @@ export default function Dashboard() {
             </div>
           </div>
           <div>
-            <Button icon>Request a Dashboard Demonstration</Button>
+            <BookDemoButton>Request a Dashboard Demonstration</BookDemoButton>
           </div>
         </div>
         <Photo
