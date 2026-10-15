@@ -202,8 +202,7 @@ export const privacyPolicy: LegalDoc = {
         {
           box: [
             "Organization: TruePas",
-            "Privacy contact: [Privacy team or Data Protection Officer, if appointed]",
-            "Email: [Official privacy contact email]",
+            "Email: truepasai@gmail.com",
             "Website: https://truepas-blond.vercel.app/",
           ],
         },
@@ -417,7 +416,7 @@ export const termsAndConditions: LegalDoc = {
         {
           box: [
             "Organization: TruePas",
-            "Email: [Official support or legal contact email]",
+            "Email: truepasai@gmail.com",
             "Website: https://truepas-blond.vercel.app/",
           ],
         },
