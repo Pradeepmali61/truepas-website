@@ -11,7 +11,6 @@ export type LegalSection = {
 };
 
 export type LegalDoc = {
-  eyebrow: string;
   title: string;
   description: string;
   effective: string;
@@ -20,7 +19,6 @@ export type LegalDoc = {
 };
 
 export const privacyPolicy: LegalDoc = {
-  eyebrow: "Privacy & Security",
   title: "Your Privacy Matters",
   description:
     "How TruePas collects, uses, protects and shares personal and biometric information, and the choices you have.",
@@ -222,7 +220,6 @@ export const privacyPolicy: LegalDoc = {
 };
 
 export const termsAndConditions: LegalDoc = {
-  eyebrow: "Legal",
   title: "Terms & Conditions",
   description:
     "The terms that govern your use of the TruePas website, mobile app and TruePas-enabled kiosks.",
@@ -435,7 +432,6 @@ export const termsAndConditions: LegalDoc = {
 };
 
 export const cookiePolicy: LegalDoc = {
-  eyebrow: "Privacy & Security",
   title: "Cookies & Your Choices",
   description: "A clear guide to cookie categories, consent choices and browser controls.",
   effective: "October 9, 2026",

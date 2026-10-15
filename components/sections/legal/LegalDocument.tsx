@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import SectionLabel from "@/components/ui/SectionLabel";
 import type { LegalBlock, LegalDoc } from "@/lib/legal";
 
 // "3. How TruePas Works" -> "how-truepas-works"
@@ -55,7 +54,6 @@ export default function LegalDocument({ doc, extras = {} }: Props) {
     <>
       <section className="bg-linear-to-b from-sky-200 to-white px-5 pt-36 pb-8 text-center md:px-10 lg:pb-10">
         <div className="mx-auto flex max-w-[700px] flex-col items-center gap-4">
-          <SectionLabel>{doc.eyebrow}</SectionLabel>
           <h1 className="heading-xl">{doc.title}</h1>
           <p className="text-base leading-[26px] text-ink-3">{doc.description}</p>
           <div className="flex flex-wrap justify-center gap-2.5" aria-label="Policy dates">
