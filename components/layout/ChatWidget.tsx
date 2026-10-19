@@ -6,7 +6,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { ChatIcon } from "@/components/ui/Button";
 import { openDemoBooking } from "@/components/ui/BookDemoButton";
 import { contactHref, industries, inquiryTypes } from "@/lib/contact";
-import { tools, type AgentEvent, type Message, type ToolCall } from "@/lib/chat/protocol";
+import { actionNote, tools, type AgentEvent, type Message, type ToolCall } from "@/lib/chat/protocol";
 import { publicRoutes } from "@/lib/site";
 
 // Floating chat assistant on every page (rendered by app/layout.tsx when GEMINI_API_KEY is set). It is an AG-UI
@@ -249,9 +249,10 @@ export default function ChatWidget() {
                   {m.content}
                 </p>
               ) : m.role === "assistant" ? (
-                m.content && (
+                // Safety net: an action note the model wrote as text is never shown
+                m.content?.replace(actionNote, "").trim() && (
                   <p key={m.id} className="max-w-[85%] rounded-2xl rounded-tl-sm bg-sky-50 px-4 py-3 text-sm leading-[22px] whitespace-pre-wrap text-ink-3">
-                    {m.content}
+                    {m.content.replace(actionNote, "").trim()}
                   </p>
                 )
               ) : (

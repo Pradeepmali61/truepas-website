@@ -33,6 +33,10 @@ export type AgentEvent =
   | { type: "TOOL_CALL_ARGS"; toolCallId: string; delta: string }
   | { type: "TOOL_CALL_END"; toolCallId: string };
 
+/** An action note the model sometimes writes into its text instead of calling a tool, e.g. `[Action: open_page {...} -> ...]`.
+ *  Also matches an unclosed note at the end of a reply that is still streaming */
+export const actionNote = /\s*\[(?:Action|Website)\b[^\]]*(?:\]|$)/gi;
+
 // Frontend tools: the assistant asks for them and the browser runs them (components/layout/ChatWidget.tsx)
 export const tools: Tool[] = [
   {

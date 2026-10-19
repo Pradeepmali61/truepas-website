@@ -1,6 +1,6 @@
-import { ApiError, GoogleGenAI, ThinkingLevel, type Content } from "@google/genai";
+import { ApiError, FunctionCallingConfigMode, GoogleGenAI, ThinkingLevel, type Content, type FunctionCall, type Part } from "@google/genai";
 import { systemPrompt } from "@/lib/chat/knowledge";
-import { tools, type AgentEvent, type Message, type RunAgentInput } from "@/lib/chat/protocol";
+import { actionNote, tools, type AgentEvent, type Message, type RunAgentInput } from "@/lib/chat/protocol";
 
 // AG-UI agent endpoint for the chat assistant: takes a RunAgentInput, streams the run back as server-sent events.
 // Needs GEMINI_API_KEY (Vercel env var); without it the widget isn't rendered and this returns 503
@@ -45,29 +45,54 @@ function parseInput(body: unknown): RunAgentInput | null {
   return { threadId, runId, messages, tools: [], context: [] };
 }
 
-// AG-UI history -> Gemini contents. Earlier actions become "[Action: ...]" notes in the assistant's text: each run
-// ends at its function call and the browser runs it, so there is no pending call to answer
+// AG-UI history -> Gemini contents. Earlier actions go back as real functionCall / functionResponse parts. They used
+// to be "[Action: ...]" notes in the assistant's text, and the model then copied that format (or just said "I am
+// opening...") instead of calling the function, so the action never ran. The browser doesn't keep Gemini's thought
+// signatures, so replayed calls carry Google's documented placeholder that skips their validation
+const REPLAYED = "skip_thought_signature_validator";
+
 function toContents(messages: Message[]): Content[] {
-  const results = new Map(messages.flatMap((m) => (m.role === "tool" ? [[m.toolCallId, m.error ? `failed: ${m.error}` : m.content]] : [])));
   const out: Content[] = [];
-  const push = (role: "user" | "model", text: string) => {
+  const push = (role: "user" | "model", part: Part) => {
     const last = out.at(-1);
-    if (last?.role === role) last.parts!.push({ text });
-    else out.push({ role, parts: [{ text }] });
+    if (last?.role === role) last.parts!.push(part);
+    else out.push({ role, parts: [part] });
+  };
+  // Calls still waiting for their result, so one the browser never ran is still answered before the next turn
+  const open = new Map<string, string>();
+  const answer = (id: string, response: Record<string, unknown>) => {
+    push("user", { functionResponse: { id, name: open.get(id), response } });
+    open.delete(id);
   };
   for (const m of messages) {
-    if (m.role === "user") push("user", m.content);
-    if (m.role === "assistant") {
-      const actions = (m.toolCalls ?? []).map(
-        (c) => `[Action: ${c.function.name} ${c.function.arguments} -> ${results.get(c.id) ?? "not run"}]`,
-      );
-      const text = [m.content, ...actions].filter(Boolean).join("\n");
-      // The history must open with a user turn
-      if (text && out.length) push("model", text);
+    if (m.role === "user") {
+      for (const id of [...open.keys()]) answer(id, { error: "not run" });
+      push("user", { text: m.content });
     }
+    // The history must open with a user turn
+    if (m.role === "assistant" && out.length) {
+      const text = m.content?.replace(actionNote, "").trim();
+      if (text) push("model", { text });
+      for (const c of m.toolCalls ?? []) {
+        let args: Record<string, unknown> = {};
+        try {
+          args = JSON.parse(c.function.arguments || "{}");
+        } catch {}
+        push("model", { functionCall: { id: c.id, name: c.function.name, args }, thoughtSignature: REPLAYED });
+        open.set(c.id, c.function.name);
+      }
+    }
+    if (m.role === "tool" && open.has(m.toolCallId)) answer(m.toolCallId, m.error ? { error: m.error } : { result: m.content });
   }
   return out;
 }
+
+// A reply that says it is opening something ("I am taking you to the users page") as a statement, not an offer.
+// Flash-Lite sometimes writes this without calling the function; the route then asks it again for just the call
+const claimsAction = (text: string) =>
+  !/\?\s*$/.test(text.trim()) &&
+  (/\b(?:I am|I'm|I'll|I will|let me)\s+(?:now\s+)?(?:open|opening|tak(?:e|ing) you|bring(?:ing)? you|navigat|redirect|show(?:ing)? you)/i.test(text) ||
+    /\bopen kar (?:raha|rahi|rha|rhi)\b/i.test(text));
 
 const functionDeclarations = tools.map((t) => ({ name: t.name, description: t.description, parametersJsonSchema: t.parameters }));
 
@@ -96,21 +121,19 @@ export async function POST(request: Request) {
     apiKey: process.env.GEMINI_API_KEY,
     httpOptions: { retryOptions: { attempts: 2, initialDelay: 1, maxDelay: 2, httpStatusCodes: [429, 500, 503] } },
   });
+  const contents = toContents(input.messages);
+  const config = {
+    systemInstruction: systemPrompt,
+    tools: [{ functionDeclarations }],
+    // Short website answers
+    thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
+    maxOutputTokens: 2048,
+    abortSignal: request.signal,
+  };
   const startStream = async () => {
     for (const [i, model] of MODELS.entries()) {
       try {
-        return await ai.models.generateContentStream({
-          model,
-          contents: toContents(input.messages),
-          config: {
-            systemInstruction: systemPrompt,
-            tools: [{ functionDeclarations }],
-            // Short website answers
-            thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
-            maxOutputTokens: 2048,
-            abortSignal: request.signal,
-          },
-        });
+        return { model, stream: await ai.models.generateContentStream({ model, contents, config }) };
       } catch (err) {
         if (!unavailable(err) || i === MODELS.length - 1) throw err;
       }
@@ -130,10 +153,19 @@ export async function POST(request: Request) {
       let toolCalls = 0;
       let finishReason: string | undefined;
       let promptBlocked = false;
+      let replyText = "";
+      // Gemini sends each call whole, so its arguments go out as a single TOOL_CALL_ARGS
+      const sendCall = (call: FunctionCall) => {
+        toolCalls++;
+        const toolCallId = call.id || `call_${runId}_${toolCalls}`;
+        send({ type: "TOOL_CALL_START", toolCallId, toolCallName: call.name!, parentMessageId: messageId });
+        send({ type: "TOOL_CALL_ARGS", toolCallId, delta: JSON.stringify(call.args ?? {}) });
+        send({ type: "TOOL_CALL_END", toolCallId });
+      };
 
       send({ type: "RUN_STARTED", threadId, runId });
       try {
-        const stream = await startStream();
+        const { model, stream } = await startStream();
 
         for await (const chunk of stream) {
           if (chunk.promptFeedback?.blockReason) promptBlocked = true;
@@ -144,16 +176,25 @@ export async function POST(request: Request) {
             if (part.text) {
               if (!textOpen) send({ type: "TEXT_MESSAGE_START", messageId, role: "assistant" });
               textOpen = true;
+              replyText += part.text;
               send({ type: "TEXT_MESSAGE_CONTENT", messageId, delta: part.text });
             }
-            if (part.functionCall?.name) {
-              // Gemini sends each call whole, so its arguments go out as a single TOOL_CALL_ARGS
-              toolCalls++;
-              const toolCallId = part.functionCall.id || `call_${runId}_${toolCalls}`;
-              send({ type: "TOOL_CALL_START", toolCallId, toolCallName: part.functionCall.name, parentMessageId: messageId });
-              send({ type: "TOOL_CALL_ARGS", toolCallId, delta: JSON.stringify(part.functionCall.args ?? {}) });
-              send({ type: "TOOL_CALL_END", toolCallId });
-            }
+            if (part.functionCall?.name) sendCall(part.functionCall);
+          }
+        }
+
+        // The reply promised an action but made no call: ask the same model for only the call (mode ANY)
+        if (!toolCalls && finishReason === "STOP" && claimsAction(replyText)) {
+          try {
+            const forced = await ai.models.generateContent({
+              model,
+              contents,
+              config: { ...config, toolConfig: { functionCallingConfig: { mode: FunctionCallingConfigMode.ANY } } },
+            });
+            const call = forced.functionCalls?.[0];
+            if (call?.name) sendCall(call);
+          } catch (err) {
+            if (!request.signal.aborted) console.error("Chat forced action failed:", err);
           }
         }
 
@@ -165,6 +206,7 @@ export async function POST(request: Request) {
           send({ type: "RUN_ERROR", code: "incomplete", message: "Sorry, that reply was cut off. Please try again." });
         } else if (finishReason && finishReason !== "STOP" && finishReason !== "MAX_TOKENS") {
           // e.g. MALFORMED_FUNCTION_CALL
+          console.error("Chat run ended with finish reason", finishReason);
           send({ type: "RUN_ERROR", code: "failed", message: "Sorry, something went wrong. Please try again." });
         } else {
           send({ type: "RUN_FINISHED", threadId, runId });
