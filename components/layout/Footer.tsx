@@ -12,7 +12,7 @@ const social = [
   { label: "Linkedin", href: "https://www.linkedin.com/company/truepas/" },
   // Not in Figma; added at the client's request
   { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61595153494823" },
-  { label: "Instagram", href: "#" },
+  { label: "Instagram", href: "https://www.instagram.com/truepasai/" },
 ];
 const legal = [
   { label: "Privacy Policy", href: "/privacy-policy" },
