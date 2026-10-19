@@ -31,11 +31,7 @@ export default function Hero() {
         <div className="glass flex flex-col gap-5 rounded-2xl px-6 py-5 lg:h-24 lg:flex-row lg:items-center lg:justify-between lg:py-0">
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <BrandLogo height={22} className="h-[22px]" />
-            <div className="flex items-center gap-1">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/icons/star-rate-half.svg" alt="" className="size-6" />
-              <span className="text-base leading-6 whitespace-nowrap text-ink-3">4.9 (1.5k reviews)</span>
-            </div>
+            {/* Figma's "4.9 (1.5k reviews)" rating is hidden at the client's request until there are real reviews */}
           </div>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
             <div className="flex items-center gap-3">
