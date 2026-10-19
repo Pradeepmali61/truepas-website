@@ -23,7 +23,7 @@ export default function TeamMembers() {
         {/* Browser Inter renders ~2px wider than Figma; the extra 4px keeps Figma's line breaks */}
         <p className="text-base leading-6 whitespace-pre-line text-ink-3 lg:-mr-1">
           {
-            "Our team brings over four decades of combined expertise in enterprise technology leadership across finance, aviation, healthcare, and hospitality, with deep specialization in IT infrastructure, cybersecurity, and large-scale digital transformation. We're equally at home in cloud-native architecture and micro-services, as we are in translating complex technology into measurable business outcomes.\n\nTogether, this experience shapes our strategic vision — built to scale, and designed to be secure."
+            "Our team brings over four decades of combined expertise in enterprise technology leadership across finance, aviation, healthcare, and hospitality, with deep specialization in IT infrastructure, cybersecurity, and large-scale digital transformation. We're equally at home in cloud-native architecture and microservices as we are in translating complex technology into measurable business outcomes.\n\nTogether, this experience shapes our strategic vision — built to scale and designed to be secure."
           }
         </p>
         <ul className="grid grid-cols-2 gap-x-5 gap-y-10 md:gap-x-10 lg:grid-cols-4">

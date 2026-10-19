@@ -8,7 +8,7 @@ export default function About() {
           <h1 className="heading-xl">About TruePas</h1>
           <p className="text-base leading-6 whitespace-pre-line text-ink-3">
             {
-              "TruePas began with a simple problem and the rest was the search for its solution.\n\nIn 2025, we uncovered a fundamental flaw: payment and identity systems were verifying cards, not people. Behind that single gap sat a cascade of problems; fragmented identity verification, endless friction, and long wait times across hotels, banks, airports, and healthcare.\n\nWe built a biometric layer that puts the person back at the center of authentication. TruePas is a single solution to the identity and payment pain points we've all lived through, seamless, secure, and built for the real world."
+              "TruePas began with a simple problem, and the rest was the search for its solution.\n\nIn 2025, we uncovered a fundamental flaw: payment and identity systems were verifying cards, not people. Behind that single gap sat a cascade of problems: fragmented identity verification, endless friction, and long wait times across hotels, banks, airports, and healthcare.\n\nWe built a biometric layer that puts the person back at the center of authentication. TruePas is a seamless, secure, real-world solution to the identity and payment frustrations we have all experienced."
             }
           </p>
         </div>

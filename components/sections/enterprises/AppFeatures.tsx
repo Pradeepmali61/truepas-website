@@ -2,12 +2,12 @@ import IconBox from "@/components/ui/IconBox";
 
 const features = [
   { icon: "acute", title: "Faster Check-In and Entry", text: "Replace manual document and ticket checks with fast identity recognition." },
-  { icon: "arrow-cool-down", title: "Lower Operational Workload", text: "Automate repetitive verification tasks so staff can focus on customer support" },
-  { icon: "encrypted", title: "Stronger Fraud Prevention", text: "Verify with true identity, reduce unauthorized access, duplication  and manual errors." },
-  { icon: "ar-on-you", title: "Better Customer Experience", text: "Give customers one consistent identity experience across locations and services" },
+  { icon: "arrow-cool-down", title: "Lower Operational Workload", text: "Automate repetitive verification tasks so staff can focus on customer support." },
+  { icon: "encrypted", title: "Stronger Fraud Prevention", text: "Verify identities to reduce unauthorized access, duplication, and manual errors." },
+  { icon: "ar-on-you", title: "Better Customer Experience", text: "Give customers one consistent identity experience across locations and services." },
   { icon: "speed", title: "Increased Customer Throughput", text: "Scan more customers during peak periods with unmatched security and efficiency." },
   { icon: "diamond-shine", title: "Personalized Engagement", text: "Recognize authorized users at the touchpoints." },
-  { icon: "open-with", title: "Scalable Deployment", text: "Start with single location and expand across  properties, departments, and journeys." },
+  { icon: "open-with", title: "Scalable Deployment", text: "Start with a single location and expand across properties, departments, and journeys." },
 ];
 
 export default function AppFeatures() {

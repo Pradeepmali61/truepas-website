@@ -1,6 +1,21 @@
 import Button from "@/components/ui/Button";
 import Photo from "@/components/ui/Photo";
 import SectionLabel from "@/components/ui/SectionLabel";
+import TermList from "@/components/ui/TermList";
+
+const systems = [
+  "Reservation systems",
+  "Property management systems",
+  "Ticketing platforms",
+  "Access control",
+  "CRM",
+  "Loyalty/membership platforms",
+  "Point-of-sale",
+  "Payment platforms",
+  "EHR systems",
+  "Mobile & web apps",
+  "Security/monitoring platforms",
+];
 
 export default function Integrations() {
   return (
@@ -18,14 +33,10 @@ export default function Integrations() {
             className="h-64 rounded-2xl bg-white shadow-card-strong md:h-[417px] lg:flex-1"
             fit="contain"
           />
-          <div className="flex flex-col justify-between gap-8 lg:h-[417px] lg:flex-1">
+          <div className="flex flex-col justify-between gap-8 lg:min-h-[417px] lg:flex-1">
             <div className="flex flex-col gap-6 text-base leading-6">
               <p>TruePas is built to slot into your existing stack, no rip-and-replace required.</p>
-              <p>
-                <strong className="font-semibold">Connects with</strong>: Reservation systems · Property management systems ·
-                Ticketing platforms · Access control · CRM · Loyalty/membership Platforms · Point-of-sale · Payment platforms · EHR
-                systems · Mobile &amp; web apps · Security/monitoring platforms
-              </p>
+              <TermList label="Connects with" items={systems} />
               <p>
                 Our API-first architecture lets merchants add identity verification without rebuilding their core business
                 platform.
