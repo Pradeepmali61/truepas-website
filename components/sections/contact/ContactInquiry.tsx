@@ -11,7 +11,7 @@ const areas = [
 
 export default function ContactInquiry() {
   return (
-    <section className="section-pad bg-white">
+    <section className="bg-white px-5 pt-8 pb-14 md:px-10 lg:pt-10 lg:pb-20">
       <div className="container-page grid gap-[30px] lg:grid-cols-[1.35fr_0.65fr] lg:items-start">
         <ContactForm />
         <aside aria-labelledby="business-inquiry" className="flex flex-col gap-[22px] rounded-2xl border border-line/75 bg-sky-50 p-7 shadow-card-strong md:p-10">

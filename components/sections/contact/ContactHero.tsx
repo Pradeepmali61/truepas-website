@@ -2,7 +2,7 @@ import SectionLabel from "@/components/ui/SectionLabel";
 
 export default function ContactHero() {
   return (
-    <section className="bg-linear-to-b from-sky-200 to-white px-5 pt-36 pb-16 md:px-10 lg:pt-[200px] lg:pb-[120px]">
+    <section className="bg-linear-to-b from-sky-200 to-white px-5 pt-24 pb-8 md:px-10 lg:pt-28 lg:pb-10">
       <div className="mx-auto flex max-w-[835px] flex-col items-center gap-5 text-center">
         <SectionLabel>Contact Us</SectionLabel>
         <h1 className="heading-xl">Let&apos;s Make Every Customer Journey Seamless</h1>
