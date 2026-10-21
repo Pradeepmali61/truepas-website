@@ -5,8 +5,8 @@ const benefits = [
   { icon: "database-off", title: "Contactless Convenience", text: "Access complete verification without reaching for your phone or documents." },
   { icon: "encrypted", title: "Fraud & Identity-Theft Protection", text: "3D liveness detection blocks spoofing creating a safer environment for every user." },
   { icon: "acute", title: "Sub-3-Second Verification", text: "Real-time biometric matching at any touchpoint, no matter the venue." },
-  { icon: "home-work", title: "Works in diverse conditions", text: "Verifies accurately in low-light and various angles also, with masks and glasses" },
-  { icon: "sensor-occupied", title: "Efficiency at Scale", text: "A single identity across physical touchpoint that is effortless and eliminates queues. " },
+  { icon: "home-work", title: "Works in diverse conditions", text: "Verifies accurately from various angles and in low-light conditions, even with masks and glasses." },
+  { icon: "sensor-occupied", title: "Efficiency at Scale", text: "A single identity across physical touchpoints that is effortless and eliminates queues." },
 ];
 
 export default function Benefits() {
