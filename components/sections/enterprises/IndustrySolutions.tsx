@@ -7,7 +7,9 @@ import SectionLabel from "@/components/ui/SectionLabel";
 import Tabs from "@/components/ui/Tabs";
 
 // Only Airports/Airlines copy exists in Figma; the other industries are drafts pending client review.
-// `page` is the industry page the Explore CTA opens (app/industries/[slug], data in lib/industries)
+// `page` is the industry page the Explore CTA opens (app/industries/[slug], data in lib/industries).
+// Figma runs "Where it fits" and "What merchants gain" as sentences; a more structured layout was requested
+// (22 Oct 2026), so they render as chips and a checklist
 const industries = [
   {
     tab: "Airports/Airlines",
@@ -15,8 +17,15 @@ const industries = [
     page: "/industries/airports",
     title: "From Curb to Gate, Without the Wait",
     intro: "Passengers link their identity to their trip before they ever reach the airport.",
-    fits: "Arrival · Self-service check-in · Identity verification · Security · Lounge entry · Gate access · Boarding",
-    gain: "Shorter queues, faster passenger flow, less document handling, higher terminal throughput, consistent verification, a smoother passenger experience",
+    fits: ["Arrival", "Self-service check-in", "Identity verification", "Security", "Lounge entry", "Gate access", "Boarding"],
+    gain: [
+      "Shorter queues",
+      "Faster passenger flow",
+      "Less document handling",
+      "Higher terminal throughput",
+      "Consistent verification",
+      "Smoother passenger experience",
+    ],
     image: "industry-airports",
     alt: "Traveller verifying their identity on a check-in device while airline staff assist",
   },
@@ -26,8 +35,8 @@ const industries = [
     page: "/industries/car-rentals",
     title: "From Booking to Keys, in Seconds",
     intro: "Renters verify their identity and licence once, then skip the counter at every pickup.",
-    fits: "Online booking · Licence verification · Counter-free pickup · Vehicle access · Returns · Loyalty programs",
-    gain: "Fewer counter queues, reduced rental fraud, faster vehicle handover, lower staffing load, a seamless renter experience",
+    fits: ["Online booking", "Licence verification", "Counter-free pickup", "Vehicle access", "Returns", "Loyalty programs"],
+    gain: ["Fewer counter queues", "Reduced rental fraud", "Faster vehicle handover", "Lower staffing load", "Seamless renter experience"],
     image: "industry-car-rentals",
     alt: "Customer verifying their identity at a car rental counter as the agent hands over the keys",
   },
@@ -37,8 +46,8 @@ const industries = [
     page: "/industries/hotels",
     title: "Check In Before You Arrive",
     intro: "Guests confirm their identity ahead of arrival and walk straight to their room.",
-    fits: "Pre-arrival check-in · Front desk · Room access · Amenities and spa · Lounge entry · Check-out",
-    gain: "Shorter front-desk lines, less paperwork, secure room access, more time for guest service, a personal welcome every stay",
+    fits: ["Pre-arrival check-in", "Front desk", "Room access", "Amenities and spa", "Lounge entry", "Check-out"],
+    gain: ["Shorter front-desk lines", "Less paperwork", "Secure room access", "More time for guest service", "A personal welcome every stay"],
     image: "industry-hotels",
     alt: "Guest verifying their identity on a device at a hotel reception as the receptionist welcomes them",
   },
@@ -48,8 +57,8 @@ const industries = [
     page: "/industries/theme-parks",
     title: "More Rides, Less Waiting",
     intro: "Visitors link their tickets and passes to their identity for fast, secure entry all day long.",
-    fits: "Park entry · Season pass validation · Ride access · Express lanes · Re-entry",
-    gain: "Faster gate throughput, no pass sharing, fewer lost tickets, reduced staffing at entrances, happier visitors",
+    fits: ["Park entry", "Season pass validation", "Ride access", "Express lanes", "Re-entry"],
+    gain: ["Faster gate throughput", "No pass sharing", "Fewer lost tickets", "Reduced staffing at entrances", "Happier visitors"],
     image: "industry-theme-parks",
     alt: "Family verifying their identity at a theme park entrance gate with a staff member",
   },
@@ -59,8 +68,8 @@ const industries = [
     page: "/industries/cruise",
     title: "From Terminal to Deck, Effortlessly",
     intro: "Passengers verify once before sailing and move through embarkation and every port with ease.",
-    fits: "Terminal check-in · Embarkation · Onboard access · Cabin entry · Shore excursions · Disembarkation",
-    gain: "Quicker embarkation, accurate passenger manifests, secure onboard access, less document handling, a smoother voyage",
+    fits: ["Terminal check-in", "Embarkation", "Onboard access", "Cabin entry", "Shore excursions", "Disembarkation"],
+    gain: ["Quicker embarkation", "Accurate passenger manifests", "Secure onboard access", "Less document handling", "A smoother voyage"],
     image: "industry-cruise",
     alt: "Passenger verifying their identity at a cruise terminal gate with the ship outside",
   },
@@ -70,8 +79,8 @@ const industries = [
     page: "/industries/venues",
     title: "Doors Open, Lines Disappear",
     intro: "Fans link their tickets to their identity and walk in without searching for a phone or paper ticket.",
-    fits: "Gate entry · Ticket validation · VIP and hospitality areas · Staff access · Re-entry",
-    gain: "Faster crowd flow, elimination of ticket touting, stronger venue security, a better fan experience",
+    fits: ["Gate entry", "Ticket validation", "VIP and hospitality areas", "Staff access", "Re-entry"],
+    gain: ["Faster crowd flow", "No ticket touting", "Stronger venue security", "A better fan experience"],
     image: "industry-stadiums",
     alt: "Fan verifying their identity and ticket at a stadium entrance with venue staff",
   },
@@ -81,14 +90,16 @@ const industries = [
     page: "/industries/healthcare",
     title: "Right Patient, Right Care, Every Time",
     intro: "Patients verify their identity once and are recognised instantly at every visit.",
-    fits: "Patient registration · Appointment check-in · Record access · Pharmacy pickup · Restricted areas",
-    gain: "Fewer identity errors, reduced medical fraud, shorter waiting rooms, less admin work, safer patient care",
+    fits: ["Patient registration", "Appointment check-in", "Record access", "Pharmacy pickup", "Restricted areas"],
+    gain: ["Fewer identity errors", "Reduced medical fraud", "Shorter waiting rooms", "Less admin work", "Safer patient care"],
     image: "industry-healthcare",
     alt: "Patient checking in at a hospital reception with identity verification",
   },
 ];
 
 const images = industries.map((ind) => (ind.image ? { src: `/images/enterprises/${ind.image}.webp`, alt: ind.alt } : undefined));
+
+const label = "text-xs leading-4 font-semibold tracking-[0.08em] text-ink-3/60 uppercase";
 
 export default function IndustrySolutions() {
   const [active, setActive] = useState(0);
@@ -107,17 +118,34 @@ export default function IndustrySolutions() {
         </div>
 
         <div id={`${id}-panel`} role="tabpanel" aria-labelledby={`${id}-t${active}`} className="flex w-full flex-col gap-10 lg:flex-row">
-          <div className="flex flex-col justify-between gap-8 lg:h-[417px] lg:flex-1">
-            <div className="flex flex-col gap-4">
-              <h3 className="heading-md max-w-[512px]">{current.title}</h3>
-              <div className="flex flex-col gap-6 text-base leading-6">
-                <p>{current.intro}</p>
-                <p>
-                  <strong className="font-semibold">Where it fits</strong>: {current.fits}
-                </p>
-                <p>
-                  <strong className="font-semibold">What merchants gain</strong>: {current.gain}
-                </p>
+          <div className="flex flex-col justify-between gap-8 lg:h-[568px] lg:flex-1 xl:h-[520px]">
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-3">
+                <h3 className="heading-md max-w-[512px]">{current.title}</h3>
+                <p className="max-w-[440px] text-lg leading-7 text-ink-3/80">{current.intro}</p>
+              </div>
+              <div className="flex flex-col gap-3">
+                <h4 className={label}>Where it fits</h4>
+                <ul className="flex flex-wrap gap-2">
+                  {current.fits.map((fit) => (
+                    <li key={fit} className="rounded-full border border-line bg-white px-3 py-1 text-sm leading-5">
+                      {fit}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="flex flex-col gap-3">
+                <h4 className={label}>What merchants gain</h4>
+                <ul className="grid gap-x-6 gap-y-2.5 text-sm leading-5 sm:grid-cols-2">
+                  {current.gain.map((gain) => (
+                    <li key={gain} className="flex gap-2.5">
+                      <svg aria-hidden viewBox="0 0 16 16" className="size-5 shrink-0 rounded-full bg-sky-100 p-1 text-primary">
+                        <path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                      {gain}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
             <div className="flex flex-wrap gap-4">
@@ -130,7 +158,7 @@ export default function IndustrySolutions() {
           <PhotoSwap
             images={images}
             active={active}
-            className="h-64 rounded-2xl shadow-card-strong md:h-[417px] lg:flex-1"
+            className="h-64 rounded-2xl shadow-card-strong md:h-[417px] lg:h-[568px] lg:flex-1 xl:h-[520px]"
             label={`${current.tab} illustration`}
           />
         </div>
