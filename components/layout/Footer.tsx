@@ -1,12 +1,13 @@
 import Link from "next/link";
+import { DownloadLink } from "@/components/ui/DownloadDialog";
 import Logo from "./Logo";
 
-const primary = [
+const primary: { label: string; href?: string }[] = [
   { label: "For Enterprises", href: "/" },
   // Blogs (app/_blogs) are hidden until the client's articles arrive: { label: "Blogs", href: "/blogs" },
   { label: "Who we are", href: "/who-are-we" },
-  // The store links live on the Users page until the app store URLs arrive
-  { label: "Download the app", href: "/users" },
+  // No href: opens the "Download and Sign Up" dialog with the store badges
+  { label: "Download the app" },
 ];
 const social = [
   { label: "Linkedin", href: "https://www.linkedin.com/company/truepas/" },
@@ -33,9 +34,13 @@ export default function Footer() {
             <ul className={list}>
               {primary.map((l) => (
                 <li key={l.label}>
-                  <Link href={l.href} className="hover:text-primary">
-                    {l.label}
-                  </Link>
+                  {l.href ? (
+                    <Link href={l.href} className="hover:text-primary">
+                      {l.label}
+                    </Link>
+                  ) : (
+                    <DownloadLink className="hover:text-primary">{l.label}</DownloadLink>
+                  )}
                 </li>
               ))}
             </ul>

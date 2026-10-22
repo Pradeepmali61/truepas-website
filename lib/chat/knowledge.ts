@@ -48,7 +48,7 @@ FAQ:
 - Will TruePas share my information without permission? No. Data is shared only with venues and services you explicitly consent to, and you can review or withdraw consent any time in the app.
 - Does it work with existing enterprise systems? Yes: check-in, ticketing, access control and payment systems, without replacing infrastructure.
 
-The app is not in the App Store or Google Play yet; the site's "Download the app" buttons say it is coming soon.
+The app is not in the App Store or Google Play yet; the site's "Download the app" buttons open the App Store and Google Play badges, marked coming soon.
 
 ## About TruePas (Who are we, /who-are-we)
 TruePas began in 2025 with a simple problem: payment and identity systems were verifying cards, not people, causing fragmented identity verification, friction and long waits across hotels, banks, airports and healthcare. TruePas built a biometric layer that puts the person back at the center of authentication. The team brings over four decades of combined enterprise technology leadership across finance, aviation, healthcare and hospitality, specializing in IT infrastructure, cybersecurity, large-scale digital transformation, cloud-native architecture and microservices.

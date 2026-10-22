@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Accordion from "@/components/ui/Accordion";
-import DownloadButton from "@/components/ui/DownloadButton";
 import PhotoSwap from "@/components/ui/PhotoSwap";
 import SectionLabel from "@/components/ui/SectionLabel";
 
@@ -46,7 +45,7 @@ export default function AppFeatures() {
             </div>
           </div>
         </div>
-        <DownloadButton />
+        {/* "Download the app" (Figma) removed on request (22 Oct 2026); the Hero and Use cases keep theirs */}
       </div>
     </section>
   );
