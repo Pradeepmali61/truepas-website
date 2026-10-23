@@ -16,7 +16,7 @@ export default function Hero() {
             </h1>
             <p className="max-w-[468px] text-base leading-6 whitespace-pre-line text-ink-3">
               {
-                "In a tech-savvy world, simplicity is expected and security is non-negotiable. When both coexist seamlessly, that's where revolution happens.\n\nTruePas is the inevitable evolution of identity in a connected world; a single, reusable biometric identity, enrolled once and used across airports, hotels, cruise terminals, car rentals, theme parks, venues, and healthcare. Delivered with privacy, security, and full user control."
+                "In a tech-savvy world, simplicity is expected and security is non-negotiable. When both coexist seamlessly, that's where revolution happens.\n\nTruePas is the inevitable evolution of identity in a connected world: a single, reusable biometric identity, enrolled once and used across airports, hotels, cruise terminals, car rentals, theme parks, venues, and healthcare. Delivered with privacy, security, and full user control."
               }
             </p>
           </div>

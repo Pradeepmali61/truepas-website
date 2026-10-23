@@ -3,7 +3,7 @@ import IconBox from "@/components/ui/IconBox";
 const benefits = [
   { icon: "apps", title: "Unified identity", text: "Single verification that eliminates friction and grants access across multiple platforms. " },
   { icon: "database-off", title: "Contactless Convenience", text: "Access complete verification without reaching for your phone or documents." },
-  { icon: "encrypted", title: "Fraud & Identity-Theft Protection", text: "3D liveness detection blocks spoofing creating a safer environment for every user." },
+  { icon: "encrypted", title: "Fraud & Identity-Theft Protection", text: "3D liveness detection blocks spoofing, creating a safer environment for every user." },
   { icon: "acute", title: "Sub-3-Second Verification", text: "Real-time biometric matching at any touchpoint, no matter the venue." },
   { icon: "home-work", title: "Works in diverse conditions", text: "Verifies accurately from various angles and in low-light conditions, even with masks and glasses." },
   { icon: "sensor-occupied", title: "Efficiency at Scale", text: "A single identity across physical touchpoints that is effortless and eliminates queues." },

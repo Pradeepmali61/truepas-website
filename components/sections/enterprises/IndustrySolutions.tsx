@@ -117,14 +117,20 @@ export default function IndustrySolutions() {
           <Tabs id={id} label="Industries" tabs={industries.map((ind) => ind.tab)} active={active} onChange={setActive} />
         </div>
 
-        <div id={`${id}-panel`} role="tabpanel" aria-labelledby={`${id}-t${active}`} className="flex w-full flex-col gap-10 lg:flex-row">
-          <div className="flex flex-col justify-between gap-8 lg:h-[568px] lg:flex-1 xl:h-[520px]">
-            <div className="flex flex-col gap-6">
-              <div className="flex flex-col gap-3">
-                <h3 className="heading-md max-w-[512px]">{current.title}</h3>
-                <p className="max-w-[440px] text-lg leading-7 text-ink-3/80">{current.intro}</p>
-              </div>
-              <div className="flex flex-col gap-3">
+        {/* Text is centred against the photo with one 32px rhythm, so tabs with less copy don't leave a gap above the CTA */}
+        <div
+          id={`${id}-panel`}
+          role="tabpanel"
+          aria-labelledby={`${id}-t${active}`}
+          className="flex w-full flex-col gap-10 lg:flex-row lg:items-center"
+        >
+          <div className="flex flex-col gap-8 lg:flex-1">
+            <div className="flex flex-col gap-3">
+              <h3 className="heading-md max-w-[512px]">{current.title}</h3>
+              <p className="max-w-[440px] text-lg leading-7 text-ink-3/80">{current.intro}</p>
+            </div>
+            <div className="flex flex-col divide-y divide-line border-y border-line">
+              <div className="flex flex-col gap-3 py-5">
                 <h4 className={label}>Where it fits</h4>
                 <ul className="flex flex-wrap gap-2">
                   {current.fits.map((fit) => (
@@ -134,7 +140,7 @@ export default function IndustrySolutions() {
                   ))}
                 </ul>
               </div>
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-3 py-5">
                 <h4 className={label}>What merchants gain</h4>
                 <ul className="grid gap-x-6 gap-y-2.5 text-sm leading-5 sm:grid-cols-2">
                   {current.gain.map((gain) => (

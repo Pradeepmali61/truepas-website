@@ -11,7 +11,7 @@ const useCases = [
   {
     tab: "Airports",
     title: "From hours in the queue to seconds at the gate.",
-    text: "One glance verifies your identity at every checkpoint, check-in, security, and boarding, cutting wait times substantially and eliminating document fraud.",
+    text: "One glance verifies your identity at every checkpoint (check-in, security, and boarding), cutting wait times and reducing document fraud.",
     image: "use-case-airports",
     alt: "Traveller showing a TruePas travel pass on his phone in an airport terminal",
   },
@@ -65,7 +65,7 @@ export default function UseCases() {
         <div className="flex w-full flex-col items-center gap-10">
           <div className="flex flex-col items-center gap-4">
             <SectionLabel>Use-cases</SectionLabel>
-            <h2 className="heading-xl max-w-[796px] text-center">From Check-In to Check-Out - Your Face Is the Key.</h2>
+            <h2 className="heading-xl max-w-[796px] text-center">From Check-In to Check-Out — Your Face Is the Key.</h2>
           </div>
           <Tabs id={id} label="Use-cases" tabs={useCases.map((u) => u.tab)} active={active} onChange={setActive} />
         </div>

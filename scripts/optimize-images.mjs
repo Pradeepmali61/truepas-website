@@ -93,13 +93,21 @@ const images = {
 // Largest slot is ~540 CSS px wide; 1400px covers 2x screens with room for crops
 const MAX_WIDTH = 1400;
 
+// Source rows to drop from the bottom: the healthcare export has a white band baked into its last 14px
+const cropBottom = { "enterprises/industry-healthcare.webp": 14 };
+
 // Optional filter so a new batch doesn't re-encode (and churn) every existing file, e.g. `industries/airports`
 const only = process.argv[2];
 
 for (const [out, src] of Object.entries(images).filter(([out]) => !only || out.startsWith(only))) {
   const dest = path.join("public/images", out);
   await mkdir(path.dirname(dest), { recursive: true });
-  const resized = sharp(src).resize({ width: MAX_WIDTH, withoutEnlargement: true });
+  let img = sharp(src);
+  if (cropBottom[out]) {
+    const { width, height } = await img.metadata();
+    img = img.extract({ left: 0, top: 0, width, height: height - cropBottom[out] });
+  }
+  const resized = img.resize({ width: MAX_WIDTH, withoutEnlargement: true });
   const info = await (out.endsWith(".png") ? resized.png({ compressionLevel: 9 }) : resized.webp({ quality: 88 })).toFile(dest);
   const before = (await stat(src)).size;
   console.log(`${out.padEnd(36)} ${info.width}x${info.height}  ${(before / 1024) | 0}KB -> ${(info.size / 1024) | 0}KB`);
