@@ -3,7 +3,7 @@
 import Button from "./Button";
 
 // Every demo CTA books through this Calendly event
-const CALENDLY_URL = "https://calendly.com/pradeepmali269/30min";
+const CALENDLY_URL = "https://calendly.com/contact-truepas/30min";
 const WIDGET = "https://assets.calendly.com/assets/external/widget";
 
 type Calendly = { initPopupWidget(options: { url: string }): void };
