@@ -1,6 +1,6 @@
-import DownloadButton from "@/components/ui/DownloadButton";
 import BrandLogo from "@/components/ui/BrandLogo";
 import Photo from "@/components/ui/Photo";
+import { StoreIconLinks } from "@/components/ui/StoreLinks";
 import VideoPlayer from "@/components/ui/VideoPlayer";
 
 export default function Hero() {
@@ -33,17 +33,10 @@ export default function Hero() {
             <BrandLogo height={22} className="h-[22px]" />
             {/* Figma's "4.9 (1.5k reviews)" rating is hidden at the client's request until there are real reviews */}
           </div>
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
-            <div className="flex items-center gap-3">
-              <span className="text-base leading-6 whitespace-nowrap text-[#525455]">Available on</span>
-              <div className="flex items-center gap-3.5">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/icons/group-1.svg" alt="Apple App Store" className="h-5" />
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/icons/group-2.svg" alt="Google Play" className="h-[18px]" />
-              </div>
-            </div>
-            <DownloadButton className="whitespace-nowrap" />
+          {/* Figma's "Download the app" button is removed on request (23 Oct 2026); the store icons link straight to the stores */}
+          <div className="flex items-center gap-3">
+            <span className="text-base leading-6 whitespace-nowrap text-[#525455]">Available on</span>
+            <StoreIconLinks />
           </div>
         </div>
 

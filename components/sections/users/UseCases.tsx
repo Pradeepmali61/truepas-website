@@ -1,9 +1,9 @@
 "use client";
 
 import { useId, useState } from "react";
-import DownloadButton from "@/components/ui/DownloadButton";
 import PhotoSwap from "@/components/ui/PhotoSwap";
 import SectionLabel from "@/components/ui/SectionLabel";
+import { StoreBadges } from "@/components/ui/StoreLinks";
 import Tabs from "@/components/ui/Tabs";
 
 // Only Airports copy exists in Figma; the other use-cases are drafts pending client review
@@ -77,7 +77,8 @@ export default function UseCases() {
               <p className="text-base leading-6">{current.text}</p>
             </div>
             <div className="flex flex-wrap gap-4">
-              <DownloadButton />
+              {/* Store badges replace Figma's "Download the app" button on request (23 Oct 2026) */}
+              <StoreBadges />
               {/* "Read more" (Figma) is hidden until there are use-case articles to link to: <Button variant="secondary">Read more</Button> */}
             </div>
           </div>
