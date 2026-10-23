@@ -11,6 +11,9 @@ export const maxDuration = 60;
 // Flash answers first; when it is overloaded (503) or out of quota (429), Flash-Lite, which has its own quota, answers
 const MODELS = ["gemini-3.8-flash", "gemini-3.5-flash-lite"];
 const unavailable = (err: unknown) => err instanceof ApiError && (err.status === 429 || err.status === 503);
+// Flash sometimes takes the request and then sends nothing, no reply and no error (seen 23 Oct 2026), which held the
+// run until Vercel's 60s limit cut it off. A model that hasn't started answering by then hands over to the next one
+const FIRST_CHUNK_MS = 12_000;
 
 // Public endpoint on a quota-limited free tier, so cap what one visitor can send. The rate limit is per server
 // instance (in memory), a speed bump rather than a guarantee
@@ -132,10 +135,22 @@ export async function POST(request: Request) {
   };
   const startStream = async () => {
     for (const [i, model] of MODELS.entries()) {
+      const last = i === MODELS.length - 1;
+      const stalled = new AbortController();
+      const timer = last ? undefined : setTimeout(() => stalled.abort(), FIRST_CHUNK_MS);
       try {
-        return { model, stream: await ai.models.generateContentStream({ model, contents, config }) };
+        const abortSignal = AbortSignal.any([request.signal, stalled.signal]);
+        const chunks = (await ai.models.generateContentStream({ model, contents, config: { ...config, abortSignal } }))[Symbol.asyncIterator]();
+        const first = await chunks.next();
+        clearTimeout(timer);
+        const stream = (async function* () {
+          if (!first.done) yield first.value;
+          yield* { [Symbol.asyncIterator]: () => chunks };
+        })();
+        return { model, stream };
       } catch (err) {
-        if (!unavailable(err) || i === MODELS.length - 1) throw err;
+        clearTimeout(timer);
+        if (last || request.signal.aborted || !(unavailable(err) || stalled.signal.aborted)) throw err;
       }
     }
     throw new Error("No model available");
@@ -189,7 +204,11 @@ export async function POST(request: Request) {
             const forced = await ai.models.generateContent({
               model,
               contents,
-              config: { ...config, toolConfig: { functionCallingConfig: { mode: FunctionCallingConfigMode.ANY } } },
+              config: {
+                ...config,
+                abortSignal: AbortSignal.any([request.signal, AbortSignal.timeout(FIRST_CHUNK_MS)]),
+                toolConfig: { functionCallingConfig: { mode: FunctionCallingConfigMode.ANY } },
+              },
             });
             const call = forced.functionCalls?.[0];
             if (call?.name) sendCall(call);
