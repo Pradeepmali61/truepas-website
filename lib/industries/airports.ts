@@ -6,7 +6,7 @@ export default {
   intro:
     "Passengers link their identity to their trip before they ever reach the airport. From then on, one glance replaces the passport and boarding pass at every checkpoint.",
   heroImage: "enterprises/industry-airports",
-  heroAlt: "Traveller verifying their identity on a check-in device while airline staff assist",
+  heroAlt: "Traveler verifying their identity on a check-in device while airline staff assist",
   contact: "aviation",
   journey: {
     label: "Passenger Journey",
@@ -17,7 +17,7 @@ export default {
         title: "Link Identity to the Trip",
         text: "Passengers enroll once in the TruePas app or at a kiosk, link their booking and approve sharing with the airline.",
         image: "industries/airports-1-link-trip",
-        alt: "Traveller at home approving identity sharing with their airline in the TruePas app",
+        alt: "Traveler at home approving identity sharing with their airline in the TruePas app",
       },
       {
         title: "Self-Service Check-In",
@@ -39,9 +39,9 @@ export default {
       },
       {
         title: "Lounge Entry",
-        text: "Eligible passengers are recognised at the lounge desk and welcomed by name, with access confirmed instantly.",
+        text: "Eligible passengers are recognized at the lounge desk and welcomed by name, with access confirmed instantly.",
         image: "industries/airports-5-lounge",
-        alt: "Lounge host welcoming a traveller verified by TruePas at the desk",
+        alt: "Lounge host welcoming a traveler verified by TruePas at the desk",
       },
       {
         title: "Gate & Boarding",

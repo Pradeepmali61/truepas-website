@@ -25,7 +25,7 @@ export default function Hero() {
         </div>
         <Photo
           src="/images/enterprises/hero.webp"
-          alt="Traveller verifying her identity with a facial scan at an airport self-service kiosk"
+          alt="Traveler verifying her identity with a facial scan at an airport self-service kiosk"
           className="h-64 rounded-2xl shadow-card-strong md:h-[376px] lg:flex-1"
           eager
         />

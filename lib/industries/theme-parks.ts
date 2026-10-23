@@ -21,7 +21,7 @@ export default {
       },
       {
         title: "Add the Family",
-        text: "Visitors invite the family and friends they are travelling with, so the whole group enters together on arrival.",
+        text: "Visitors invite the family and friends they are traveling with, so the whole group enters together on arrival.",
         image: "industries/theme-parks-2-family",
         alt: "Family on a sofa with the TruePas Invite screen listing every family member as added",
       },
@@ -39,13 +39,13 @@ export default {
       },
       {
         title: "Rides, Shows & Attractions",
-        text: "Visitors are recognised at each attraction entrance, so access is confirmed without tickets or wristbands.",
+        text: "Visitors are recognized at each attraction entrance, so access is confirmed without tickets or wristbands.",
         image: "industries/theme-parks-5-rides",
         alt: "Teenager verified by TruePas at a roller coaster ride entrance",
       },
       {
         title: "Express Lanes & Re-Entry",
-        text: "Express lane holders are recognised at the queue entrance, and guests re-enter the park later with the same glance.",
+        text: "Express lane holders are recognized at the queue entrance, and guests re-enter the park later with the same glance.",
         image: "industries/theme-parks-6-express-reentry",
         alt: "Couple entering the Express lane at golden hour after a TruePas check",
       },

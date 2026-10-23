@@ -4,7 +4,7 @@ export default {
   label: "Car Rentals",
   title: "From Booking to Keys, in Seconds",
   intro:
-    "Renters verify their identity and licence once, then skip the counter at every pickup. Your team spends less time on paperwork and more time getting customers on the road.",
+    "Renters verify their identity and license once, then skip the counter at every pickup. Your team spends less time on paperwork and more time getting customers on the road.",
   heroImage: "enterprises/industry-car-rentals",
   heroAlt: "Customer verifying their identity at a car rental counter as the agent hands over the keys",
   contact: "car-rentals",
@@ -15,15 +15,15 @@ export default {
     steps: [
       {
         title: "Book and Link Once",
-        text: "Renters enroll in the TruePas app or at a kiosk, link their licence to the booking and approve sharing with you.",
+        text: "Renters enroll in the TruePas app or at a kiosk, link their license to the booking and approve sharing with you.",
         image: "industries/car-rentals-1-book-link",
         alt: "Renter on a sofa approving identity sharing for a car booking in the TruePas app",
       },
       {
-        title: "Licence & ID Verification",
+        title: "License & ID Verification",
         text: "A quick face check against the renter's ID confirms who is driving before they ever reach your branch.",
         image: "industries/car-rentals-2-licence-check",
-        alt: "TruePas app confirming a liveness check and licence verification, licence and keys on the table",
+        alt: "TruePas app confirming a liveness check and license verification, license and keys on the table",
       },
       {
         title: "Skip the Queue",
@@ -39,7 +39,7 @@ export default {
       },
       {
         title: "Exit Gate",
-        text: "Drivers are recognised at the lot barrier, which lifts automatically once the rental is confirmed.",
+        text: "Drivers are recognized at the lot barrier, which lifts automatically once the rental is confirmed.",
         image: "industries/car-rentals-5-exit-gate",
         alt: "Driver verified by a TruePas terminal as the car park exit barrier rises",
       },

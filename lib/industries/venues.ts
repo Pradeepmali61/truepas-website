@@ -21,7 +21,7 @@ export default {
       },
       {
         title: "Ticket Validation",
-        text: "Each ticket belongs to a verified person, which shuts out touting and unauthorised resale before the event.",
+        text: "Each ticket belongs to a verified person, which shuts out scalping and unauthorized resale before the event.",
         image: "industries/venues-2-ticket-validation",
         alt: "Fan outside the stadium at dusk with a ticket linked to their identity in the TruePas app",
       },
@@ -33,7 +33,7 @@ export default {
       },
       {
         title: "VIP & Hospitality Areas",
-        text: "Premium guests are recognised on arrival and welcomed by name, with access confirmed without a lanyard or list.",
+        text: "Premium guests are recognized on arrival and welcomed by name, with access confirmed without a lanyard or list.",
         image: "industries/venues-4-vip",
         alt: "Host welcoming a guest verified by TruePas at a stadium hospitality lounge",
       },

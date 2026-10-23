@@ -4,7 +4,7 @@ export default {
   label: "Healthcare Providers",
   title: "Right Patient, Right Care, Every Time",
   intro:
-    "Patients verify their identity once and are recognised instantly at every visit. From registration to pharmacy pickup, one glance replaces the forms, cards and repeated questions.",
+    "Patients verify their identity once and are recognized instantly at every visit. From registration to pharmacy pickup, one glance replaces the forms, cards and repeated questions.",
   heroImage: "enterprises/industry-healthcare",
   heroAlt: "Patient checking in at a hospital reception with identity verification",
   contact: "healthcare",

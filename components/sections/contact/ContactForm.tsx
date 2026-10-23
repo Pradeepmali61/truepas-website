@@ -63,7 +63,7 @@ const statusStyles = {
 const industryHints: Record<string, string> = {
   Aviation: "Which touchpoints do you want to streamline? e.g. check-in, security, lounge entry or boarding",
   Hospitality: "Which touchpoints do you want to streamline? e.g. pre-arrival check-in, room access or check-out",
-  "Car Rentals": "Which touchpoints do you want to streamline? e.g. licence verification, counter-free pickup or returns",
+  "Car Rentals": "Which touchpoints do you want to streamline? e.g. license verification, counter-free pickup or returns",
   "Theme Parks": "Which touchpoints do you want to streamline? e.g. park entry, season passes or ride access",
   "Cruise Operations": "Which touchpoints do you want to streamline? e.g. terminal check-in, embarkation or cabin entry",
   "Stadiums & Entertainment Venues": "Which touchpoints do you want to streamline? e.g. gate entry, VIP areas or staff access",

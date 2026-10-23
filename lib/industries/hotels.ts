@@ -23,11 +23,11 @@ export default {
         title: "Pre-Arrival Check-In",
         text: "Guests confirm their details from their phone before they travel, so arrival is quick and friendly.",
         image: "industries/hotels-2-pre-arrival",
-        alt: "Traveller in a taxi seeing their completed hotel check-in in the TruePas app",
+        alt: "Traveler in a taxi seeing their completed hotel check-in in the TruePas app",
       },
       {
         title: "Front Desk Welcome",
-        text: "Guests are recognised and greeted by name at the desk, with no ID or card needed to hand over.",
+        text: "Guests are recognized and greeted by name at the desk, with no ID or card needed to hand over.",
         image: "industries/hotels-3-front-desk",
         alt: "Receptionist welcoming a guest verified by TruePas at a marble front desk",
       },

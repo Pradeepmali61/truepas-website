@@ -21,7 +21,7 @@ export const posts: BlogPost[] = [
     date: "2026-10-01",
     readMinutes: 4,
     image: "/images/enterprises/step-enroll.webp",
-    imageAlt: "Traveller holding a phone showing his TruePas digital identity",
+    imageAlt: "Traveler holding a phone showing his TruePas digital identity",
     body: [
       { text: "Hotels, airports, car rental desks and venues each ask for the same proof of identity, again and again. Customers queue, staff check documents by hand, and the business learns nothing it didn't already know." },
       { heading: "Verify once, reuse everywhere", text: "With TruePas, a customer enrolls once in the app: their ID document is verified and linked to a secure face template. At any TruePas-enabled location, a quick face scan confirms it is really them, in seconds." },
@@ -60,7 +60,7 @@ export const posts: BlogPost[] = [
       { heading: "2. A consistent experience", text: "Every location follows the same verification flow, so guests know what to expect." },
       { heading: "3. Staff focus on service", text: "With identity checks automated, teams can spend their time helping guests." },
       { heading: "4. Fewer errors", text: "Automated matching removes the mistakes that come with manual document checks." },
-      { heading: "5. Recognition that feels personal", text: "Guests are recognised and welcomed by name, from the first visit to the hundredth." },
+      { heading: "5. Recognition that feels personal", text: "Guests are recognized and welcomed by name, from the first visit to the hundredth." },
     ],
   },
 ];

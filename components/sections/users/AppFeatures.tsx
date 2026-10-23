@@ -8,7 +8,7 @@ import SectionLabel from "@/components/ui/SectionLabel";
 // Only the first item has copy in Figma; the rest are drafts pending client review
 const features = [
   { title: "3D Face Scan Authentication", content: "One selfie to securely verify your identity at every authorized checkpoint.", image: "feature-face-scan", alt: "TruePas app scanning a face to verify identity" },
-  { title: "Instant Document Access", content: "Keep your verified ID documents in one secure place, ready whenever a checkpoint needs them.", image: "feature-documents", alt: "TruePas app document wallet with a passport, licence and other IDs" },
+  { title: "Instant Document Access", content: "Keep your verified ID documents in one secure place, ready whenever a checkpoint needs them.", image: "feature-documents", alt: "TruePas app document wallet with a passport, license and other IDs" },
   { title: "Add / Invite Family & Friends", content: "Invite the people you travel with so everyone moves through checkpoints together.", image: "feature-invite", alt: "TruePas app screen for inviting family and friends" },
   { title: "Track Recent Activity", content: "See where and when your identity was used, with a clear history of every verification.", image: "feature-activity", alt: "TruePas app timeline of recent verifications and check-ins" },
   { title: "Biometric Enrollment & ID Verification", content: "Enroll your face and verify your ID in minutes, from the app or at a partner kiosk.", image: "feature-enrollment", alt: "TruePas app biometric enrollment and ID verification screen" },

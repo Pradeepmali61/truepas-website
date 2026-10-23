@@ -22,7 +22,7 @@ export default function Hero() {
           </div>
           <Photo
             src="/images/users/hero.webp"
-            alt="Traveller holding a phone with a TruePas airport travel pass in the terminal"
+            alt="Traveler holding a phone with a TruePas airport travel pass in the terminal"
             className="h-64 rounded-2xl shadow-card-strong md:h-[376px] lg:flex-1"
             eager
           />
