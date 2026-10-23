@@ -1,15 +1,12 @@
 import Photo from "@/components/ui/Photo";
-import SectionLabel from "@/components/ui/SectionLabel";
 
 export default function Team() {
   return (
     <section className="section-pad bg-white">
       <div className="container-page flex flex-col gap-12 lg:gap-20">
-        <div className="flex flex-col items-center gap-4">
-          <SectionLabel>Our Vision</SectionLabel>
-          {/* Was "About Us" / "The Team Behind TruePas" (Figma); reframed as the vision on request (23 Oct 2026), vision line pending client sign-off */}
-          <h2 className="heading-lg text-center">Where TruePas Is Going</h2>
-        </div>
+        {/* Was "About Us" / "The Team Behind TruePas" (Figma); reframed as the vision on request (23 Oct 2026), vision line pending
+            client sign-off. The label pill was dropped (QA TP-016) so "Our Vision" only names the nav link */}
+        <h2 className="heading-lg text-center">Where TruePas Is Going</h2>
         <div className="flex flex-col gap-10 lg:flex-row">
           <Photo
             src="/images/enterprises/team.webp"

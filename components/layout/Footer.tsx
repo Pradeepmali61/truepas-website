@@ -5,7 +5,7 @@ import Logo from "./Logo";
 const primary: { label: string; href?: string }[] = [
   { label: "For Enterprises", href: "/" },
   // Blogs (app/_blogs) are hidden until the client's articles arrive: { label: "Blogs", href: "/blogs" },
-  { label: "Who we are", href: "/who-are-we" },
+  { label: "Our Vision", href: "/who-are-we" },
   // No href: opens the "Download and Sign Up" dialog with the store badges
   { label: "Download the app" },
 ];

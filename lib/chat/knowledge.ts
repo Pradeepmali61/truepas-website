@@ -2,7 +2,7 @@ import "server-only";
 import { industries } from "@/lib/industries";
 
 // System prompt for the chat assistant (app/api/chat/route.ts). The site copy below is condensed from the
-// Enterprises, Users, Who are we and Contact pages; keep it in step when that copy changes. Industry journeys come
+// Enterprises, Users, Our Vision and Contact pages; keep it in step when that copy changes. Industry journeys come
 // straight from lib/industries. Left out on purpose: the "4.9 (1.5k reviews)" badge (placeholder) and the hidden
 // Blogs and team member sections
 
@@ -50,7 +50,7 @@ FAQ:
 
 The app is not in the App Store or Google Play yet; the site's "Download the app" buttons open the App Store and Google Play badges, marked coming soon.
 
-## About TruePas (Who are we, /who-are-we)
+## About TruePas (Our Vision, /who-are-we)
 Vision: a world where your face is your one trusted identity, at every airport, hotel, venue and hospital, with no queues and full control over your data. TruePas began in 2025 with a simple problem: payment and identity systems were verifying cards, not people, causing fragmented identity verification, friction and long waits across hotels, banks, airports and healthcare. TruePas built a biometric layer that puts the person back at the center of authentication. The team brings over four decades of combined enterprise technology leadership across finance, aviation, healthcare and hospitality, specializing in IT infrastructure, cybersecurity, large-scale digital transformation, cloud-native architecture and microservices.
 
 ## Contacting TruePas (/contact)
