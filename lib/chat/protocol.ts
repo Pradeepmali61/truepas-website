@@ -33,9 +33,32 @@ export type AgentEvent =
   | { type: "TOOL_CALL_ARGS"; toolCallId: string; delta: string }
   | { type: "TOOL_CALL_END"; toolCallId: string };
 
+/** How many recent messages a run carries (the blueprint's context memory, 7 exchanges); the browser sends at most
+ *  this many and the route keeps at most this many */
+export const contextWindow = 14;
+
 /** An action note the model sometimes writes into its text instead of calling a tool, e.g. `[Action: open_page {...} -> ...]`.
  *  Also matches an unclosed note at the end of a reply that is still streaming */
 export const actionNote = /\s*\[(?:Action|Website)\b[^\]]*(?:\]|$)/gi;
+
+/** Why an action can't run, or null when its name and arguments are on the allow-lists. The route checks each call
+ *  before sending it and the browser again before running it, so a manipulated reply can't open anything else */
+export function actionError(name: string, args: Record<string, unknown>): string | null {
+  switch (name) {
+    case "book_demo":
+      return null;
+    case "open_contact_form": {
+      const { inquiryType, industry } = args;
+      if (typeof inquiryType !== "string" || !inquiryTypes.includes(inquiryType)) return "unknown inquiry type";
+      if (industry !== undefined && (typeof industry !== "string" || !industries.includes(industry))) return "unknown industry";
+      return null;
+    }
+    case "open_page":
+      return typeof args.page === "string" && publicRoutes.includes(args.page) ? null : "unknown page";
+    default:
+      return "unknown action";
+  }
+}
 
 // Frontend tools: the assistant asks for them and the browser runs them (components/layout/ChatWidget.tsx)
 export const tools: Tool[] = [

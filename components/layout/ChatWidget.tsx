@@ -5,18 +5,33 @@ import { useRouter } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import { ChatIcon } from "@/components/ui/Button";
 import { openDemoBooking } from "@/components/ui/BookDemoButton";
-import { contactHref, industries, inquiryTypes } from "@/lib/contact";
-import { actionNote, tools, type AgentEvent, type Message, type ToolCall } from "@/lib/chat/protocol";
-import { publicRoutes } from "@/lib/site";
+import ChatMarkdown from "@/components/layout/ChatMarkdown";
+import { contactHref } from "@/lib/contact";
+import { actionError, actionNote, contextWindow, tools, type AgentEvent, type Message, type ToolCall } from "@/lib/chat/protocol";
 
 // Floating chat assistant on every page (rendered by app/layout.tsx when GEMINI_API_KEY is set). It is an AG-UI
 // client: each visitor message starts a run on /api/chat, and the assistant's actions (tool calls) run here once
-// the run finishes. Not in Figma; added at the client's request
+// the run finishes. Not in Figma; added at the client's request. The look (capsule launcher, header with status and
+// reset, bubbles, chips) and the per-tab history follow the chatbot blueprint the team adopted (23 Oct 2026), in
+// TruePas colours
 
 type Assistant = Extract<Message, { role: "assistant" }>;
 
 const suggestions = ["What is TruePas?", "How do I enroll?", "Which systems does it integrate with?", "Book a demo"];
 const focus = "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+const headerButton = `flex size-[30px] items-center justify-center rounded-lg border border-line bg-sky-50 text-ink-3 transition-colors disabled:opacity-40 ${focus}`;
+
+// The conversation survives reloads and page changes in this tab (sessionStorage), and is gone when the tab closes
+const STORAGE_KEY = "truepas-chat-v1";
+const STORED_MESSAGES = 50;
+
+function loadChat(): { threadId: string; messages: Message[] } {
+  try {
+    const saved = JSON.parse(sessionStorage.getItem(STORAGE_KEY) ?? "null");
+    if (saved && typeof saved.threadId === "string" && Array.isArray(saved.messages)) return saved;
+  } catch {}
+  return { threadId: "", messages: [] };
+}
 
 const newId = () => crypto.randomUUID();
 
@@ -28,25 +43,22 @@ function runAction(call: ToolCall, navigate: (href: string) => void): { content:
   } catch {
     return { content: "", error: "invalid arguments" };
   }
+  const error = actionError(call.function.name, args);
+  if (error) return { content: "", error };
   switch (call.function.name) {
     case "book_demo":
       openDemoBooking();
       return { content: "Opened the demo booking calendar" };
     case "open_contact_form": {
-      const { inquiryType, industry } = args;
-      if (typeof inquiryType !== "string" || !inquiryTypes.includes(inquiryType)) return { content: "", error: "unknown inquiry type" };
-      if (industry !== undefined && (typeof industry !== "string" || !industries.includes(industry))) return { content: "", error: "unknown industry" };
+      const { inquiryType, industry } = args as { inquiryType: string; industry?: string };
       navigate(contactHref({ inquiryType, industry }));
       return { content: `Opened the contact form (${[inquiryType, industry].filter(Boolean).join(", ")})` };
     }
-    case "open_page": {
-      const { page } = args;
-      if (typeof page !== "string" || !publicRoutes.includes(page)) return { content: "", error: "unknown page" };
+    default: {
+      const page = args.page as string;
       navigate(page);
       return { content: `Opened ${page === "/" ? "the home page" : page}` };
     }
-    default:
-      return { content: "", error: "unknown action" };
   }
 }
 
@@ -72,15 +84,26 @@ async function readEvents(body: ReadableStream<Uint8Array>, onEvent: (e: AgentEv
   }
 }
 
+export function OnlineDot({ className = "" }: { className?: string }) {
+  return (
+    <span className={`relative flex ${className}`} aria-hidden>
+      <span className="absolute inline-flex size-full animate-ping rounded-full bg-online opacity-60 motion-reduce:hidden" />
+      <span className="relative size-full rounded-full border-2 border-white bg-online" />
+    </span>
+  );
+}
+
 export default function ChatWidget() {
   const id = useId();
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
+  // The panel only renders once opened, so reading the saved chat on the first client render can't cause a mismatch
+  const [saved] = useState(() => (typeof window === "undefined" ? null : loadChat()));
+  const [messages, setMessages] = useState<Message[]>(saved?.messages ?? []);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-  const threadId = useRef("");
+  const threadId = useRef(saved?.threadId ?? "");
   const abort = useRef<AbortController | null>(null);
   const launcher = useRef<HTMLButtonElement>(null);
   const field = useRef<HTMLTextAreaElement>(null);
@@ -92,17 +115,37 @@ export default function ChatWidget() {
   }, [open]);
   useEffect(() => {
     log.current?.scrollTo({ top: log.current.scrollHeight });
-  }, [messages, busy, error]);
+  }, [messages, busy, error, open]);
+  // Saved between runs only, so a reload mid-reply doesn't keep a half-written answer
+  useEffect(() => {
+    if (busy) return;
+    try {
+      if (messages.length) sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ threadId: threadId.current, messages: messages.slice(-STORED_MESSAGES) }));
+      else sessionStorage.removeItem(STORAGE_KEY);
+    } catch {}
+  }, [messages, busy]);
 
   const close = () => {
     setOpen(false);
     launcher.current?.focus();
   };
 
-  // On phones the panel covers the page, so it steps aside when an action changes what's behind it
+  // On phones the panel covers the page, so it steps aside when an action or a link changes what's behind it
+  const stepAside = () => {
+    if (window.matchMedia("(width < 48rem)").matches) setOpen(false);
+  };
   const navigate = (href: string) => {
     router.push(href);
-    if (window.matchMedia("(width < 48rem)").matches) setOpen(false);
+    stepAside();
+  };
+
+  const reset = () => {
+    abort.current?.abort();
+    threadId.current = "";
+    setMessages([]);
+    setInput("");
+    setError("");
+    field.current?.focus();
   };
 
   async function send(text: string) {
@@ -124,7 +167,7 @@ export default function ChatWidget() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ threadId: threadId.current, runId: newId(), messages: history, tools, context: [] }),
+        body: JSON.stringify({ threadId: threadId.current, runId: newId(), messages: history.slice(-contextWindow), tools, context: [] }),
         signal: abort.current.signal,
       });
       if (!res.ok || !res.body) {
@@ -171,6 +214,8 @@ export default function ChatWidget() {
 
   const empty = messages.length === 0;
   const waiting = busy && messages.at(-1)?.role === "user";
+  const bubble = "max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-[21px]";
+  const botBubble = `${bubble} self-start rounded-tl-[4px] border border-sky-100 bg-sky-50 text-ink-2`;
 
   return (
     <>
@@ -181,17 +226,25 @@ export default function ChatWidget() {
         aria-expanded={open}
         aria-controls={`${id}-panel`}
         aria-label={open ? "Close the TruePas Assistant" : "Chat with the TruePas Assistant"}
-        className={`fixed right-5 bottom-5 z-40 flex size-14 items-center justify-center rounded-full bg-primary text-white shadow-card-strong transition-transform hover:scale-105 md:right-8 md:bottom-8 ${focus} ${open ? "max-md:hidden" : ""}`}
+        className={`group fixed right-5 bottom-5 z-40 flex items-center gap-3 rounded-full border border-primary/20 bg-white py-2 pr-[18px] pl-2.5 text-left shadow-[0_4px_6px_-1px_rgba(0,0,0,0.04),0_12px_28px_-4px_rgba(0,122,255,0.16)] transition-[translate,scale,border-color,box-shadow] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 hover:scale-[1.015] hover:border-primary/50 hover:shadow-[0_18px_36px_-4px_rgba(0,122,255,0.24)] motion-reduce:transition-none md:right-8 md:bottom-8 ${focus} ${open ? "max-md:hidden" : ""}`}
       >
-        {open ? (
-          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
-            <path d="M6 6l12 12M18 6 6 18" />
-          </svg>
-        ) : (
-          <span className="scale-125">
+        <span className="relative flex size-9 shrink-0 items-center justify-center rounded-full border-[1.5px] border-sky-100 bg-sky-50 text-primary">
+          {open ? (
+            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
+              <path d="M6 6l12 12M18 6 6 18" />
+            </svg>
+          ) : (
             <ChatIcon />
-          </span>
-        )}
+          )}
+          <OnlineDot className="absolute right-0 bottom-0 size-2.5" />
+        </span>
+        <span className="flex flex-col">
+          <span className="text-[10px] leading-3 font-bold tracking-[0.06em] text-primary uppercase">AI Assistant</span>
+          <span className="text-sm leading-5 font-extrabold text-ink">{open ? "Close chat" : "Ask Questions"}</span>
+        </span>
+        <span aria-hidden className="text-sm leading-5 text-primary">
+          ✦
+        </span>
       </button>
 
       {open && (
@@ -200,72 +253,91 @@ export default function ChatWidget() {
           role="dialog"
           aria-labelledby={`${id}-title`}
           onKeyDown={(e) => e.key === "Escape" && close()}
-          className="fixed inset-0 z-[60] flex flex-col bg-white md:inset-auto md:right-8 md:bottom-26 md:h-[min(600px,calc(100svh-140px))] md:w-[400px] md:overflow-hidden md:rounded-2xl md:border md:border-line md:shadow-card-strong"
+          className="fixed inset-0 z-[60] flex flex-col bg-white transition-[opacity,translate,scale] duration-250 ease-[cubic-bezier(0.16,1,0.3,1)] starting:translate-y-5 starting:scale-[0.96] starting:opacity-0 motion-reduce:transition-none md:inset-auto md:right-8 md:bottom-[100px] md:h-[min(600px,calc(100svh-130px))] md:w-[390px] md:overflow-hidden md:rounded-[20px] md:border md:border-line md:shadow-[0_20px_45px_-10px_rgba(15,23,42,0.16)]"
         >
-          <div className="flex items-center gap-3 bg-linear-to-b from-sky-200 to-sky-50 px-5 py-4">
-            <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary text-white">
-              <ChatIcon />
-            </span>
-            <div className="min-w-0 flex-1">
-              <h2 id={`${id}-title`} className="text-base leading-6 font-semibold">
-                TruePas Assistant
-              </h2>
-              <p className="text-xs leading-4 text-ink-3">AI assistant, answers may be inaccurate</p>
+          <div className="flex items-center justify-between gap-3 border-b border-line/70 bg-white/95 px-[18px] py-4 backdrop-blur-lg">
+            <div className="flex min-w-0 items-center gap-2.5">
+              <span className="flex size-[38px] shrink-0 items-center justify-center rounded-full bg-sky-100 text-[13px] leading-4 font-extrabold text-primary">
+                AI
+              </span>
+              <div className="min-w-0">
+                <h2 id={`${id}-title`} className="flex items-center gap-1.5 text-[15px] leading-5 font-extrabold">
+                  TruePas Assistant
+                  <span aria-hidden className="flex size-4 items-center justify-center rounded-full bg-primary text-[9px] leading-none text-white">
+                    ✓
+                  </span>
+                </h2>
+                <p className="mt-0.5 flex items-center gap-1.5 text-[11px] leading-4 text-ink-3/70">
+                  <span className="inline-flex items-center gap-1 rounded-full border border-[#a7f3d0] bg-[#ecfdf5] px-1.5 text-[10px] leading-4 font-bold text-[#059669]">
+                    <span aria-hidden className="size-1 rounded-full bg-online" />
+                    Online
+                  </span>
+                  <span className="truncate">• AI, may be inaccurate</span>
+                </p>
+              </div>
             </div>
-            <button
-              type="button"
-              onClick={close}
-              aria-label="Close the assistant"
-              className={`flex size-10 items-center justify-center rounded-lg text-ink-3 hover:bg-white/60 ${focus}`}
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <path d="M6 6l12 12M18 6 6 18" />
-              </svg>
-            </button>
+            <div className="flex shrink-0 gap-1">
+              <button type="button" onClick={reset} disabled={empty} aria-label="Start a new chat" title="New chat" className={`${headerButton} hover:bg-sky-100 hover:text-ink`}>
+                <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M3 12a9 9 0 1 0 3-6.7L3 8" />
+                  <path d="M3 3v5h5" />
+                </svg>
+              </button>
+              <button type="button" onClick={close} aria-label="Close the assistant" title="Close" className={`${headerButton} hover:bg-[#fee2e2] hover:text-danger`}>
+                <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+                  <path d="M6 6l12 12M18 6 6 18" />
+                </svg>
+              </button>
+            </div>
           </div>
 
-          <div ref={log} role="log" aria-live="polite" aria-busy={busy} className="flex flex-1 flex-col gap-3 overflow-y-auto px-5 py-4">
-            <p className="max-w-[85%] rounded-2xl rounded-tl-sm bg-sky-50 px-4 py-3 text-sm leading-[22px] text-ink-3">
-              Hi! I can answer questions about TruePas for businesses and app users, or help you book a demo.
-            </p>
+          <div ref={log} role="log" aria-live="polite" aria-busy={busy} className="flex flex-1 flex-col gap-3 overflow-y-auto p-4">
+            <p className={botBubble}>Hi there! 👋 Ask me anything about TruePas, for businesses or app users, or I can help you book a demo.</p>
             {empty && (
-              <ul className="flex flex-wrap gap-2" aria-label="Suggested questions">
+              <ul className="flex flex-col gap-1.5" aria-label="Suggested questions">
                 {suggestions.map((s) => (
                   <li key={s}>
                     <button
                       type="button"
                       onClick={() => send(s)}
-                      className={`rounded-full border border-line-2 bg-white px-3 py-1.5 text-sm leading-5 text-ink-3 hover:border-primary hover:text-primary ${focus}`}
+                      className={`flex w-full items-center justify-between gap-2 rounded-[10px] border border-line bg-white px-3 py-2 text-left text-[13px] leading-5 text-ink-3 transition-[background-color,border-color,color,translate] duration-150 hover:translate-x-0.5 hover:border-primary hover:bg-sky-50 hover:text-primary motion-reduce:transition-none ${focus}`}
                     >
                       {s}
+                      <span aria-hidden>→</span>
                     </button>
                   </li>
                 ))}
               </ul>
             )}
-            {messages.map((m) =>
-              m.role === "user" ? (
-                <p key={m.id} className="max-w-[85%] self-end rounded-2xl rounded-tr-sm bg-primary px-4 py-3 text-sm leading-[22px] whitespace-pre-wrap text-white">
-                  {m.content}
-                </p>
-              ) : m.role === "assistant" ? (
-                // Safety net: an action note the model wrote as text is never shown
-                m.content?.replace(actionNote, "").trim() && (
-                  <p key={m.id} className="max-w-[85%] rounded-2xl rounded-tl-sm bg-sky-50 px-4 py-3 text-sm leading-[22px] whitespace-pre-wrap text-ink-3">
-                    {m.content.replace(actionNote, "").trim()}
+            {messages.map((m) => {
+              if (m.role === "user")
+                return (
+                  <p key={m.id} className={`${bubble} self-end rounded-tr-[4px] bg-primary whitespace-pre-wrap text-white`}>
+                    {m.content}
                   </p>
-                )
-              ) : (
+                );
+              if (m.role === "assistant") {
+                // Safety net: an action note the model wrote as text is never shown
+                const text = m.content?.replace(actionNote, "").trim();
+                return (
+                  text && (
+                    <div key={m.id} className={botBubble}>
+                      <ChatMarkdown text={text} onLink={stepAside} />
+                    </div>
+                  )
+                );
+              }
+              return (
                 <p key={m.id} className={`flex items-center gap-1.5 text-xs leading-4 ${m.error ? "text-danger" : "text-ink-3"}`}>
                   <span aria-hidden>{m.error ? "!" : "✓"}</span>
                   {m.error ? "That action couldn't be completed." : m.content}
                 </p>
-              ),
-            )}
+              );
+            })}
             {waiting && (
-              <p className="flex w-fit gap-1 rounded-2xl rounded-tl-sm bg-sky-50 px-4 py-4" aria-label="The assistant is typing">
+              <p className="flex w-fit gap-1 rounded-2xl rounded-tl-[4px] border border-sky-100 bg-sky-50 px-4 py-4" aria-label="The assistant is typing">
                 {[0, 150, 300].map((delay) => (
-                  <span key={delay} className="size-1.5 animate-bounce rounded-full bg-ink-3/50" style={{ animationDelay: `${delay}ms` }} />
+                  <span key={delay} className="size-1.5 animate-bounce rounded-full bg-primary/50" style={{ animationDelay: `${delay}ms` }} />
                 ))}
               </p>
             )}
@@ -281,7 +353,7 @@ export default function ChatWidget() {
               e.preventDefault();
               send(input);
             }}
-            className="border-t border-line px-4 pt-3 pb-[max(12px,env(safe-area-inset-bottom))]"
+            className="border-t border-line/70 bg-white px-3 pt-3 pb-[max(12px,env(safe-area-inset-bottom))]"
           >
             <div className="flex items-end gap-2">
               <label htmlFor={`${id}-input`} className="sr-only">
@@ -300,21 +372,21 @@ export default function ChatWidget() {
                     send(input);
                   }
                 }}
-                placeholder="Ask about TruePas…"
-                className="max-h-32 min-h-11 flex-1 resize-none rounded-lg border border-line-2 px-3.5 py-2.5 text-base leading-6 outline-none [field-sizing:content] focus:border-primary focus:shadow-[0_0_0_3px_rgba(0,122,255,0.12)]"
+                placeholder="Ask a question…"
+                className="max-h-32 min-h-10 flex-1 resize-none rounded-xl border border-line px-3.5 py-2 text-base leading-6 transition-colors outline-none [field-sizing:content] focus:border-primary md:text-sm md:leading-6"
               />
               <button
                 type="submit"
                 disabled={busy || !input.trim()}
                 aria-label="Send"
-                className={`flex size-11 shrink-0 items-center justify-center rounded-lg bg-primary text-white transition-colors hover:bg-[#006ae0] disabled:cursor-not-allowed disabled:opacity-50 ${focus}`}
+                className={`flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 ${focus}`}
               >
-                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden fill="currentColor">
+                <svg width="17" height="17" viewBox="0 0 24 24" aria-hidden fill="currentColor">
                   <path d="M3.4 20.4 21 12 3.4 3.6 3.39 10.13 15 12 3.39 13.87z" />
                 </svg>
               </button>
             </div>
-            <p className="mt-2 text-[11px] leading-4 text-ink-3/80">
+            <p className="mt-2 text-[11px] leading-4 text-ink-3/70">
               Please don&apos;t share sensitive personal details. Messages are processed by Google Gemini and may be used to improve it; see our{" "}
               <Link href="/privacy-policy" className="underline hover:text-primary">
                 Privacy Policy
