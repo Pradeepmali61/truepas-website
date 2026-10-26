@@ -10,8 +10,8 @@ import Logo from "./Logo";
 const links = [
   { label: "For Enterprises", href: "/" },
   { label: "For Users", href: "/users" },
-  { label: "Our Vision", href: "/who-are-we" },
   { label: "Businesses", href: "/businesses" },
+  { label: "Our Vision", href: "/who-are-we" },
   // Blogs (app/_blogs) are hidden until the client's articles arrive: { label: "Blogs", href: "/blogs" }
 ];
 

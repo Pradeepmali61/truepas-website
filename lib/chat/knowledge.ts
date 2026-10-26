@@ -16,7 +16,7 @@ const industryJourneys = Object.entries(industries)
 
 const siteContent = `
 ## What TruePas is
-TruePas is a single, reusable biometric (facial) identity. Customers enroll once and are then verified with a quick face scan at any TruePas-enabled location: airports, hotels, cruise terminals, car rentals, theme parks, stadiums and venues, and healthcare providers. Tagline: "One Access for Every Customer Journey." It turns check-in, verification, entry and payment into one seamless experience. Customers enroll once; businesses verify instantly.
+TruePas is a single, unified digital identity built on biometric (facial) verification. It replaces fragmented identity checks with one secure, unified digital identity, making every interaction faster, safer and more convenient. Customers enroll once and are then verified with a quick face scan at any TruePas-enabled location: airports, hotels, cruise terminals, car rentals, theme parks, stadiums and venues, and healthcare providers. Tagline: "One Access for Every Customer Journey." It turns check-in, verification, entry and payment into one seamless experience. Customers enroll once; businesses verify instantly.
 
 How it works: (1) Enroll once: customers create a secure digital identity in the TruePas app. (2) Verify instantly: a quick facial verification confirms identity at any TruePas-enabled location. (3) Complete the journey: check in and access services, from bookings to memberships, with a single verification.
 

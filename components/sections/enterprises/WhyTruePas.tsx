@@ -17,7 +17,7 @@ export default function WhyTruePas() {
           <div className="flex flex-col gap-6 lg:w-[532px] lg:shrink-0">
             <h2 className="heading-xl">Why TruePas</h2>
             <p className="text-base leading-6 whitespace-pre-line text-ink-3">
-              {"TruePas replaces fragmented identity checks with one secure, reusable digital identity, making every interaction faster, safer, and more convenient.\n\nWhether customers are checking into a hotel, boarding a flight or entering a venue, TruePas helps businesses verify identity in seconds."}
+              {"TruePas replaces fragmented identity checks with one secure, unified digital identity, making every interaction faster, safer, and more convenient.\n\nWhether customers are checking into a hotel, boarding a flight or entering a venue, TruePas helps businesses verify identity in seconds."}
             </p>
           </div>
           <div className="flex h-40 items-center justify-center rounded-lg bg-sky-50 md:h-60 lg:flex-1">
