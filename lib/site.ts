@@ -12,6 +12,7 @@ export const publicRoutes = [
   "/",
   "/users",
   "/who-are-we",
+  "/businesses",
   "/contact",
   ...Object.keys(industries).map((slug) => `/industries/${slug}`),
   "/privacy-policy",

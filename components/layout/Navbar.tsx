@@ -11,14 +11,17 @@ const links = [
   { label: "For Enterprises", href: "/" },
   { label: "For Users", href: "/users" },
   { label: "Our Vision", href: "/who-are-we" },
+  { label: "Businesses", href: "/businesses" },
   // Blogs (app/_blogs) are hidden until the client's articles arrive: { label: "Blogs", href: "/blogs" }
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
-  // Child routes (e.g. /blogs/<slug>) keep their parent pill active; industry pages (/industries/<slug>) belong to For Enterprises
+  // Child routes (e.g. /blogs/<slug>) keep their parent pill active; industry pages (/industries/<slug>) belong to Businesses
   const isActive = (href: string) =>
-    href === pathname || (href === "/" ? pathname.startsWith("/industries/") : pathname.startsWith(`${href}/`));
+    href === pathname ||
+    (href !== "/" && pathname.startsWith(`${href}/`)) ||
+    (href === "/businesses" && pathname.startsWith("/industries/"));
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 

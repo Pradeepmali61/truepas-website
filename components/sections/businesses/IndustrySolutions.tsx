@@ -107,12 +107,14 @@ export default function IndustrySolutions() {
   const current = industries[active];
 
   return (
-    <section id="industry-solutions" className="section-pad scroll-mt-16 bg-sky-50">
+    // Moved from Enterprises to open the Businesses page (26 Oct 2026, client request), so it carries the page's h1
+    // and the top padding that clears the fixed navbar
+    <section className="section-pad bg-sky-50 pt-32 lg:pt-40">
       <div className="container-page flex flex-col items-center gap-12 lg:gap-16">
         <div className="flex w-full flex-col items-center gap-10">
           <div className="flex flex-col items-center gap-4">
             <SectionLabel>Industry Solutions</SectionLabel>
-            <h2 className="heading-xl max-w-[834px] text-center">One Identity Platform, Built for Every Merchant Environment</h2>
+            <h1 className="heading-xl max-w-[834px] text-center">One Identity Platform, Built for Every Merchant Environment</h1>
           </div>
           <Tabs id={id} label="Industries" tabs={industries.map((ind) => ind.tab)} active={active} onChange={setActive} />
         </div>

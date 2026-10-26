@@ -57,6 +57,8 @@ Vision: a world where your face is your one trusted identity, at every airport, 
 The Contact page has an inquiry form (name, work email, company, optional phone, industry, inquiry type, message). Inquiry types: Request Demo, Enterprise Partnership, API Integration, Technical Support, General Inquiry. The team reviews the requirements and follows up with the right demonstration or discussion. Demos can also be booked directly in a calendar ("Book a Demo"). Policies: /privacy-policy, /terms-and-conditions, /cookie-policy.
 
 ## Industry journeys
+The Businesses page (/businesses) has a tab per industry, each linking to that industry's page below.
+
 ${industryJourneys}
 `;
 

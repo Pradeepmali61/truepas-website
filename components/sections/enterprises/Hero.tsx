@@ -18,7 +18,7 @@ export default function Hero() {
           </div>
           <div className="flex flex-wrap gap-4">
             <BookDemoButton />
-            <Button variant="secondary" href="#industry-solutions">
+            <Button variant="secondary" href="/businesses">
               Explore Solutions
             </Button>
           </div>
