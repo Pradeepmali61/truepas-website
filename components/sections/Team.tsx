@@ -10,7 +10,7 @@ export default function Team() {
         <div className="flex flex-col gap-10 lg:flex-row">
           <Photo
             src="/images/enterprises/team.webp"
-            alt="TruePas leadership team around a digital table showing verified identities connected across the world"
+            alt="TruePas team in a bright office smiling at a tablet that shows a verified face match"
             className="h-72 rounded-2xl shadow-card-strong md:h-[552px] lg:flex-1"
           />
           <div className="flex flex-col text-base leading-6 lg:flex-1">
