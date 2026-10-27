@@ -114,7 +114,9 @@ export default function IndustrySolutions() {
         <div className="flex w-full flex-col items-center gap-10">
           <div className="flex flex-col items-center gap-4">
             <SectionLabel>Industry Solutions</SectionLabel>
-            <h1 className="heading-xl max-w-[834px] text-center">One Identity Platform, Built for Every Merchant Environment</h1>
+            <h1 className="heading-xl text-center text-balance">
+              One Identity Check-in Platform,<br className="hidden xl:inline" /> Built for Every Merchant Environment
+            </h1>
           </div>
           <Tabs id={id} label="Industries" tabs={industries.map((ind) => ind.tab)} active={active} onChange={setActive} />
         </div>
