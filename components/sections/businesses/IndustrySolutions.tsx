@@ -109,7 +109,7 @@ export default function IndustrySolutions() {
   return (
     // Moved from Enterprises to open the Businesses page (26 Oct 2026, client request), so it carries the page's h1
     // and the top padding that clears the fixed navbar
-    <section className="section-pad bg-sky-50 pt-32 lg:pt-40">
+    <section className="section-pad bg-linear-to-b from-sky-200 to-white pt-32 lg:pt-40">
       <div className="container-page flex flex-col items-center gap-12 lg:gap-16">
         <div className="flex w-full flex-col items-center gap-10">
           <div className="flex flex-col items-center gap-4">
