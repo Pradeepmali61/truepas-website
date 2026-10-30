@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import BrandLogo from "@/components/ui/BrandLogo";
 
 // Brand video; regenerate both files with scripts/optimize-video.mjs
 const VIDEO = "/videos/truepas-brand.mp4";
@@ -21,6 +22,10 @@ export default function VideoPlayer({ className = "" }: { className?: string }) 
     <>
       <div className={`relative flex items-center justify-center overflow-hidden rounded-2xl bg-placeholder/80 ${className}`}>
         <Image src={POSTER} alt="" fill unoptimized className="object-cover" />
+        {/* Client asked for the logo on the thumbnail (30 Oct 2026); the video's own logo shots sit behind the play button */}
+        <div className="absolute top-3 left-3 rounded-xl bg-white/90 px-3 py-2 shadow-card md:top-6 md:left-6 md:px-4 md:py-3">
+          <BrandLogo height={32} className="h-5 md:h-8" />
+        </div>
         <button
           type="button"
           onClick={() => setOpen(true)}
