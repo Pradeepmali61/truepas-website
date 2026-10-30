@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
+import BrandLogo from "@/components/ui/BrandLogo";
 
-// Brand video; regenerate both files with scripts/optimize-video.mjs
+// Brand video; regenerate both files with scripts/optimize-video.mjs (the poster shows while the video loads)
 const VIDEO = "/videos/truepas-brand.mp4";
 const POSTER = "/images/video-poster.webp";
 
@@ -19,8 +19,12 @@ export default function VideoPlayer({ className = "" }: { className?: string }) 
 
   return (
     <>
-      <div className={`relative flex items-center justify-center overflow-hidden rounded-2xl bg-placeholder/80 ${className}`}>
-        <Image src={POSTER} alt="" fill unoptimized className="object-cover" />
+      {/* Thumbnail recreates the video's white logo card (0:05) in markup, so the logo sits a fixed gap above
+          the play button at every width (30 Oct 2026) */}
+      <div
+        className={`relative flex flex-col items-center justify-center gap-6 overflow-hidden rounded-2xl bg-linear-160 from-white to-[#edf3f8] md:gap-10 ${className}`}
+      >
+        <BrandLogo height={88} className="h-8 md:h-14 lg:h-[88px]" />
         {/* Client's pick from the play-button options (option 1, 30 Oct 2026): brand gradient with pulsing rings */}
         <button
           type="button"

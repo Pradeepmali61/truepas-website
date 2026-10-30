@@ -13,9 +13,9 @@ export default function WhyTruePas() {
     <section className="section-pad bg-white">
       <div className="container-page flex flex-col gap-12 lg:gap-16">
         {/* Figma's logo card beside this text was removed on request (30 Oct 2026): the video thumbnail below shows the same logo */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col items-center gap-6 text-center">
           <h2 className="heading-xl">Why TruePas</h2>
-          <p className="max-w-[800px] text-lg leading-7 whitespace-pre-line text-ink-3">
+          <p className="max-w-[800px] text-lg leading-7 text-balance whitespace-pre-line text-ink-3">
             {"TruePas replaces fragmented identity checks with one secure, unified digital identity, making every interaction faster, safer, and more convenient.\n\nWhether customers are checking into a hotel, boarding a flight or entering a venue, TruePas helps businesses verify identity in seconds."}
           </p>
         </div>
