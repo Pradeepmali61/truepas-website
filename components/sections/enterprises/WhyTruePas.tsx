@@ -1,4 +1,3 @@
-import BrandLogo from "@/components/ui/BrandLogo";
 import Photo from "@/components/ui/Photo";
 import SectionLabel from "@/components/ui/SectionLabel";
 import VideoPlayer from "@/components/ui/VideoPlayer";
@@ -13,16 +12,12 @@ export default function WhyTruePas() {
   return (
     <section className="section-pad bg-white">
       <div className="container-page flex flex-col gap-12 lg:gap-16">
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-16">
-          <div className="flex flex-col gap-6 lg:w-[532px] lg:shrink-0">
-            <h2 className="heading-xl">Why TruePas</h2>
-            <p className="text-base leading-6 whitespace-pre-line text-ink-3">
-              {"TruePas replaces fragmented identity checks with one secure, unified digital identity, making every interaction faster, safer, and more convenient.\n\nWhether customers are checking into a hotel, boarding a flight or entering a venue, TruePas helps businesses verify identity in seconds."}
-            </p>
-          </div>
-          <div className="flex h-40 items-center justify-center rounded-lg bg-sky-50 md:h-60 lg:flex-1">
-            <BrandLogo height={66} className="h-11 md:h-[66px]" />
-          </div>
+        {/* Figma's logo card beside this text was removed on request (30 Oct 2026): the video thumbnail below shows the same logo */}
+        <div className="flex flex-col gap-6">
+          <h2 className="heading-xl">Why TruePas</h2>
+          <p className="max-w-[800px] text-lg leading-7 whitespace-pre-line text-ink-3">
+            {"TruePas replaces fragmented identity checks with one secure, unified digital identity, making every interaction faster, safer, and more convenient.\n\nWhether customers are checking into a hotel, boarding a flight or entering a venue, TruePas helps businesses verify identity in seconds."}
+          </p>
         </div>
 
         <VideoPlayer className="aspect-video w-full" />
