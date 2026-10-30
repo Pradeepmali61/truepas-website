@@ -21,14 +21,17 @@ export default function VideoPlayer({ className = "" }: { className?: string }) 
     <>
       <div className={`relative flex items-center justify-center overflow-hidden rounded-2xl bg-placeholder/80 ${className}`}>
         <Image src={POSTER} alt="" fill unoptimized className="object-cover" />
+        {/* Client's pick from the play-button options (option 1, 30 Oct 2026): brand gradient with pulsing rings */}
         <button
           type="button"
           onClick={() => setOpen(true)}
           aria-label="Play the TruePas brand video"
-          className="relative flex size-20 items-center justify-center rounded-full bg-danger transition-transform hover:scale-105 focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-primary md:size-[120px]"
+          className="relative flex size-20 items-center justify-center rounded-full bg-linear-135 from-cyan to-play-blue shadow-[0_12px_30px_rgba(10,124,255,0.38)] transition-transform hover:scale-105 focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-primary md:size-[120px]"
         >
-          <svg width="40" height="47" viewBox="0 0 40 47" aria-hidden className="h-8 w-[27px] translate-x-1 md:h-[47px] md:w-10">
-            <path d="M40 23.5 0 47V0z" fill="#fff" />
+          <span aria-hidden className="absolute inset-0 rounded-full border-2 border-cyan opacity-0 motion-safe:animate-play-pulse" />
+          <span aria-hidden className="absolute inset-0 rounded-full border-2 border-cyan opacity-0 motion-safe:animate-play-pulse motion-safe:[animation-delay:1.3s]" />
+          <svg viewBox="0 0 24 28" aria-hidden className="w-7 translate-x-1 fill-white md:w-[42px] md:translate-x-1.5">
+            <path d="M3 2.6a2 2 0 013-1.7l16 11.4a2 2 0 010 3.4L6 27.1a2 2 0 01-3-1.7z" />
           </svg>
         </button>
       </div>

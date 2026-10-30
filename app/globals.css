@@ -9,6 +9,9 @@
   --color-ink-3: #2a2a2a;
   --color-accent: #ff8d28;
   --color-danger: #ff5353;
+  /* Logo cyan; the video play button runs cyan to brand blue */
+  --color-cyan: #19b4e8;
+  --color-play-blue: #0a7cff;
   /* Chat assistant's "online" dot (launcher and header) */
   --color-online: #10b981;
   --color-placeholder: #d9d9d9;
@@ -24,6 +27,19 @@
   --shadow-card-strong: 2px 2px 16px rgba(0, 0, 0, 0.16);
 
   --radius-sm: 4.6px;
+
+  /* Rings that spread out from the video play button */
+  --animate-play-pulse: play-pulse 2.6s ease-out infinite;
+  @keyframes play-pulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.55;
+    }
+    100% {
+      transform: scale(1.75);
+      opacity: 0;
+    }
+  }
 }
 
 @utility container-page {
