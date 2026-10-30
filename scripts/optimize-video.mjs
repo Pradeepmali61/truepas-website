@@ -1,10 +1,10 @@
-// Usage: node scripts/optimize-video.mjs   (needs ffmpeg on PATH)
-// Compresses the brand video (gitignored 5-Oct/Direct/) for the web and grabs its poster frame.
+// Usage: node scripts/optimize-video.mjs [src]   (needs ffmpeg on PATH)
+// Compresses the brand video (default: gitignored 5-Oct/Direct/) for the web and grabs its poster frame.
 import { execFileSync } from "node:child_process";
 import { mkdir, stat } from "node:fs/promises";
 import sharp from "sharp";
 
-const SRC = "5-Oct/Direct/Truepas Brand Video.mp4";
+const SRC = process.argv[2] ?? "5-Oct/Direct/Truepas Brand Video.mp4";
 const OUT = "public/videos/truepas-brand.mp4";
 const POSTER = "public/images/video-poster.webp";
 // Seconds: the biometric-gate shot, which keeps the centre clear for the play button
