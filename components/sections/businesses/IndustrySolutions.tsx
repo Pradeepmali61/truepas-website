@@ -138,7 +138,8 @@ export default function IndustrySolutions() {
                 <h4 className={label}>Where it fits</h4>
                 <ul className="flex flex-wrap gap-2">
                   {current.fits.map((fit) => (
-                    <li key={fit} className="rounded-full border border-line bg-white px-3 py-1 text-sm leading-5">
+                    // Brand-blue chips so the touchpoints stand out (client request, 30 Oct 2026)
+                    <li key={fit} className="rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-sm leading-5 font-medium text-primary">
                       {fit}
                     </li>
                   ))}
